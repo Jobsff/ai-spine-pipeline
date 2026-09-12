@@ -1,0 +1,75 @@
+name: Check live web preview
+
+on:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/check-web-preview.yml']
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - name: Verify public HTTPS homepage
+        env:
+          SITE_URL: https://jobsff.github.io/ai-spine-pipeline/
+        run: |
+          set -euo pipefail
+          mkdir -p live-qa
+          curl --fail --location --silent --show-error --retry 5 --retry-all-errors --retry-delay 4 --max-time 20 --dump-header live-qa/headers.txt --output live-qa/homepage.html "$SITE_URL"
+          python - <<'PY'
+          from pathlib import Path
+          html = Path('live-qa/homepage.html').read_text()
+          assert 'AI Bone Studio' in html, 'Not the editor homepage'
+          assert 'id="board"' in html and 'id="empty-demo"' in html, 'Editor markup missing'
+          assert '<script>' in html, 'Standalone script missing'
+          print('HTTPS homepage is reachable and contains the built editor.')
+          PY
+      - name: Install browser test tooling
+        run: |
+          python -m pip install --disable-pip-version-check playwright==1.55.0
+          python -m playwright install --with-deps chromium
+      - name: Test live mobile viewport
+        env:
+          SITE_URL: https://jobsff.github.io/ai-spine-pipeline/
+        run: |
+          python - <<'PY'
+          import os, json
+          from pathlib import Path
+          from playwright.sync_api import sync_playwright
+          with sync_playwright() as pw:
+              browser = pw.chromium.launch()
+              context = browser.new_context(viewport={'width':390,'height':844}, is_mobile=True, has_touch=True, device_scale_factor=1)
+              page = context.new_page()
+              errors = []
+              page.on('pageerror', lambda error: errors.append(str(error)))
+              response = page.goto(os.environ['SITE_URL'], wait_until='networkidle', timeout=60000)
+              assert response and response.status == 200, 'Homepage HTTP status is not 200'
+              assert 'AI Bone Studio' in page.title(), page.title()
+              page.locator('#empty-demo').click()
+              page.locator('[data-mode="animate"]').click()
+              page.locator('#play').click()
+              page.wait_for_timeout(450)
+              time_value = float(page.locator('#time').input_value())
+              assert time_value > 0, 'Animation time did not advance'
+              page.locator('#play').click()
+              dimensions = page.evaluate('({scroll:document.documentElement.scrollWidth,width:innerWidth})')
+              assert dimensions['scroll'] <= dimensions['width'] + 1, dimensions
+              page.screenshot(path='live-qa/mobile.png', full_page=True)
+              assert not errors, errors
+              report = {'url':page.url,'httpStatus':response.status,'title':page.title(),'viewport':{'width':390,'height':844},'demoOpened':True,'animationTime':time_value,'noHorizontalOverflow':True,'pageErrors':errors,'browser':'Chromium mobile emulation; not an iOS device test'}
+              Path('live-qa/results.json').write_text(json.dumps(report,ensure_ascii=False,indent=2))
+              print(json.dumps(report,ensure_ascii=False))
+              browser.close()
+          PY
+      - name: Save verification evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: live-web-preview-qa
+          path: live-qa/
+          retention-days: 7
