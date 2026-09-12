@@ -2,6 +2,18 @@
 
 面向新手的 2D 角色资产流程：AI 设计与补绘 → 透明零件 → 网页拼装 → 骨骼绑定 → 动作 → 游戏资源。
 
+## 在线体验
+
+**打开：https://jobsff.github.io/ai-spine-pipeline/**
+
+手机或电脑浏览器均可访问，无需下载、解压、安装 Node 或登录编辑器。首次体验点击“先试一试练习角色”，进入“做动作”后点击播放。手机可在部件库、画板、属性之间切换。
+
+当前在线版为 **V0.2 Beta**。V0.3 的角色生成、图片 API、统一纯色抠图和表情换图流程仍是已批准方案，尚未上线。当前编辑功能在浏览器本地处理素材；工程请主动保存，浏览器存储不是跨设备云同步。
+
+2026-09-12：GitHub Pages 首次发布成功。网站文件在 `gh-pages` 分支；源码保留在 `main`。`Build web preview` 工作流先运行构建与核心测试，再将静态产物提交到 `site-build`；发布时需将经过检查的产物提交推进到 `gh-pages`，不能把构建成功当成线上已更新。`Check live web preview` 可检查线上 HTTPS 首页及 Chromium 手机视口交互；具体通过情况以对应 Actions 运行记录为准。
+
+本次未绑定 Cloudflare 或自定义域名，没有修改 `jyounet.com` 的 DNS。
+
 ## 当前版本：编辑器 V0.2 Beta
 
 已实现四步式网页编辑器，以及 Spine 3.8.99 区域贴图 / FK 子集导出。**格式检查与浏览器测试通过，不等于已经通过 Laya / Cocos 项目及真机验收。**
@@ -14,7 +26,7 @@ npm run dev
 
 打开终端显示的本地地址，点“先试一试练习角色”，可直接播放、拖动关节、保存并导出。无需准备人物素材。图片处理与编辑在浏览器本地进行，不上传服务器。
 
-`npm run build` 还会生成 `apps/editor/dist/AI-Bone-Studio.html` 单文件版本：可复制到电脑，用现代浏览器打开；不依赖外部 CDN。手机建议访问已部署的网页或电脑的局域网服务，不依赖文件预览器执行 HTML。当前仓库尚未配置在线部署。
+`npm run build` 还会生成 `apps/editor/dist/AI-Bone-Studio.html` 单文件版本：可复制到电脑，用现代浏览器打开；不依赖外部 CDN。手机推荐访问上方在线地址，不依赖文件预览器执行 HTML。
 
 ## 能力与边界
 
@@ -31,6 +43,7 @@ npm run dev
 - [编辑器使用说明](apps/editor/README.md)
 - [格式、引擎接入与验收边界](docs/v0.2-compatibility.md)
 - [本次测试记录](docs/v0.2-qa.md)
+- [V0.3 已批准方案](docs/v0.3-approved-plan.md)
 - [早期 AI 拆件流程](docs/workflow.md)
 - [早期素材规范](docs/asset-spec.md)
 
