@@ -1,56 +1,51 @@
-# Asset Production Specification
+# 部件生产规范
 
-## Core principle
+最新确认：2026-09-12。与旧方案冲突时，以本规范及 [V0.3 已确认方案](v0.3-approved-plan.md) 为准。规范描述目标要求，不代表早期脚本已完整实现。
 
-The generated image is an animation source asset, not a presentation sheet. Engineering correctness takes priority over visual layout.
+## 核心原则
 
-## Chroma background
+生成内容用于动画，不是展示板。所有 AI 部件生图统一使用高对比度纯色背景，由后处理产生透明通道。不启用模型原生透明，不根据模型切换流程。外部现成透明 PNG 经检查后直接导入，免重复抠图。
 
-For the current mage, use a flat high-saturation green that is distant from the character palette. The exact color should remain uniform across the entire canvas. Production tooling should eventually choose the chroma color dynamically based on the source character palette.
+## 背景色
 
-## Separation
+按角色配色选择与主体不冲突的色键色；同批次固定并记录。当前银紫色魔法师可优先测试绿色，其他角色不强制绿色。记录请求颜色及返回图实测颜色，不能假设模型准确输出指定 RGB。
 
-- Every requested part must be spatially isolated.
-- No labels, numbers, borders or UI.
-- No staff, pet or VFX unless explicitly requested.
-- Do not generate unrequested extra parts.
+背景须平整、单一、不透明，无渐变、纹理、棋盘格、地面、背景装饰、投影、泛光或背景反色光。保留部件本身必要的明暗与材质，不把“无投影”解释成删除角色原有阴影。生成格式优先 PNG，实际返回图片须验收。
 
-## Face system
+背景不均匀、主体同色或非预期透明时进入待修复状态，不盲目强行抠图。纯色方案统一输出工程标准，不保证所有输入无损；复杂半透明、发光和透射素材不属于首版通用保证。
 
-`face_base` must contain no eyes, eyebrows, mouth or hair. Eyes, eyebrows and mouths are independent attachments.
+## 部件分离与清单
 
-## Joint overlap
+每个请求有稳定 part_id、语义名称、所属组和预期状态。支持一图多个部件，但须保持足够间距、不接触、不跨格串联、不裁断。编号和文字在检查界面绘制，不烘焙进图片。
 
-Visible contours are not valid cut boundaries for moving joints. Generate hidden overlap under sleeves, skirts, hair and adjacent body parts. As a starting heuristic, provide roughly 15-25% additional hidden length around rotating joints and validate against the intended animation range.
+不生成未要求的帽子、身体、法杖、宠物或特效。多出和缺少的元素必须报告，不能仅凭连通域数量自动匹配语义名。一个部件可含多个分离区域，需归组后再裁切。
 
-## Alpha processing
+## 面部系统
 
-After chroma extraction:
+face_base 不含眼睛、眉毛、嘴和头发。耳朵是否合在脸底由清单明确。后发、刘海、左右侧发的职责明确，避免重复画出同一发束。左右眼分别准备睁开与闭合状态，眉毛和嘴型独立。左右的命名采用角色自身左右，检查页同时提示画面左右，避免镜像误认。
 
-1. Create soft alpha from color distance.
-2. Despill chroma contamination on transition pixels.
-3. Preserve anti-aliased edges.
-4. Crop to foreground bounds.
-5. Add transparent padding.
-6. Store original source-sheet coordinates in the manifest.
+## 遮挡补绘与运动余量
 
-## Naming
+按目标动作范围补全袖内手腕、裙下腿根、被头发遮挡的轮廓等。关节重叠不是通用固定百分比：以旋转范围、实际形状、层级和最坏姿态测试决定。早期提出的 15–25% 只可作为实验起点，不能作为自动合格判据。
 
-Use semantic stable names for production assets, for example:
+## 后处理目标流程
 
-```text
-face_base
-hair_back
-bangs
-side_hair_L
-side_hair_R
-eyebrow_L
-eyebrow_R
-eye_L_open
-eye_R_open
-eye_L_closed
-eye_R_closed
-mouth_smile
-```
+1. 检查背景均匀度和主体色冲突，并记录输入版本。
+2. 按实际背景估计蒙版；保留反锯齿及部件内部有效空隙。
+3. 去除边缘的背景色污染。算法应使用实际色键色，不能所有背景都硬套压低绿色。
+4. 对照部件清单做分离、归组和命名，隔离相邻部件的像素。
+5. 按归组蒙版裁切并加入透明 padding；padding 根据尺寸及打包要求配置。
+6. 输出独立 RGBA PNG，检查真实透明通道及在白底、深色底上的边缘。
+7. 记录 source_bbox、处理参数、背景色、部件归属、检查状态、版本和内容校验值；合格后进入部件库。
 
-The extraction prototype currently uses generic `part_XX` names because automatic semantic classification is a later pipeline stage.
+异常处理：局部蒙版修正、重新归组、调整色键或仅重新生成失败部件。不自动覆盖已确认素材。不合格结果可作为候选保留，但不得标成生产合格。
+
+## 坐标与绑定
+
+source_bbox 仅表示素材板裁切位置，不是角色拼装位置。setup_transform 和 pivot/关节信息独立记录。重新生成替换件须对齐后确认，不能靠更换同名图片自动保证动画不变形。
+
+## 名称示例
+
+face_base、hair_back、bangs、side_hair_L、side_hair_R、eyebrow_L、eyebrow_R、eye_L_open、eye_R_open、eye_L_closed、eye_R_closed、mouth_smile。
+
+早期 scripts/extract_chroma_parts.py 仍是原型，通用 part_XX 不表示已识别语义。新规范所述多色去色、检查台与归组能力须另行实现和测试。

@@ -1,62 +1,43 @@
-# AI -> Spine Workflow
+# AI → 部件 → 骨骼动画工作流
 
-## 1. Character design
+2026-09-12 更新。产品方案已确认，AI 前置流程仍待实现；当前编辑器能力以 README 和 V0.2 测试记录为准。完整方案见 [V0.3 已确认方案](v0.3-approved-plan.md)，素材要求见 [部件生产规范](asset-spec.md)。
 
-Create a stable turnaround before producing animation assets. For the current experiment this is a two-head-tall chibi female mage.
+## 1. 准备角色，允许跳过
 
-## 2. Define parts by animation responsibility
+从描述生成或直接上传已有角色；也可从部件 PNG/ZIP 或已有工程进入。没有 API 仍可使用手工编辑流程。采用的原画建立角色版本，不自动重画或覆盖。三视图为可选参考，多视图稿先选择使用视图。
 
-Do not simply cut along visible contours. A part should be separated when it needs independent motion, deformation, depth ordering, or attachment swapping.
+## 2. 按用途规划部件
 
-For a modular head, a useful baseline is:
+选择头像表情、角色待机或基础游戏动作。依据独立运动、变形、遮挡及换图需求制定部件清单，而非沿可见轮廓切碎图片。同视图多个动作复用基础素材，不按每个动作重复生成人物。
 
-- `face_base`: skin/face shape only; no eyes, eyebrows, mouth or hair
-- `hair_back`
-- `bangs`
-- `side_hair_L`
-- `side_hair_R`
-- `eyebrow_L`, `eyebrow_R`
-- `eye_L_open`, `eye_R_open`
-- `eye_L_closed`, `eye_R_closed`
-- interchangeable mouth attachments
+头像基础：无五官脸底、后发、刘海、左右侧发、左右眉毛、左右睁眼/闭眼与所需嘴型。新动作或视角的补图须明确确认。
 
-## 3. Generate an engineering parts sheet
+## 3. 统一生成高对比度纯色部件图
 
-Prefer a flat high-contrast chroma background when image editing does not reliably preserve alpha.
+AI 部件生图、补绘、替换件一律纯色色键背景，不请求原生透明，也不按供应商启用透明路径。每组允许多个部件，一组固定一个按角色配色选择的背景色；无渐变、棋盘、背景投影、文字或框线，部件不接触。补全动画需要的隐藏区域。
 
-Requirements:
+## 4. 抠图、裁切及检查
 
-- one uniform background color
-- no gradient, texture, checkerboard, cast shadow, text or labels
-- parts do not touch each other
-- consistent character identity, palette, rendering and scale
-- hidden joint regions must be reconstructed, not merely cut at the visible boundary
+检查实测背景 → 蒙版与边缘去色 → 按清单分离/归组 → 独立裁切和透明 padding → 输出 RGBA PNG → 白底/深色底检查 → 确认入库。
 
-## 4. Chroma extraction
+统一色键路线不等于所有输入自动合格。缺件、重复、粘连、主体同色或轮廓丢失须提示并允许修复。透明 PNG 外部导入不重复抠图。运行时 Atlas 由程序在合格部件基础上打包，不由模型排版冒充。
 
-`scripts/extract_chroma_parts.py` estimates the background from the image corners, creates a soft alpha mask, performs a basic green-spill reduction, finds connected foreground regions and exports cropped RGBA PNGs.
-
-Example:
+早期脚本仍可供原型实验：
 
 ```bash
 python scripts/extract_chroma_parts.py source.png build/mage_head --padding 8
 ```
 
-## 5. Human/automated QA
+该脚本不代表已完成上述完整规范，也不代表输出能免除 QA；多色去色、语义归组和检查台仍待实现。
 
-Check:
+## 5. 拼装、绑定及动画
 
-- no residual chroma fringe
-- no missing anti-aliased pixels
-- no two intended parts merged into one crop
-- no one intended part split into multiple crops
-- reconstructed hidden areas provide sufficient overlap at joints
-- left/right naming and depth ordering are correct
+将合格部件包导入当前画板。区分素材板坐标与人物初始摆放坐标，确认比例、pivot 和层级，再绑定骨骼。保留原图位置的分割件可复位；重新生成的素材需对齐确认。
 
-## 6. Spine assembly
+V0.2 支持单骨刚性绑定和基础骨骼变换轨道。表情换图轨道、IK、网格与多骨权重不属于现成功能；V0.3 优先增加眨眼的 Attachment 替换并验证保存、预览和导出一致性。
 
-Create bones, slots and attachments from the validated parts. Use attachment swaps for discrete facial states. Use meshes/weights where deformation is preferable to rigid rotation.
+## 6. 导出和游戏验收
 
-## 7. Runtime atlas
+工程保存与运行时资源分开。程序从合格部件、骨架和动作生成目标版本的 JSON/ATLAS/PNG 包；后续在匹配版本的 Laya 工程先验收，再验收 Cocos。不要通过更改版本字符串宣称通用兼容。
 
-Do not ask the generative model to optimize the final runtime texture atlas. Once the rig is complete, use Spine Texture Packer for deterministic packing.
+先跑通女魔法师头像的完整流程，再扩展全身待机及逐项验收基础动作。文档提交不是运行库、引擎或真机测试通过的证据。
