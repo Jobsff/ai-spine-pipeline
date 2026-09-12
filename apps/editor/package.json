@@ -1,1 +1,13 @@
-{"name":"ai-bone-studio","private":true,"version":"0.1.0","type":"module","scripts":{"dev":"vite","build":"tsc && vite build","preview":"vite preview"},"dependencies":{"@vitejs/plugin-react":"latest","vite":"latest","typescript":"latest","react":"latest","react-dom":"latest","lucide-react":"latest"},"devDependencies":{"@types/react":"latest","@types/react-dom":"latest"}}
+{
+  "name": "ai-bone-studio",
+  "version": "0.2.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "node scripts/dev.mjs",
+    "build": "tsc -p tsconfig.json && node scripts/build.mjs",
+    "preview": "node scripts/serve.mjs",
+    "test": "npm run build && node --test tests/*.test.mjs"
+  },
+  "devDependencies": { "typescript": "5.8.3" }
+}

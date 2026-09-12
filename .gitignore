@@ -1,0 +1,9 @@
+node_modules/
+apps/editor/dist/
+apps/editor/qa-output/
+__pycache__/
+*.pyc
+.DS_Store
+.env
+.env.*
+!.env.example

@@ -1,50 +1,68 @@
-# AI Bone Studio V0.1
+# AI Bone Studio · V0.2 Beta
 
-A beginner-friendly browser editor for assembling AI-generated 2D character parts before skeletal rigging.
+这是新手角色拼装与基础骨骼动画编辑器，不是完整 Spine 替代品。本版用 TypeScript + 浏览器原生 Canvas2D/DOM 实现，无第三方浏览器运行时依赖；替换了 V0.1 的 React 草稿。骨骼、图片变换、导出及 ZIP 模块独立，后续可扩展渲染器。
 
-## Implemented
+## 启动
 
-- Batch import PNG/WebP character parts
-- Parts library with thumbnails
-- Drag parts directly on an 800x650 assembly canvas
-- Select, move and fine-tune X/Y
-- Rotation and scale controls
-- Z-order editing
-- Editable pivot X/Y
-- Visibility, lock, reset and delete
-- Export a native `.project.json` assembly description
-- Experimental `Spine draft JSON` export scaffold
-- Responsive compact layout for smaller screens
-
-## Important note about Spine export
-
-The current Spine button exports a **draft/intermediate JSON scaffold**, not a guaranteed production-compatible Spine runtime asset. A real Spine exporter must be version-tested and must also produce/correlate image dimensions, atlas data, bones, slots, skins and animation structures. The native AI Bone Studio project format remains the source of truth.
-
-## Run
+测试环境：Node 22.16.0、TypeScript 5.8.3、Chromium。
 
 ```bash
-cd apps/editor
 npm install
 npm run dev
 ```
 
-Build:
+默认本地地址 `http://localhost:5173`。`npm run build` 输出 `dist/` 静态站点，以及可离线打开的 `dist/AI-Bone-Studio.html`。
+
+`npm run preview` 提供 dist 静态服务；默认监听局域网，勿直接暴露到公网作为生产服务。生产环境可托管 dist 到普通静态网站，无需后端。当前没有自动部署流程。
+
+开发时 TypeScript 自动重新编译；修改 HTML/CSS 后运行 `npm run build` 并刷新。仅有固定的 TypeScript 开发依赖；安装仍需要 npm 网络，生成后的编辑器运行不需要 CDN。
+
+## 第一次使用
+
+打开“练习角色”，先播放看挥手。它是程序本地绘制的简化练习玩偶，不是之前女魔法师的最终美术，也不是 Spine 官方示例。
+
+### 1. 拼装
+
+导入透明 PNG/WebP 或部件 ZIP。ZIP 包含 `parts/` 时仅导入其中的零件，避免把预览大图当角色。点选和拖动图片；上方紫点旋转、右下角缩放，右侧可精确输入。透明区域不会抢选。用“向前 / 向后一层”处理头发与脸的遮挡。
+
+旋转点可以数字调整或在画布点选，改点不改变画面位置。源图集裁切坐标不会被当作角色组装位置。当前没有 AI 自动拼装、参考图叠加或吸附功能。
+
+### 2. 连接关节
+
+先在关节树选择父级，再点“画关节链”：依次点肩膀、肘部、手腕；Esc 或再次点按钮结束。也可选零件后点“在旋转点创建关节并绑定”。
+
+给每个零件选择“跟随哪个关节”。绑定时保留世界位置、缩放和朝向。拖起点移动骨链，拖末端改长度/朝向。子关节继承父关节的旋转、平移和等比缩放。
+
+本版是单骨刚性绑定。骨骼只允许正数等比缩放；图片支持非等比变换和镜像。为避免破坏动作，已有关键帧时改父级/删除关节被禁止，需先备份并清空关键帧。移动初始骨架仍会影响所有动作。
+
+### 3. 制作动作
+
+选时间 → 选关节 → 调转动或位置。系统自动记录关键帧。移动到另一时刻重复，点播放。支持新建动作、时长调整、删帧、循环、轻轻摆动/呼吸模板。模板只替换当前关节在当前动作的轨道，会先提示确认。
+
+时间轴只显示当前关节；没有跨轨复制、曲线编辑、IK、网格权重或动态换图。眨眼嘴型素材可先拼装，但离散换图时间轴尚未实现。
+
+### 4. 保存与导出
+
+“保存工程”输出包含图片的 `.project.json`；“打开工程”可还原该文件或导出的资源 ZIP。IndexedDB 只是浏览器副本，不是永久备份，权限不足时会提示下载保存。
+
+资源 ZIP 包含 Spine 3.8 JSON、图集描述、PNG、独立图片、源工程、接入示例、IMPORT.md 和兼容性报告。Laya/Cocos 导入步骤详见包内说明及 [兼容文档](../../docs/v0.2-compatibility.md)。未在实际引擎验收前请作为测试资源。
+
+V0.1 工程没有保存图片，无法无损迁移。本版明确拒绝伪还原，需重新导入原 PNG。
+
+## 快捷键与手机
+
+Ctrl/Cmd+S 保存，Ctrl/Cmd+Z 撤销，Shift+Ctrl/Cmd+Z 重做，方向键微调，Shift 加大步幅，空格播放，Esc 取消。
+
+手机通过“部件/关节、画板、属性/导出”切换面板，支持单指拖动。390px Chromium 模拟触摸已测；不宣称 iOS Safari 真机已测。精细骨骼操作仍建议电脑或平板。
+
+## 测试
 
 ```bash
-npm run build
+npm test
+# 可选 UI 测试（先安装 Python Playwright 与 Chromium）
+python tests/browser_smoke.py
 ```
 
-## V0.2 target
+可用 `CHROMIUM` 指定浏览器路径，`QA_OUT` 指定截图/导出目录。浏览器测试离线注入单文件页面，不需要访问互联网；不测试 HTTP/IndexedDB 持久化或引擎 SDK。
 
-- Joint/bone creation mode
-- Parent-child bone hierarchy
-- Bind a part to a bone
-- Bone manipulation moves child parts
-- Visual bone overlay
-
-## V0.3 target
-
-- Timeline
-- Transform keyframes
-- Playback and looping
-- Beginner animation presets such as idle breathing, blink and wave
+核心源文件：model.ts（FK 与工程）、images.ts（贴图/示例）、spine.ts（格式/图集）、zip.ts（压缩包）、io.ts（文件与接入说明）、app.ts（交互）、styles.css（响应式界面）。
