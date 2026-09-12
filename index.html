@@ -5,12 +5,17 @@
 @media(max-width:1100px){.studio{grid-template-columns:195px minmax(270px,1fr) 235px}.topbar{gap:15px;padding:14px}.name-label{display:none}.steps{padding:10px}.steps small{font-size:9px}.tools button{padding:6px}.panel{padding:14px 10px}.footer-right{display:none}.auto-key{display:none}}
 @media(max-width:780px){.topbar{flex-wrap:wrap;gap:10px;padding:12px}.brand strong{font-size:15px}.brand-mark{width:34px;height:34px;border-radius:9px;font-size:24px}.brand small{font-size:9px}.header-actions{gap:5px}.header-actions button{padding:8px;font-size:11px;min-height:38px}.header-actions #new{display:none}.steps{gap:3px;padding:8px 6px}.steps button{gap:5px;padding:8px 3px;justify-content:center}.steps button b{width:21px;height:21px;font-size:10px}.steps span{font-size:11px}.steps small{display:none}.mobile-tabs{display:flex;padding:6px 10px;background:#151a28;gap:8px}.mobile-tabs button{flex:1;min-height:38px;font-size:11px}.mobile-tabs button.active{color:#d8c3ff;background:#332941;border-color:#66517d}.studio{display:block;height:calc(100dvh - 210px);min-height:450px}.panel,.workspace{height:100%}.studio[data-pane=canvas]>.panel{display:none}.studio[data-pane=library]>.workspace,.studio[data-pane=library]>.inspector{display:none}.studio[data-pane=inspector]>.workspace,.studio[data-pane=inspector]>.library{display:none}.canvas-toolbar{padding:6px 8px;gap:5px}.tools{gap:4px}.tools button{min-height:34px;padding:7px;font-size:10px}.tools #zoom{display:none}.mode-hint{padding:8px 12px;font-size:10px}.canvas-wrap{padding:12px}.panel{padding:18px}.parts-list{max-height:42vh}.part-row{min-height:51px}.part-name{font-size:13px}.bone-row{min-height:42px;font-size:12px}.timeline{padding:9px}.timeline-top{gap:5px}.timeline-top button{min-height:34px}.timeline .duration-label{margin-left:auto}.timeline-top label{font-size:10px}.timeline-top #delete-clip{font-size:9px}.timeline-bottom span{max-width:40%}.timeline-bottom button{min-height:34px}.empty-state h1{font-size:21px}.empty-state p{font-size:11px}.empty-star{font-size:46px}.resume{padding:10px;flex-wrap:wrap;font-size:11px}footer{font-size:9px;padding:9px}.property input,.property select,.button-row button{min-height:40px}.toast{bottom:40px;font-size:12px}.panel-heading h2{font-size:14px}}
 @media(max-width:410px){.topbar{gap:7px}.brand strong{font-size:13px}.brand-mark{display:none}.header-actions{gap:4px}.header-actions button{font-size:10px;padding:7px}.canvas-toolbar .tools{gap:3px}.tools button{padding:6px}.steps button{gap:3px}.steps button b{width:18px;height:18px}.steps span{font-size:10px}.timeline-top #delete-clip{display:none}}
+/* V0.3: optional role preparation workbench; every screen remains touch-friendly. */
+.prep{box-sizing:border-box;width:min(1440px,98vw);max-width:none;height:94dvh;max-height:none;margin:auto;padding:0;border:1px solid #ddd5ee;border-radius:22px;background:#faf9fc;color:#343143;box-shadow:0 28px 100px #1813264d;overflow:hidden}
+.prep[open]{display:flex;flex-direction:column}.prep::backdrop{background:#24203699;backdrop-filter:blur(4px)}
+.prep-header{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:22px 28px 12px;background:#fff}.prep h2{font-size:23px;margin:6px 0}.prep .eyebrow{font-size:10px;letter-spacing:2px;color:#796598}.prep h3{font-size:17px;margin:0 0 18px}.prep h3 small{font-weight:400;color:#88808d;margin-left:12px}.prep p{font-size:13px;line-height:1.8;color:#766c80}.prep button,.prep .button-label{min-height:39px;padding:8px 12px;font-size:12px;border-radius:9px;cursor:pointer}.prep button:disabled{opacity:.45;cursor:not-allowed}.prep button.active{background:#eadeff;color:#6b47ab;border-color:#b49ddb}.prep input,.prep textarea,.prep select{box-sizing:border-box;max-width:100%;border:1px solid #dcd6e6;border-radius:8px;padding:9px;background:#fff;color:#383042;font:inherit;min-height:39px}.prep textarea{width:100%;resize:vertical}.prep label:not(.button-label){display:flex;flex-direction:column;gap:7px;font-size:12px;margin:9px 0;color:#635a70}.prep input[type=checkbox]{min-height:0;accent-color:#8461bc}.prep input[type=color]{width:85px;height:39px;padding:3px}.prep button.primary,.prep .button-label.primary{background:#7e59b5;border:1px solid #7e59b5;color:white}.prep .button-label{display:inline-flex;align-items:center;justify-content:center;border:1px solid #dcd6e6;background:white;font-weight:600}.prep .prep-steps{display:flex;gap:8px;padding:8px 28px 18px;background:#fff;border-bottom:1px solid #e8e2ef;overflow:auto;flex-shrink:0}.prep-steps button{display:flex;align-items:center;gap:10px;white-space:nowrap}.prep-steps b{font-size:11px;opacity:.6}.prep-body{flex:1;min-height:0;overflow:auto;overscroll-behavior:contain;padding:24px 28px}.prep-grid{display:grid;grid-template-columns:1fr 1fr;gap:28px}.prep-grid>section,.prep-work>section{min-width:0}.prep-grid>section{background:white;border:1px solid #e9e3ef;padding:23px;border-radius:15px}.prep-actions{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:12px 0}.prep-actions>input,.prep-actions>select{flex:1;min-width:100px}.prep-actions label input[type=number]{width:65px}.prep-actions .compact{display:flex;flex-direction:row!important;align-items:center}.prep-actions .compact input{width:55px}.prep details{padding:12px 0;font-size:12px}.prep summary{cursor:pointer;padding:6px 0;color:#786092}.prep .role-preview{height:300px;display:flex;align-items:center;justify-content:center;background:repeating-conic-gradient(#f0edf4 0% 25%,white 0% 50%) 50% / 18px 18px;border-radius:12px}.role-preview img{max-width:100%;max-height:100%;object-fit:contain}.prep-empty{padding:46px 20px;text-align:center;line-height:1.9;color:#9b91a5;border:1px dashed #d6cbdc;border-radius:12px;background:#f7f4fb;font-size:13px}.prep .versions{display:flex;gap:6px;flex-wrap:wrap;margin:14px 0}.prep-four{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}.prep-four input{width:100%}.purpose-options>label{display:grid!important;grid-template-columns:22px 1fr;gap:6px!important;padding:15px;border:1px solid #e3dcea;border-radius:10px}.purpose-options small{grid-column:2;font-size:11px;color:#9a8ca7}.purpose-options input{grid-row:span 2;width:16px;align-self:center}.specs{max-height:430px;overflow:auto}.specs>div{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #eee8f2;padding:7px 0}.specs span{display:flex;flex-direction:column;gap:3px;font-size:12px}.specs small{font-size:10px;color:#9b8aaa}.prep-work{display:grid;grid-template-columns:minmax(0,1.13fr) minmax(330px,1fr);gap:26px}.key-controls{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}.key-controls input[type=number]{width:100%}.key-controls label{font-size:11px!important}.key-controls label:last-child{display:flex;flex-direction:row;align-items:center}.mask-wrap{border:1px solid #d8cfdf;border-radius:10px;overflow:hidden;line-height:0}.checker{background:repeating-conic-gradient(#e9e5ef 0% 25%,#fff 0% 50%) 50% / 16px 16px}.mask-wrap.white{background:white}.mask-wrap.dark{background:#22202e}.mask-wrap.original{background:#00ff00}.mask-wrap canvas{display:block;width:100%;height:auto;touch-action:none;cursor:crosshair}.candidate-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;max-height:620px;overflow:auto;padding:3px}.candidate{background:white;border:1px solid #e4ddec;border-radius:12px;padding:10px;min-width:0}.candidate.approved{border-color:#55ad88;background:#f6fdfa}.candidate.repair{border-color:#dc9683}.candidate-check{flex-direction:row!important;gap:6px!important;margin:0 0 6px!important}.candidate-image{height:105px;display:flex;align-items:center;justify-content:center;border-radius:7px}.candidate-image img{max-width:100%;max-height:100%;object-fit:contain}.candidate select{width:100%;font-size:11px;margin:8px 0 4px}.candidate>small{display:block;color:#8e819a;font-size:10px}.candidate .warn{color:#b87a42}.candidate .prep-actions{margin:8px 0 0}.candidate .prep-actions button{font-size:10px;padding:4px 8px;min-height:30px}.prep-footer{flex-shrink:0;padding:10px 26px;display:flex;align-items:center;justify-content:space-between;gap:18px;border-top:1px solid #e9e1ef;background:#fff}.prep-footer>span{font-size:11px;line-height:1.6;max-width:62%;color:#83748d}.prep-footer .prep-actions{margin:0}.prep-footer .button-label,.prep-footer button{font-size:11px;min-height:32px}.task-list article{background:#f3eff8;padding:14px;border-radius:10px;margin:12px 0;font-size:12px}.task-list article span{display:block;color:#94889c;margin-top:7px}.prep.processing .prep-body,.prep.processing .prep-steps{pointer-events:none;opacity:.66}.prep.processing #prep-status{color:#7450af}.expressions{border-top:1px solid #d9d2e4;margin:18px 0 0;padding:20px 16px}.expressions h3{margin:0 0 15px}.expressions h3 small{font-size:10px;color:#9975b0}.expressions select{width:100%}.expressions summary{font-size:12px;margin:13px 0;cursor:pointer}.expression-keys{display:flex;gap:4px;flex-wrap:wrap;margin:10px 0}.expression-keys button{font-size:10px;padding:4px}.expression-keys button:hover{background:#e8dcf6}
+@media(max-width:780px){.prep{width:100vw;height:100dvh;border-radius:0;border:0}.prep-header{padding:16px 14px 6px;gap:8px}.prep h2{font-size:16px;line-height:1.5}.prep-header>button{font-size:10px;white-space:nowrap;padding:6px}.prep .eyebrow{font-size:8px;letter-spacing:1px}.prep .prep-steps{padding:8px 12px;gap:4px}.prep-steps button{font-size:11px;gap:5px;padding:6px 9px}.prep-body{padding:14px}.prep-grid,.prep-work{grid-template-columns:1fr;gap:18px}.prep-grid>section{padding:15px}.prep-footer{padding:9px 12px;flex-direction:column;align-items:stretch;gap:6px}.prep-footer>span{max-width:100%;max-height:44px;overflow:auto;font-size:10px}.prep-footer .prep-actions{justify-content:space-between;gap:3px}.prep-footer button,.prep-footer .button-label{padding:5px 7px;font-size:10px}.key-controls{grid-template-columns:repeat(3,1fr)}.candidate-grid{max-height:550px}.prep button,.prep select,.prep input{min-height:42px}.prep .role-preview{height:230px}#prepare{font-size:10px;padding:6px;white-space:nowrap}}
 </style></head>
 <body>
 <header class="topbar">
-  <a class="brand" href="#" aria-label="AI Bone Studio 首页"><span class="brand-mark">✦</span><span><strong>AI Bone Studio</strong><small>角色动画工坊 <em>0.2</em></small></span></a>
+  <a class="brand" href="#" aria-label="AI Bone Studio 首页"><span class="brand-mark">✦</span><span><strong>AI Bone Studio</strong><small>角色动画工坊 <em>0.3</em></small></span></a>
   <label class="name-label"><span>当前工程</span><input id="project-name" maxlength="80" aria-label="工程名称" value="my-character"></label>
-  <div class="header-actions"><button id="new">新建</button><button id="open">打开工程</button><button id="save">保存工程</button><button id="go-export" class="primary">导出资源 ↗</button></div>
+  <div class="header-actions"><button id="prepare" class="primary">角色与拆件 · V0.3</button><button id="new">新建</button><button id="open">打开工程</button><button id="save">保存工程</button><button id="go-export" class="primary">导出资源 ↗</button></div>
 </header>
 <nav class="steps" aria-label="制作流程">
   <button data-mode="assemble" class="active"><b>1</b><span>拼装角色<small>把零件放到合适的位置</small></span></button>
@@ -32,7 +37,7 @@
   <main class="workspace">
     <div class="canvas-toolbar"><div class="tools"><button id="select-tool" class="selected" title="选择和拖动">↖ 选择</button><button id="draw-tool" title="依次点击肩、肘、腕；Esc 结束">⌁ 画关节链</button><button id="bind-tool">⊕ 绑定零件</button></div><div class="tools"><button id="undo" title="撤销 Ctrl/Cmd+Z">↶</button><button id="redo" title="重做 Ctrl/Cmd+Shift+Z">↷</button><button id="fit">适合画板</button><select id="zoom" aria-label="画板缩放"><option value="0.35">35%</option><option value="0.5">50%</option><option value="0.75">75%</option><option value="1">100%</option><option value="1.5">150%</option></select></div></div>
     <div id="mode-hint" class="mode-hint"></div>
-    <div id="canvas-scroll" class="canvas-scroll"><div class="canvas-wrap"><canvas id="board" width="800" height="720" tabindex="0" role="img" aria-label="角色拼装与骨骼编辑画板。也可通过右侧数字属性精确调整。"></canvas></div><div id="empty-state" class="empty-state"><span class="empty-star">✦</span><h1>让你的角色，动起来。</h1><p>先导入拆好的透明 PNG，或打开练习角色。<br>不用认识复杂术语，跟着上面四步走。</p><button id="empty-import" class="primary">导入我的零件</button><button id="empty-demo">先试一试练习角色</button></div></div>
+    <div id="canvas-scroll" class="canvas-scroll"><div class="canvas-wrap"><canvas id="board" width="800" height="720" tabindex="0" role="img" aria-label="角色拼装与骨骼编辑画板。也可通过右侧数字属性精确调整。"></canvas></div><div id="empty-state" class="empty-state"><span class="empty-star">✦</span><h1>让你的角色，动起来。</h1><p>先导入拆好的透明 PNG，或打开练习角色。<br>不用认识复杂术语，跟着上面四步走。</p><button id="empty-import" class="primary">导入我的零件</button><button id="empty-prepare" class="primary">从角色开始 → 生成 / 上传 / 拆图</button><button id="empty-demo">先试一试练习角色</button></div></div>
     <section id="timeline" class="timeline" hidden>
       <div class="timeline-top"><button id="play" class="play">▶ 播放</button><label>动作 <select id="clip" aria-label="选择动作"></select></label><button id="add-clip" title="新建动作">＋</button><button id="delete-clip" title="删除当前动作">删除动作</button><label class="duration-label">时长 <input id="duration" type="number" min="0.1" max="60" step="0.1" value="2"> 秒</label><span class="auto-key">● 自动记帧</span></div>
       <div class="time-row"><span id="time-label">0.00 s</span><input id="time" type="range" min="0" max="2" step="0.0333333333" value="0" aria-label="动画时间"><span id="time-end">2.00 s</span></div>
@@ -40,11 +45,12 @@
       <div class="timeline-bottom"><span id="track-label">选择关节后，转动它就会记住姿势。</span><button id="add-key">记住此刻姿势</button><button id="delete-key">删除此帧</button></div>
     </section>
   </main>
-  <aside class="inspector panel"><div class="panel-heading"><h2 id="inspector-title">操作向导</h2><span class="badge">✦</span></div><div id="properties"></div></aside>
+  <aside class="inspector panel"><div class="panel-heading"><h2 id="inspector-title">操作向导</h2><span class="badge">✦</span></div><div id="properties"></div><section id="expressions" class="expressions" hidden></section></aside>
 </div>
 <footer><span id="status" role="status" aria-live="polite">准备就绪 · 支持鼠标与单指拖动</span><span class="footer-right">本地自动保存 ≠ 下载备份 <b id="save-state">尚未修改</b></span></footer>
 <div id="toast" class="toast" role="alert" hidden></div>
 <input id="image-input" type="file" accept="image/png,image/webp,.zip" multiple hidden><input id="project-input" type="file" accept=".json,.zip" hidden>
+<input id="variant-input" type="file" accept="image/png,image/webp" hidden>
 <script>(()=>{const factories=Object.create(null), cache=Object.create(null);
 factories['./model.js']=(module,exports,require)=>{
 "use strict";
@@ -69,6 +75,11 @@ exports.deleteBone = deleteBone;
 exports.addBone = addBone;
 exports.setKey = setKey;
 exports.parseProject = parseProject;
+exports.sampleAttachment = sampleAttachment;
+exports.setAttachmentKey = setAttachmentKey;
+exports.variantPart = variantPart;
+exports.addVariant = addVariant;
+exports.blink = blink;
 exports.identity = [1, 0, 0, 1, 0, 0];
 const restPose = () => ({ x: 0, y: 0, rotation: 0, scale: 1 });
 exports.restPose = restPose;
@@ -84,7 +95,7 @@ const clamp = (n, lo, hi) => Math.min(hi, Math.max(lo, n));
 exports.clamp = clamp;
 function newProject() {
     return {
-        format: 'ai-bone-studio', version: '0.2', name: 'my-character',
+        format: 'ai-bone-studio', version: '0.3', name: 'my-character',
         canvas: { width: 800, height: 720, originX: 400, originY: 570 },
         assets: [], parts: [],
         bones: [{ id: 'root', name: '整体 / 根关节', parentId: null, x: 400, y: 570, rotation: 0, scale: 1, length: 0, locked: false }],
@@ -94,8 +105,8 @@ function newProject() {
 /** Keep immutable image strings shared between undo snapshots. */
 function cloneProject(p) {
     return { ...p, canvas: { ...p.canvas }, assets: p.assets.map(a => ({ ...a })),
-        parts: p.parts.map(a => ({ ...a })), bones: p.bones.map(b => ({ ...b })),
-        clips: p.clips.map(c => ({ ...c, tracks: Object.fromEntries(Object.entries(c.tracks).map(([id, keys]) => [id, keys.map(k => ({ ...k }))])) })) };
+        parts: p.parts.map(a => ({ ...a, ...(a.variants ? { variants: a.variants.map(v => ({ ...v })) } : {}) })), bones: p.bones.map(b => ({ ...b })),
+        clips: p.clips.map(c => ({ ...c, ...(c.attachments ? { attachments: Object.fromEntries(Object.entries(c.attachments).map(([id, keys]) => [id, keys.map(k => ({ ...k }))])) } : {}), tracks: Object.fromEntries(Object.entries(c.tracks).map(([id, keys]) => [id, keys.map(k => ({ ...k }))])) })) };
 }
 function multiply(a, b) {
     return [a[0] * b[0] + a[2] * b[1], a[1] * b[0] + a[3] * b[1],
@@ -191,6 +202,10 @@ function movePivot(p, partId, px, py) {
     const part = p.parts.find(a => a.id === partId);
     const asset = p.assets.find(a => a.id === part.assetId);
     const delta = point(transform(0, 0, part.rotation, part.scaleX, part.scaleY), (px - part.pivotX) * asset.width, (py - part.pivotY) * asset.height);
+    for (const v of part.variants ?? []) {
+        v.x -= (px - part.pivotX) * asset.width;
+        v.y -= (py - part.pivotY) * asset.height;
+    }
     part.x += delta.x;
     part.y += delta.y;
     part.pivotX = px;
@@ -270,7 +285,7 @@ function parseProject(data) {
     requireValue(object(data), '这不是工程文件。');
     if (data.version === '0.1')
         throw new Error('V0.1 工程没有保存图片，不能完整还原。请重新导入原 PNG，在本版本重新保存。');
-    requireValue(data.format === 'ai-bone-studio' && data.version === '0.2', '仅支持 AI Bone Studio V0.2 工程；Spine JSON 是游戏资源，不是编辑工程。');
+    requireValue(data.format === 'ai-bone-studio' && (data.version === '0.2' || data.version === '0.3'), '仅支持 AI Bone Studio V0.2 / V0.3 工程；Spine JSON 是游戏资源，不是编辑工程。');
     requireValue(string(data.name) && object(data.canvas), '工程名称或画板信息缺失。');
     const c = data.canvas;
     requireValue(finite(c.width) && finite(c.height) && Number.isInteger(c.width) && Number.isInteger(c.height) && c.width >= 64 && c.height >= 64 && c.width <= 4096 && c.height <= 4096 && finite(c.originX) && finite(c.originY), '画板尺寸必须为 64～4096 像素。');
@@ -316,7 +331,37 @@ function parseProject(data) {
             }
         }
     }
-    const p = data;
+    const p = { ...data, version: '0.3' };
+    for (const part of p.parts) {
+        if (part.variants !== undefined) {
+            requireValue(list(part.variants) && part.variants.length <= 32, '替换图最多 32 项。');
+            unique(part.variants, '替换图');
+            for (const v of part.variants) {
+                requireValue(object(v), '替换图格式无效。');
+                checkId(v.id);
+                checkId(v.assetId);
+                requireValue(v.id !== 'base' && string(v.name) && p.assets.some(a => a.id === v.assetId), '替换图名称或图片引用无效。');
+                requireValue(['x', 'y', 'scaleX', 'scaleY', 'pivotX', 'pivotY'].every(k => finite(v[k])), '替换图对齐数值无效。');
+                requireValue(Math.abs(v.scaleX) >= .001 && Math.abs(v.scaleY) >= .001 && Math.abs(v.scaleX) <= 100 && Math.abs(v.scaleY) <= 100 && Math.abs(v.x) < 100000 && Math.abs(v.y) < 100000 && v.pivotX >= 0 && v.pivotX <= 1 && v.pivotY >= 0 && v.pivotY <= 1, '替换图对齐范围无效。');
+            }
+        }
+    }
+    for (const clip of p.clips) {
+        if (clip.attachments === undefined)
+            continue;
+        requireValue(object(clip.attachments) && Object.keys(clip.attachments).length <= 512, '换图轨道格式无效。');
+        for (const [partId, keys] of Object.entries(clip.attachments)) {
+            checkId(partId);
+            const part = p.parts.find(a => a.id === partId);
+            requireValue(part && Array.isArray(keys) && keys.length <= 3600, '换图轨道引用丢失的部件或过长。');
+            let last = -1;
+            for (const k of keys) {
+                requireValue(object(k) && finite(k.time) && k.time > last && k.time >= 0 && k.time <= clip.duration, '换图帧必须按时间排列、在动作内且无重复。');
+                requireValue(k.variantId === null || k.variantId === 'base' || part.variants?.some(v => v.id === k.variantId), '换图帧引用不存在的替换图。');
+                last = k.time;
+            }
+        }
+    }
     unique(p.assets, '素材');
     unique(p.parts, '部件');
     unique(p.bones, '关节');
@@ -334,7 +379,79 @@ function parseProject(data) {
         requireValue(m.every(v => Number.isFinite(v) && Math.abs(v) <= 1e9), '骨架世界变换超出安全范围。');
     for (const a of p.parts)
         requireValue(partCorners(a, p.assets.find(v => v.id === a.assetId), worlds).every(v => Number.isFinite(v.x) && Number.isFinite(v.y) && Math.abs(v.x) <= 1e9 && Math.abs(v.y) <= 1e9), '部件世界变换超出安全范围。');
-    return cloneProject(p);
+    for (const a of p.parts)
+        for (const v of a.variants ?? []) {
+            const q = variantPart(p, a, v.id);
+            requireValue(partCorners(q.part, q.asset, worlds).every(v => Number.isFinite(v.x) && Number.isFinite(v.y) && Math.abs(v.x) <= 1e9 && Math.abs(v.y) <= 1e9), '替换图世界变换超出安全范围。');
+        }
+    // Only editor fields leave the importer. Unexpected credentials/provider config
+    // in a hand-edited document must not be copied into project exports.
+    const clean = {
+        format: 'ai-bone-studio', version: '0.3', name: p.name,
+        canvas: { width: p.canvas.width, height: p.canvas.height, originX: p.canvas.originX, originY: p.canvas.originY },
+        assets: p.assets.map(({ id, name, width, height, dataUrl, hasAlpha }) => ({ id, name, width, height, dataUrl, hasAlpha })),
+        bones: p.bones.map(({ id, name, parentId, x, y, rotation, scale, length, locked }) => ({ id, name, parentId, x, y, rotation, scale, length, locked })),
+        parts: p.parts.map(({ id, name, assetId, boneId, x, y, rotation, scaleX, scaleY, pivotX, pivotY, z, opacity, visible, locked, variants }) => ({
+            id, name, assetId, boneId, x, y, rotation, scaleX, scaleY, pivotX, pivotY, z, opacity, visible, locked,
+            ...(variants ? { variants: variants.map(({ id, name, assetId, x, y, scaleX, scaleY, pivotX, pivotY }) => ({ id, name, assetId, x, y, scaleX, scaleY, pivotX, pivotY })) } : {})
+        })),
+        clips: p.clips.map(({ id, name, duration, tracks, attachments }) => ({ id, name, duration,
+            tracks: Object.fromEntries(Object.entries(tracks).map(([id, keys]) => [id, keys.map(({ time, x, y, rotation, scale, easing }) => ({ time, x, y, rotation, scale, easing }))])),
+            ...(attachments ? { attachments: Object.fromEntries(Object.entries(attachments).map(([id, keys]) => [id, keys.map(({ time, variantId }) => ({ time, variantId }))])) } : {})
+        }))
+    };
+    return clean;
+}
+/** Discrete attachment state. 'base' is the setup image; null hides the slot. */
+function sampleAttachment(clip, partId, time) {
+    let state = 'base';
+    for (const key of clip?.attachments?.[partId] ?? []) {
+        if (key.time > time)
+            break;
+        state = key.variantId;
+    }
+    return state;
+}
+function setAttachmentKey(clip, part, time, variantId) {
+    if (!Number.isFinite(time) || time < 0 || time > clip.duration)
+        throw new Error('换图时间超出动作时长。');
+    if (variantId !== null && variantId !== 'base' && !part.variants?.some(v => v.id === variantId))
+        throw new Error('替换图片不存在。');
+    clip.attachments ??= {};
+    const keys = (clip.attachments[part.id] ?? []).filter(k => Math.abs(k.time - time) > .00001);
+    keys.push({ time, variantId });
+    keys.sort((a, b) => a.time - b.time);
+    clip.attachments[part.id] = keys;
+}
+function variantPart(p, part, variantId) {
+    if (variantId === 'base')
+        return { part, asset: p.assets.find(a => a.id === part.assetId) };
+    const v = part.variants?.find(v => v.id === variantId);
+    if (!v)
+        throw new Error('替换图片不存在。');
+    const delta = point(transform(0, 0, part.rotation, part.scaleX, part.scaleY), v.x, v.y);
+    return { part: { ...part, assetId: v.assetId, x: part.x + delta.x, y: part.y + delta.y,
+            scaleX: part.scaleX * v.scaleX, scaleY: part.scaleY * v.scaleY, pivotX: v.pivotX, pivotY: v.pivotY }, asset: p.assets.find(a => a.id === v.assetId) };
+}
+function addVariant(p, partId, assetId, name) {
+    const part = p.parts.find(a => a.id === partId);
+    if (!part || !p.assets.some(a => a.id === assetId))
+        throw new Error('请选择部件与图片。');
+    const id = (0, exports.uid)('variant');
+    part.variants ??= [];
+    if (part.variants.length >= 32)
+        throw new Error('一个部件最多 32 个替换图。');
+    part.variants.push({ id, name: name.slice(0, 120) || '替换图', assetId, x: 0, y: 0, scaleX: 1, scaleY: 1, pivotX: .5, pivotY: .5 });
+    return id;
+}
+function blink(p, clip, partId, closedId) {
+    const part = p.parts.find(a => a.id === partId);
+    if (!part)
+        throw new Error('请先选择眼睛部件。');
+    clip.attachments ??= {};
+    clip.attachments[partId] = [];
+    for (const [f, id] of [[0, 'base'], [.42, closedId], [.5, 'base'], [1, 'base']])
+        setAttachmentKey(clip, part, clip.duration * f, id);
 }
 
 };
@@ -507,7 +624,7 @@ exports.regionName = regionName;
 const slotName = (id) => `slot_${id}`;
 exports.slotName = slotName;
 function usedAssets(p) {
-    const ids = new Set(p.parts.map(a => a.assetId));
+    const ids = new Set(p.parts.flatMap(a => [a.assetId, ...(a.variants ?? []).map(v => v.assetId)]));
     return p.assets.filter(a => ids.has(a.id));
 }
 function preflight(p) {
@@ -531,7 +648,7 @@ function preflight(p) {
     const fixed = p.parts.filter(a => a.boneId === 'root').length;
     if (fixed)
         issues.push({ level: 'warning', message: `${fixed} 个部件跟随整体根关节；它们不会跟随其他关节单独活动。` });
-    if (!p.clips.some(c => Object.values(c.tracks).some(t => t.length)))
+    if (!p.clips.some(c => Object.values(c.tracks).some(t => t.length) || Object.values(c.attachments ?? {}).some(t => t.length)))
         issues.push({ level: 'warning', message: '还没有动作关键帧；导出的是可加载的静态骨架。' });
     issues.push({ level: 'warning', message: '目标是 Spine 3.8 的区域贴图 / FK 子集。Laya、Cocos 工程须选择 3.8 运行库；实际引擎验收仍需执行随包测试。' });
     return issues;
@@ -595,10 +712,15 @@ function exportSpine(p) {
     };
     for (const part of [...p.parts].sort((a, b) => a.z - b.z)) {
         const asset = p.assets.find(a => a.id === part.assetId);
-        const centre = (0, model_js_1.point)((0, model_js_1.transform)(part.x, part.y, part.rotation, part.scaleX, part.scaleY), (0.5 - part.pivotX) * asset.width, (0.5 - part.pivotY) * asset.height);
         const key = (0, exports.regionName)(asset), slot = (0, exports.slotName)(part.id);
         doc.slots.push({ name: slot, bone: part.boneId, ...(part.visible ? { attachment: key } : {}), color: `ffffff${Math.round(part.opacity * 255).toString(16).padStart(2, '0')}`, blend: 'normal' });
-        doc.skins[0].attachments[slot] = { [key]: { type: 'region', path: key, x: r(centre.x), y: r(-centre.y), rotation: r(-part.rotation), scaleX: r(part.scaleX), scaleY: r(part.scaleY), width: asset.width, height: asset.height } };
+        doc.skins[0].attachments[slot] = {};
+        for (const id of ['base', ...(part.variants ?? []).map(v => v.id)]) {
+            const { part: a, asset: image } = (0, model_js_1.variantPart)(p, part, id);
+            const centre = (0, model_js_1.point)((0, model_js_1.transform)(a.x, a.y, a.rotation, a.scaleX, a.scaleY), (0.5 - a.pivotX) * image.width, (0.5 - a.pivotY) * image.height);
+            const name = id === 'base' ? key : `variant_${id}`;
+            doc.skins[0].attachments[slot][name] = { type: 'region', path: (0, exports.regionName)(image), x: r(centre.x), y: r(-centre.y), rotation: r(-a.rotation), scaleX: r(a.scaleX), scaleY: r(a.scaleY), width: image.width, height: image.height };
+        }
     }
     for (const clip of p.clips) {
         const tracks = {};
@@ -621,7 +743,12 @@ function exportSpine(p) {
                 scale: keys.map(k => ({ ...common(k), x: r(k.scale), y: r(k.scale) })),
             };
         }
-        doc.animations[clip.name] = { bones: tracks };
+        const slots = {};
+        for (const [partId, keys] of Object.entries(clip.attachments ?? {})) {
+            const part = p.parts.find(v => v.id === partId);
+            slots[(0, exports.slotName)(partId)] = { attachment: keys.map(k => ({ time: r(k.time), name: k.variantId === null || !part.visible ? null : k.variantId === 'base' ? (0, exports.regionName)(p.assets.find(v => v.id === part.assetId)) : `variant_${k.variantId}` })) };
+        }
+        doc.animations[clip.name] = { bones: tracks, ...(Object.keys(slots).length ? { slots } : {}) };
     }
     return doc;
 }
@@ -711,11 +838,14 @@ function drawCharacter(ctx, p, clip, time = 0) {
     for (const part of [...p.parts].sort((a, b) => a.z - b.z)) {
         if (!part.visible || part.opacity <= 0)
             continue;
-        const asset = p.assets.find(a => a.id === part.assetId), ready = exports.decoded.get(asset.id);
+        const state = (0, model_js_1.sampleAttachment)(clip, part.id, time);
+        if (state === null)
+            continue;
+        const resolved = (0, model_js_1.variantPart)(p, part, state), asset = resolved.asset, ready = exports.decoded.get(asset.id);
         if (!ready)
             continue;
         ctx.save();
-        ctx.transform(...(0, model_js_1.partMatrix)(part, asset, bones));
+        ctx.transform(...(0, model_js_1.partMatrix)(resolved.part, asset, bones));
         ctx.globalAlpha = part.opacity;
         ctx.drawImage(ready.image, 0, 0);
         ctx.restore();
@@ -883,7 +1013,7 @@ export class BoneStudioPlayer extends Component {
 }
 `;
 function importGuide(stem) {
-    return `# AI Bone Studio 游戏资源包\n\n目标格式：Spine 3.8.99 JSON，区域贴图 / FK / 平移 / 旋转 / 等比骨骼缩放 / 固定层级。\n\n## 必须一起复制\n${stem}.json、${stem}.atlas 和所有 ${stem}_*.png。这些是运行时资源，不是 .spine 编辑器工程。\n.project.json 才是本工具可再次打开的源工程。\n\n## LayaAir 3.x（以 3.3 文档接口为基线）\n1. 项目设置 → 引擎模块 → 2D → Spine 动画：选择 3.8，不要选择 4.x。\n2. 复制资源到 assets 子目录，把 JSON 拖入层级面板，使用 Spine2DRenderNode。\n3. 动态加载 JSON 时必须指定 Laya.Loader.SPINE。不要把 Spine .atlas 当成 Laya 原生 .atlas 单独加载。\n4. 图集 PNG 为 straight alpha。按引擎要求将纹理类型设为 Default，启用 sRGB，不勾选 Premultiply Alpha。\n5. 选择导出动作名循环播放。代码例子见 examples/LayaPlayer.ts。\n\n## Cocos Creator 3.8.x\n1. 将同目录的 JSON / ATLAS / PNG 一起放入 assets 子目录。\n2. 节点添加 sp.Skeleton，把导入的 SkeletonData 拖入组件。\n3. 关闭 premultipliedAlpha；选择动作名播放。代码例子见 examples/CocosPlayer.ts。\n\n## 验收清单（本次未在你的引擎项目里自动执行）\n- 控制台无版本、骨骼、贴图缺失错误。\n- 初始姿势的位置、镜像、旋转与本工具一致。\n- 两个动作循环后无跳变，父关节带动子关节。\n- 白底和深色底均无黑边；手机目标平台再验证一次。\n- 正常释放角色后没有纹理 / 实例泄漏。\n\n## 边界与授权\n没有 IK、网格 / 权重、变形、动态换图和 draw-order 时间轴；不要把版本字段改成 4.x 冒充兼容。\n本工具不包含 Spine Runtime；使用 Laya / Cocos 的 Spine Runtime 仍须满足 Esoteric Software 的授权条款。导出格式本身不授予 Runtime 使用权。\n\n## 参考资料\n- https://layaair.com/3.3/doc-en/IDE/Component/2D/2DRender/Spine2DRenderNode/readme.html\n- https://docs.cocos.com/creator/3.8/manual/en/asset/spine.html\n- https://esotericsoftware.com/spine-json-format\n- https://esotericsoftware.com/spine-runtimes-license\n`;
+    return `# AI Bone Studio 游戏资源包\n\n目标格式：Spine 3.8.99 JSON，区域贴图 / FK / 平移 / 旋转 / 等比骨骼缩放 / Attachment 换图 / 固定层级。\n\n## 必须一起复制\n${stem}.json、${stem}.atlas 和所有 ${stem}_*.png。这些是运行时资源，不是 .spine 编辑器工程。\n.project.json 才是本工具可再次打开的源工程。\n\n## LayaAir 3.x（以 3.3 文档接口为基线）\n1. 项目设置 → 引擎模块 → 2D → Spine 动画：选择 3.8，不要选择 4.x。\n2. 复制资源到 assets 子目录，把 JSON 拖入层级面板，使用 Spine2DRenderNode。\n3. 动态加载 JSON 时必须指定 Laya.Loader.SPINE。不要把 Spine .atlas 当成 Laya 原生 .atlas 单独加载。\n4. 图集 PNG 为 straight alpha。按引擎要求将纹理类型设为 Default，启用 sRGB，不勾选 Premultiply Alpha。\n5. 选择导出动作名循环播放。代码例子见 examples/LayaPlayer.ts。\n\n## Cocos Creator 3.8.x\n1. 将同目录的 JSON / ATLAS / PNG 一起放入 assets 子目录。\n2. 节点添加 sp.Skeleton，把导入的 SkeletonData 拖入组件。\n3. 关闭 premultipliedAlpha；选择动作名播放。代码例子见 examples/CocosPlayer.ts。\n\n## 验收清单（本次未在你的引擎项目里自动执行）\n- 控制台无版本、骨骼、贴图缺失错误。\n- 初始姿势的位置、镜像、旋转与本工具一致。\n- 两个动作循环后无跳变，父关节带动子关节。\n- 白底和深色底均无黑边；手机目标平台再验证一次。\n- 正常释放角色后没有纹理 / 实例泄漏。\n\n## 边界与授权\n支持部件替换 / 隐藏的离散换图时间轴；没有 IK、网格 / 权重、变形和 draw-order 时间轴；不要把版本字段改成 4.x 冒充兼容。\n本工具不包含 Spine Runtime；使用 Laya / Cocos 的 Spine Runtime 仍须满足 Esoteric Software 的授权条款。导出格式本身不授予 Runtime 使用权。\n\n## 参考资料\n- https://layaair.com/3.3/doc-en/IDE/Component/2D/2DRender/Spine2DRenderNode/readme.html\n- https://docs.cocos.com/creator/3.8/manual/en/asset/spine.html\n- https://esotericsoftware.com/spine-json-format\n- https://esotericsoftware.com/spine-runtimes-license\n`;
 }
 async function exportBundle(p) {
     const skeleton = (0, spine_js_1.exportSpine)(p), assets = (0, spine_js_1.usedAssets)(p), stem = (0, spine_js_1.fileStem)(p.name), pages = (0, spine_js_1.packAtlas)(assets, stem);
@@ -918,7 +1048,7 @@ async function exportBundle(p) {
         entries.push({ name: `images/${(0, spine_js_1.regionName)(asset)}.png`, bytes: await pngBytes(source) });
     }
     const memoryMB = pages.reduce((s, p) => s + p.width * p.height * 4, 0) / 1048576;
-    entries.push((0, zip_js_1.textEntry)(`${stem}.project.json`, JSON.stringify(p)), (0, zip_js_1.textEntry)('IMPORT.md', importGuide(stem)), (0, zip_js_1.textEntry)('examples/LayaPlayer.ts', exports.layaExample), (0, zip_js_1.textEntry)('examples/CocosPlayer.ts', exports.cocosExample), (0, zip_js_1.textEntry)('asset-map.json', JSON.stringify({ bones: p.bones.map(b => ({ id: b.id, label: b.name })), parts: p.parts.map(a => ({ slot: `slot_${a.id}`, label: a.name, assetId: a.assetId })), pages }, null, 2)), (0, zip_js_1.textEntry)('compatibility.json', JSON.stringify({ exporter: 'ai-bone-studio/0.2.0', format: 'spine-3.8.99-region-fk', alpha: 'straight', schemaPreflight: 'passed', engineIntegrationTest: 'not-run-in-user-project', targetRuntime: '3.8', estimatedTextureMemoryMB: memoryMB, issues: (0, spine_js_1.preflight)(p) }, null, 2)));
+    entries.push((0, zip_js_1.textEntry)(`${stem}.project.json`, JSON.stringify(p)), (0, zip_js_1.textEntry)('IMPORT.md', importGuide(stem)), (0, zip_js_1.textEntry)('examples/LayaPlayer.ts', exports.layaExample), (0, zip_js_1.textEntry)('examples/CocosPlayer.ts', exports.cocosExample), (0, zip_js_1.textEntry)('asset-map.json', JSON.stringify({ bones: p.bones.map(b => ({ id: b.id, label: b.name })), parts: p.parts.map(a => ({ slot: `slot_${a.id}`, label: a.name, assetId: a.assetId })), pages }, null, 2)), (0, zip_js_1.textEntry)('compatibility.json', JSON.stringify({ exporter: 'ai-bone-studio/0.3.0', format: 'spine-3.8.99-region-fk-attachment', alpha: 'straight', schemaPreflight: 'passed', engineIntegrationTest: 'not-run-in-user-project', targetRuntime: '3.8', estimatedTextureMemoryMB: memoryMB, issues: (0, spine_js_1.preflight)(p) }, null, 2)));
     return { bytes: (0, zip_js_1.writeZip)(entries), pages: pages.length, memoryMB };
 }
 async function exportFrames(p, clip, fps = 15) {
@@ -977,10 +1107,1208 @@ async function restoreAutosave() {
 }
 
 };
+factories['./chroma.js']=(module,exports,require)=>{
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.rgbHex = exports.KEY_VERSION = void 0;
+exports.hexRGB = hexRGB;
+exports.backgroundReport = backgroundReport;
+exports.recommendColor = recommendColor;
+exports.keyRaster = keyRaster;
+exports.componentRects = componentRects;
+exports.validRect = validRect;
+exports.cropRaster = cropRaster;
+exports.brushMask = brushMask;
+exports.alphaStats = alphaStats;
+exports.KEY_VERSION = 'chroma-distance-unmix/2';
+function hexRGB(hex) {
+    if (!/^#[\da-f]{6}$/i.test(hex))
+        throw new Error('背景色必须是 #RRGGBB。');
+    return [1, 3, 5].map(i => parseInt(hex.slice(i, i + 2), 16));
+}
+const rgbHex = (rgb) => '#' + rgb.map(n => Math.round(n).toString(16).padStart(2, '0')).join('');
+exports.rgbHex = rgbHex;
+const dist = (a, b) => Math.hypot(a[0] - b[0], a[1] - b[1], a[2] - b[2]);
+const bounded = (n, lo, hi) => Math.max(lo, Math.min(hi, n));
+function validate(a) {
+    if (!Number.isInteger(a.width) || !Number.isInteger(a.height) || a.width < 1 || a.height < 1 || a.width * a.height > 16777216 || a.data.length !== a.width * a.height * 4)
+        throw new Error('图片像素尺寸无效或超过 1600 万像素。');
+}
+function backgroundReport(a, requested) {
+    validate(a);
+    const samples = [], histogram = new Map();
+    const stride = Math.max(1, Math.floor((a.width + a.height) / 1800));
+    let opaque = true;
+    const take = (x, y) => {
+        const i = (y * a.width + x) * 4, rgb = [a.data[i], a.data[i + 1], a.data[i + 2]];
+        if (a.data[i + 3] < 250)
+            opaque = false;
+        samples.push(rgb);
+        const key = rgb.map(v => Math.floor(v / 8)).join(',');
+        const bin = histogram.get(key) ?? { n: 0, rgb: [0, 0, 0] };
+        bin.n++;
+        rgb.forEach((v, j) => bin.rgb[j] += v);
+        histogram.set(key, bin);
+    };
+    for (let x = 0; x < a.width; x += stride) {
+        take(x, 0);
+        take(x, a.height - 1);
+    }
+    for (let y = 0; y < a.height; y += stride) {
+        take(0, y);
+        take(a.width - 1, y);
+    }
+    const winner = [...histogram.values()].sort((a, b) => b.n - a.n)[0];
+    const measured = winner.rgb.map(v => Math.round(v / winner.n));
+    const uniformity = samples.filter(v => dist(v, measured) < 28).length / samples.length, difference = dist(requested, measured), warnings = [];
+    if (uniformity < .95)
+        warnings.push('边框背景不够均匀或有部件触边；先检查原图，不要直接全量确认。');
+    if (difference > 45)
+        warnings.push('实测背景与指定颜色不同。可采用实测颜色，但须检查主体是否撞色。');
+    if (!opaque)
+        warnings.push('源图边框存在透明像素。AI 部件必须提供不透明纯色原图；外部透明零件请直接导入。');
+    return { requested, measured, uniformity, difference, opaque, warnings };
+}
+/** Recommend a color with a large lower-percentile distance to sampled artwork. Not an automatic safety guarantee. */
+function recommendColor(a) {
+    validate(a);
+    const candidates = [[0, 255, 0], [255, 0, 255], [0, 128, 255], [255, 255, 0], [0, 255, 255]];
+    let best = candidates[0], score = -1;
+    for (const c of candidates) {
+        const distances = [];
+        for (let i = 0; i < a.data.length; i += 4 * Math.max(1, Math.floor(a.width * a.height / 3000)))
+            if (a.data[i + 3] > 128)
+                distances.push(dist([a.data[i], a.data[i + 1], a.data[i + 2]], c));
+        distances.sort((a, b) => a - b);
+        const s = distances[Math.floor(distances.length * .02)] ?? 0;
+        if (s > score) {
+            score = s;
+            best = c;
+        }
+    }
+    return best;
+}
+/** Distance matte, same-hue background rejection and locally fitted foreground unmix.
+ * The pure-color source is retained for manual restoration; matching subject colors
+ * cannot be recovered reliably from color alone. No machine-generated alpha path.
+ */
+function keyRaster(source, options) {
+    validate(source);
+    const { color: bg, inner, outer } = options;
+    if (!Number.isFinite(inner) || !Number.isFinite(outer) || inner < 0 || outer <= inner || outer > 400 || bg.length !== 3 || bg.some(v => !Number.isFinite(v) || v < 0 || v > 255))
+        throw new Error('抠图容差无效。');
+    const w = source.width, h = source.height, n = w * h, rgba = new Uint8ClampedArray(source.data), distance = new Float32Array(n), trusted = new Uint8Array(n), near = new Uint8Array(n);
+    const avg = (bg[0] + bg[1] + bg[2]) / 3, cb = bg.map(v => v - avg), bn = Math.hypot(...cb);
+    near.fill(100);
+    for (let p = 0; p < n; p++) {
+        const i = p * 4, d = Math.hypot(rgba[i] - bg[0], rgba[i + 1] - bg[1], rgba[i + 2] - bg[2]);
+        distance[p] = d;
+        const mean = (rgba[i] + rgba[i + 1] + rgba[i + 2]) / 3, cr = rgba[i] - mean, cg = rgba[i + 1] - mean, cc = rgba[i + 2] - mean, cn = Math.hypot(cr, cg, cc);
+        const cosine = bn > 10 && cn > 1 ? (cr * cb[0] + cg * cb[1] + cc * cb[2]) / (bn * cn) : 0;
+        // Dark green/magenta compression or lighting remnants remain key-colored.
+        const keyHue = bn > 10 && cn > 16 && cosine > .985;
+        rgba[i + 3] = keyHue ? 0 : Math.round(bounded((d - inner) / (outer - inner), 0, 1) * source.data[i + 3]);
+        if (d > Math.max(outer + 30, 150) && source.data[i + 3] > 250 && (cosine < .55 || cn < 12)) {
+            trusted[p] = 1;
+            near[p] = 0;
+        }
+    }
+    if (options.despill) {
+        // Linear-time proximity pass avoids scanning a 7x7 window across an entire sheet.
+        for (let p = 0; p < n; p++) {
+            if (p % w)
+                near[p] = Math.min(near[p], near[p - 1] + 1);
+            if (p >= w)
+                near[p] = Math.min(near[p], near[p - w] + 1);
+        }
+        for (let p = n - 1; p >= 0; p--) {
+            if (p % w < w - 1)
+                near[p] = Math.min(near[p], near[p + 1] + 1);
+            if (p < n - w)
+                near[p] = Math.min(near[p], near[p + w] + 1);
+        }
+        for (let p = 0; p < n; p++) {
+            const i = p * 4;
+            if (trusted[p] || distance[p] <= inner || near[p] > 7 || source.data[i + 3] === 0)
+                continue;
+            const x = p % w, y = Math.floor(p / w);
+            let chosen = -1, alpha = 0, best = Infinity;
+            for (let dy = -5; dy <= 5; dy++)
+                for (let dx = -5; dx <= 5; dx++) {
+                    const xx = x + dx, yy = y + dy;
+                    if (xx < 0 || yy < 0 || xx >= w || yy >= h)
+                        continue;
+                    const q = yy * w + xx;
+                    if (!trusted[q])
+                        continue;
+                    const f = q * 4;
+                    let dot = 0, norm = 0;
+                    for (let c = 0; c < 3; c++) {
+                        const v = source.data[f + c] - bg[c];
+                        dot += (source.data[i + c] - bg[c]) * v;
+                        norm += v * v;
+                    }
+                    const a = bounded(dot / Math.max(1, norm), 0, 1);
+                    let error = 0;
+                    for (let c = 0; c < 3; c++)
+                        error += (source.data[i + c] - (a * source.data[f + c] + (1 - a) * bg[c])) ** 2;
+                    const score = error + 4 * (dx * dx + dy * dy);
+                    if (error <= 1800 && score < best) {
+                        best = score;
+                        chosen = q;
+                        alpha = a;
+                    }
+                }
+            if (chosen < 0)
+                continue;
+            if (alpha < .02) {
+                rgba[i + 3] = 0;
+                continue;
+            }
+            rgba[i + 3] = Math.round(alpha * source.data[i + 3]);
+            for (let c = 0; c < 3; c++)
+                rgba[i + c] = bounded((source.data[i + c] - (1 - alpha) * bg[c]) / alpha, 0, 255);
+        }
+    }
+    for (let i = 0; i < rgba.length; i += 4)
+        if (rgba[i + 3] === 0)
+            rgba[i] = rgba[i + 1] = rgba[i + 2] = 0;
+    return { width: w, height: h, data: rgba };
+}
+/** Connected regions are proposals, never semantic parts. Small islands may need manual grouping. */
+function componentRects(a, minPixels = 6) {
+    validate(a);
+    const seen = new Uint8Array(a.width * a.height), queue = new Int32Array(a.width * a.height), result = [];
+    for (let p = 0; p < seen.length; p++) {
+        if (seen[p] || a.data[p * 4 + 3] < 24)
+            continue;
+        let tail = 1, head = 0, count = 0, x0 = a.width, y0 = a.height, x1 = 0, y1 = 0;
+        queue[0] = p;
+        seen[p] = 1;
+        while (head < tail) {
+            const q = queue[head++], x = q % a.width, y = Math.floor(q / a.width);
+            count++;
+            x0 = Math.min(x0, x);
+            y0 = Math.min(y0, y);
+            x1 = Math.max(x1, x);
+            y1 = Math.max(y1, y);
+            for (let dy = -1; dy <= 1; dy++)
+                for (let dx = -1; dx <= 1; dx++) {
+                    const xx = x + dx, yy = y + dy;
+                    if (xx < 0 || yy < 0 || xx >= a.width || yy >= a.height)
+                        continue;
+                    const k = yy * a.width + xx;
+                    if (!seen[k] && a.data[k * 4 + 3] >= 24) {
+                        seen[k] = 1;
+                        queue[tail++] = k;
+                    }
+                }
+        }
+        if (count >= minPixels)
+            result.push({ x: x0, y: y0, width: x1 - x0 + 1, height: y1 - y0 + 1 });
+        if (result.length > 512)
+            throw new Error('检测到超过 512 个区域，背景可能没有抠除干净。请调容差或使用网格/手工框选。');
+    }
+    result.sort((a, b) => a.y - b.y || a.x - b.x);
+    return result;
+}
+function validRect(a, rect) {
+    const x = bounded(Math.floor(rect.x), 0, a.width - 1), y = bounded(Math.floor(rect.y), 0, a.height - 1);
+    return { x, y, width: bounded(Math.ceil(rect.width), 1, a.width - x), height: bounded(Math.ceil(rect.height), 1, a.height - y) };
+}
+function cropRaster(a, raw, padding = 8) {
+    validate(a);
+    if (!Object.values(raw).every(Number.isFinite) || padding < 0 || padding > 64)
+        throw new Error('裁切范围无效。');
+    const box = validRect(a, raw);
+    let x0 = box.x + box.width, y0 = box.y + box.height, x1 = -1, y1 = -1;
+    for (let y = box.y; y < box.y + box.height; y++)
+        for (let x = box.x; x < box.x + box.width; x++)
+            if (a.data[(y * a.width + x) * 4 + 3] > 0) {
+                x0 = Math.min(x0, x);
+                y0 = Math.min(y0, y);
+                x1 = Math.max(x1, x);
+                y1 = Math.max(y1, y);
+            }
+    if (x1 < 0)
+        throw new Error('这个范围没有前景像素。');
+    const width = x1 - x0 + 1 + padding * 2, height = y1 - y0 + 1 + padding * 2, data = new Uint8ClampedArray(width * height * 4);
+    for (let y = y0; y <= y1; y++) {
+        const start = (y * a.width + x0) * 4;
+        data.set(a.data.subarray(start, start + (x1 - x0 + 1) * 4), ((y - y0 + padding) * width + padding) * 4);
+    }
+    return { image: { width, height, data }, bounds: { x: x0, y: y0, width: x1 - x0 + 1, height: y1 - y0 + 1 } };
+}
+function brushMask(target, original, x, y, radius, restore) {
+    if (target.width !== original.width || target.height !== original.height || ![x, y, radius].every(Number.isFinite) || radius <= 0 || radius > 128)
+        throw new Error('蒙版画笔参数无效。');
+    for (let yy = Math.max(0, Math.floor(y - radius)); yy <= Math.min(target.height - 1, Math.ceil(y + radius)); yy++)
+        for (let xx = Math.max(0, Math.floor(x - radius)); xx <= Math.min(target.width - 1, Math.ceil(x + radius)); xx++) {
+            if ((xx - x) ** 2 + (yy - y) ** 2 > radius ** 2)
+                continue;
+            const i = (yy * target.width + xx) * 4;
+            if (restore)
+                target.data.set(original.data.subarray(i, i + 4), i);
+            else
+                target.data.fill(0, i, i + 4);
+        }
+}
+function alphaStats(a) {
+    validate(a);
+    let foreground = 0, transparent = 0, soft = 0, touchesEdge = false;
+    for (let p = 0; p < a.width * a.height; p++) {
+        const v = a.data[p * 4 + 3];
+        if (v === 0)
+            transparent++;
+        else {
+            foreground++;
+            if (v < 255)
+                soft++;
+            const x = p % a.width, y = Math.floor(p / a.width);
+            if (x === 0 || y === 0 || x === a.width - 1 || y === a.height - 1)
+                touchesEdge = true;
+        }
+    }
+    return { foreground, transparent, soft, touchesEdge };
+}
+
+};
+factories['./production.js']=(module,exports,require)=>{
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.HEAD = void 0;
+exports.specsFor = specsFor;
+exports.newPreparation = newPreparation;
+exports.partsPrompt = partsPrompt;
+exports.characterPrompt = characterPrompt;
+exports.addCharacter = addCharacter;
+exports.approveCandidate = approveCandidate;
+exports.coverage = coverage;
+exports.parsePreparation = parsePreparation;
+const model_js_1 = require("./model.js");
+exports.HEAD = [
+    ['face_base', '干净脸底', '无眼睛、眉毛、嘴巴、头发，保留脸型、肤色和耳朵'],
+    ['hair_back', '后发', '完整后脑头发，补全被脸遮挡的区域'],
+    ['bangs', '刘海', '只画额头前刘海，不重复包含两侧长发'],
+    ['side_hair_L', '角色左侧发', '角色自身左侧（正面图的画面右侧），发根补足隐藏覆盖'],
+    ['side_hair_R', '角色右侧发', '角色自身右侧（正面图的画面左侧），发根补足隐藏覆盖'],
+    ['eyebrow_L', '角色左眉', '单独一条角色自身左侧眉毛，不带皮肤底'],
+    ['eyebrow_R', '角色右眉', '单独一条角色自身右侧眉毛，不带皮肤底'],
+    ['eye_L_open', '角色左眼·睁开', '单独左侧睁眼，虹膜眼白睫毛在同一部件中，不带脸皮'],
+    ['eye_R_open', '角色右眼·睁开', '单独右侧睁眼，虹膜眼白睫毛在同一部件中，不带脸皮'],
+    ['eye_L_closed', '角色左眼·闭合', '与左侧睁眼匹配的闭合眼线，不带脸皮'],
+    ['eye_R_closed', '角色右眼·闭合', '与右侧睁眼匹配的闭合眼线，不带脸皮'],
+    ['mouth_smile', '微笑嘴型', '单独微笑嘴线，不带脸皮，不生成其他嘴型'],
+].map(([id, label, instruction], i) => ({ id, label, instruction, group: i < 5 ? '头部结构' : '表情' }));
+const BODY = [['torso', '躯干', '保留服装，补全手臂遮挡区域'], ['cape_back', '后披风', '完整后层'], ['skirt', '裙摆', '完整下摆，可围绕腰部轻摆'], ...['L', 'R'].flatMap(s => [
+        [`upper_arm_${s}`, `${s === 'L' ? '左' : '右'}上臂`, '肩部与肘部额外补全，供关节旋转覆盖'],
+        [`forearm_${s}`, `${s === 'L' ? '左' : '右'}前臂`, '肘部与袖口隐藏区域补全'],
+        [`hand_${s}`, `${s === 'L' ? '左' : '右'}手`, '完整手掌，补全被袖口遮住的手腕'],
+        [`leg_${s}`, `${s === 'L' ? '左' : '右'}腿`, '补全伸入裙摆的隐藏区域'],
+        [`shoe_${s}`, `${s === 'L' ? '左' : '右'}鞋`, '完整鞋和隐藏踝部'],
+    ])].map(([id, label, instruction]) => ({ id, label, instruction, group: '身体' }));
+function specsFor(purposes) {
+    const all = purposes.some(p => p !== 'head') ? [...exports.HEAD, ...BODY] : exports.HEAD;
+    return [...new Map(all.map(a => [a.id, { ...a }])).values()];
+}
+function newPreparation() { return { format: 'ai-bone-preparation', version: '0.3', name: 'my-character', description: '两头身 Q 版女魔法师，银紫色头发、深蓝色服装，清楚的轮廓，简洁配饰。', view: '正面', purposes: ['head'], specs: specsFor(['head']), characters: [], activeCharacter: null, sheets: [], activeSheet: null, candidates: [], jobs: [], color: '#00ff00' }; }
+function partsPrompt(state, ids = state.specs.map(s => s.id)) {
+    const selected = state.specs.filter(s => ids.includes(s.id));
+    if (!selected.length)
+        throw new Error('请先选择需要生成的部件。');
+    return `这是游戏骨骼动画部件工程素材，不是概念展示板。严格沿用参考角色的身份、配色、画风和比例，视图：${state.view}。\n仅生成以下 ${selected.length} 个部件，按从左到右、从上到下的顺序分格排布（格线不可见）。部件之间保持足够空隙，不接触，大小保持同一角色比例。\n${selected.map((s, i) => `${i + 1}. ${s.id}：${s.label}；${s.instruction}`).join('\n')}\n背景必须是全画布均匀、不透明的纯色 ${state.color}。不要透明背景，不要棋盘格，不要渐变、文字、编号、线框、场景、外部投影、发光溢出、法杖、小猫和额外部件。保留素材自身明暗。部件内不要使用背景色作为装饰。旋转部位需补画被遮挡像素，不能只按当前可见边缘切断；重叠量按目标动作复核。\n每格只放一个清单部件；闭眼、嘴型不带脸底；前发不重复画侧发。输出一张多部件素材图，禁止再画完整人物。`;
+}
+function characterPrompt(state) { return `设计一个可用于 2D 骨骼动画的原创游戏角色。需求：${state.description}\n${state.view}单一视图，完整轮廓，手臂与身体稍微分开，避免交叉遮挡。人物定稿素材，不要文字或排版，不要宠物、法杖和额外人物。服装与配饰简洁，保持后续易拆件。`; }
+function addCharacter(state, image, width, height, name, parentId) {
+    if (state.characters.length >= 20)
+        throw new Error('一个准备工程最多保存 20 个角色版本，请另存新工程。');
+    const id = (0, model_js_1.uid)('character');
+    state.characters.push({ id, name, image, width, height, adopted: false, description: state.description, createdAt: new Date().toISOString(), ...(parentId ? { parentId } : {}) });
+    state.activeCharacter = id;
+    return id;
+}
+function approveCandidate(state, id) {
+    const c = state.candidates.find(c => c.id === id);
+    if (!c)
+        throw new Error('候选部件不存在。');
+    if (!c.semanticId || !state.specs.some(s => s.id === c.semanticId))
+        throw new Error('先指定这个候选对应清单中的哪个部件。');
+    if (state.candidates.some(v => v.id !== id && v.semanticId === c.semanticId && v.status === 'approved'))
+        throw new Error('这个部件已有已确认版本。先将旧版归档，再确认新版；旧图不会自动覆盖。');
+    c.status = 'approved';
+}
+function coverage(state) {
+    const approved = state.candidates.filter(c => c.status === 'approved'), count = new Map();
+    approved.forEach(c => count.set(c.semanticId, (count.get(c.semanticId) ?? 0) + 1));
+    return { missing: state.specs.filter(s => !count.has(s.id)), duplicates: [...count].filter(([, n]) => n > 1).map(([id]) => id), approved: approved.length };
+}
+/** Explicitly reconstruct known fields. Gateway credentials/unknown data can never enter an exported workspace. */
+function parsePreparation(input) {
+    const d = input;
+    if (!d || d.format !== 'ai-bone-preparation' || d.version !== '0.3')
+        throw new Error('这不是 V0.3 角色准备工程。');
+    const text = (v, max = 10000) => {
+        if (typeof v !== 'string' || v.length > max)
+            throw new Error('准备工程文本无效。');
+        return v;
+    };
+    const id = (v) => {
+        const s = text(v, 80);
+        if (!/^[a-zA-Z0-9_-]+$/.test(s) || ['__proto__', 'constructor', 'prototype'].includes(s))
+            throw new Error('准备工程编号无效。');
+        return s;
+    };
+    const list = (v, max) => {
+        if (!Array.isArray(v) || v.length > max)
+            throw new Error('准备工程集合过大或缺失。');
+        return v;
+    };
+    const dim = (v) => {
+        if (!Number.isInteger(v) || Number(v) < 1 || Number(v) > 8192)
+            throw new Error('准备工程图片尺寸无效。');
+        return Number(v);
+    };
+    let total = 0;
+    const image = (v) => {
+        const s = text(v, 30 * 1024 * 1024);
+        total += s.length;
+        if (total > 100 * 1024 * 1024 || !/^data:image\/png;base64,[A-Za-z0-9+/=]+$/.test(s))
+            throw new Error('准备工程必须内嵌 PNG，总量不超过 100MB。');
+        return s;
+    };
+    const color = (v) => {
+        const s = text(v, 7);
+        if (!/^#[0-9a-f]{6}$/i.test(s))
+            throw new Error('背景色无效。');
+        return s;
+    };
+    const purposes = list(d.purposes, 3);
+    if (!purposes.length || purposes.some(v => !['head', 'idle', 'game'].includes(v)))
+        throw new Error('用途无效。');
+    const p = { format: d.format, version: d.version, name: text(d.name, 100), description: text(d.description), view: text(d.view, 100), purposes: [...purposes], color: color(d.color), activeCharacter: d.activeCharacter === null ? null : id(d.activeCharacter), activeSheet: d.activeSheet === null ? null : id(d.activeSheet), specs: list(d.specs, 100).map(s => ({ id: id(s.id), label: text(s.label, 120), group: text(s.group, 120), instruction: text(s.instruction, 2000) })), characters: list(d.characters, 20).map(v => ({ id: id(v.id), name: text(v.name, 120), image: image(v.image), width: dim(v.width), height: dim(v.height), adopted: v.adopted === true, description: text(v.description), createdAt: text(v.createdAt, 100), ...(v.parentId ? { parentId: id(v.parentId) } : {}) })), sheets: list(d.sheets, 30).map(v => ({ id: id(v.id), name: text(v.name, 120), image: image(v.image), width: dim(v.width), height: dim(v.height), color: color(v.color), roleId: v.roleId === null ? null : id(v.roleId), createdAt: text(v.createdAt, 100) })), candidates: [], jobs: [] };
+    for (const c of list(d.candidates, 256)) {
+        if (!['review', 'approved', 'repair', 'archived'].includes(c.status) || !c.bounds || !['x', 'y', 'width', 'height'].every(k => Number.isInteger(c.bounds[k]) && c.bounds[k] >= 0) || c.bounds.width < 1 || c.bounds.height < 1 || !c.key || !Array.isArray(c.key.color) || c.key.color.length !== 3 || c.key.color.some(n => !Number.isFinite(n) || n < 0 || n > 255) || !Number.isFinite(c.key.inner) || !Number.isFinite(c.key.outer) || c.key.inner < 0 || c.key.outer <= c.key.inner || c.key.outer > 400)
+            throw new Error('候选元数据无效。');
+        p.candidates.push({ id: id(c.id), name: text(c.name, 120), semanticId: c.semanticId === '' ? '' : id(c.semanticId), sheetId: id(c.sheetId), image: image(c.image), width: dim(c.width), height: dim(c.height), bounds: { x: c.bounds.x, y: c.bounds.y, width: c.bounds.width, height: c.bounds.height }, status: c.status, key: { color: [...c.key.color], inner: c.key.inner, outer: c.key.outer, despill: c.key.despill === true }, keyVersion: text(c.keyVersion, 100), warnings: list(c.warnings, 30).map(v => text(v, 2000)), imported: c.imported === true, maskEdited: c.maskEdited === true });
+    }
+    p.jobs = list(d.jobs, 200).map(v => {
+        if (!['character', 'parts'].includes(v.kind))
+            throw new Error('任务类型无效。');
+        return { id: id(v.id), requestId: id(v.requestId), kind: v.kind, provider: id(v.provider), roleId: v.roleId === null ? null : id(v.roleId), specIds: list(v.specIds, 100).map(id), color: color(v.color), imported: v.imported === true, status: text(v.status, 100), createdAt: text(v.createdAt, 100) };
+    });
+    for (const collection of [p.characters, p.sheets, p.candidates, p.specs, p.jobs])
+        if (new Set(collection.map(v => v.id)).size !== collection.length)
+            throw new Error('准备工程含重复编号。');
+    if (p.activeCharacter && !p.characters.some(c => c.id === p.activeCharacter) || p.activeSheet && !p.sheets.some(c => c.id === p.activeSheet) || p.candidates.some(c => !p.sheets.some(s => s.id === c.sheetId)))
+        throw new Error('准备工程引用了丢失的原图。');
+    for (const v of [...p.characters, ...p.sheets, ...p.candidates])
+        if (v.width * v.height > 16777216)
+            throw new Error('图片像素数量超过限制。');
+    for (const c of p.candidates) {
+        const sheet = p.sheets.find(s => s.id === c.sheetId);
+        if (c.bounds.x + c.bounds.width > sheet.width || c.bounds.y + c.bounds.height > sheet.height)
+            throw new Error('候选裁切位置超出原图。');
+    }
+    if (coverage(p).duplicates.length)
+        throw new Error('工程含重复的已确认语义部件，请修正状态后导入。');
+    return p;
+}
+
+};
+factories['./preparation-ui.js']=(module,exports,require)=>{
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.initPreparation = initPreparation;
+const model_js_1 = require("./model.js");
+const chroma_js_1 = require("./chroma.js");
+const production_js_1 = require("./production.js");
+const zip_js_1 = require("./zip.js");
+const io_js_1 = require("./io.js");
+const esc = (v) => String(v).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+const $ = (id) => document.getElementById(id);
+const waitPaint = () => new Promise(resolve => requestAnimationFrame(() => resolve()));
+function rasterURL(r) { const c = document.createElement('canvas'); c.width = r.width; c.height = r.height; c.getContext('2d').putImageData(new ImageData(new Uint8ClampedArray(r.data), r.width, r.height), 0, 0); return c.toDataURL('image/png'); }
+async function rasterFrom(url) {
+    return new Promise((resolve, reject) => {
+        const image = new Image();
+        image.onload = () => {
+            if (image.width * image.height > 16777216) {
+                reject(new Error('图片超过 1600 万像素。'));
+                return;
+            }
+            const canvas = document.createElement('canvas');
+            canvas.width = image.width;
+            canvas.height = image.height;
+            const ctx = canvas.getContext('2d', { willReadFrequently: true });
+            ctx.drawImage(image, 0, 0);
+            resolve({ width: canvas.width, height: canvas.height, data: ctx.getImageData(0, 0, canvas.width, canvas.height).data });
+        };
+        image.onerror = () => reject(new Error('图片无法解码。'));
+        image.src = url;
+    });
+}
+async function fileRaster(file) {
+    if (file.size > 20 * 1024 * 1024)
+        throw new Error('图片超过 20MB。');
+    const url = URL.createObjectURL(file);
+    try {
+        return await rasterFrom(url);
+    }
+    finally {
+        URL.revokeObjectURL(url);
+    }
+}
+async function stored(write) {
+    return new Promise((resolve, reject) => {
+        const request = indexedDB.open('ai-bone-preparation', 1);
+        request.onupgradeneeded = () => request.result.createObjectStore('state');
+        request.onerror = () => reject(request.error);
+        request.onsuccess = () => {
+            const db = request.result, tx = db.transaction('state', write ? 'readwrite' : 'readonly'), op = write ? tx.objectStore('state').put(write, 'latest') : tx.objectStore('state').get('latest');
+            let result = null;
+            op.onsuccess = () => {
+                if (!write && op.result)
+                    try {
+                        result = (0, production_js_1.parsePreparation)(op.result);
+                    }
+                    catch (e) {
+                        reject(e);
+                    }
+            };
+            tx.oncomplete = () => { db.close(); resolve(result); };
+            tx.onerror = () => { db.close(); reject(tx.error); };
+        };
+    });
+}
+function checkedRemoteJob(value) {
+    const j = value;
+    if (!j || typeof j.id !== 'string' || !/^[a-zA-Z0-9_-]{8,80}$/.test(j.id) || typeof j.requestId !== 'string' || !/^[a-zA-Z0-9_-]{8,80}$/.test(j.requestId) || !['character', 'parts'].includes(j.kind) || !['queued', 'running', 'succeeded', 'failed', 'unknown'].includes(j.status) || typeof j.createdAt !== 'string' || j.createdAt.length > 100 || j.error && typeof j.error !== 'string')
+        throw new Error('网关任务元数据格式不安全或不兼容。');
+    return j;
+}
+function initPreparation(hooks) {
+    let state = (0, production_js_1.newPreparation)(), step = 0, processing = false, report = '', original = null, keyed = null, rects = [], maskUndo = [], maskEdited = false;
+    let boxStart = null, box = null, brushStart = false, apiURL = '', access = '', providers = [], providerId = '', taskMessage = '', lastJobs = [];
+    let saveTimer = 0, modified = false, keyOptions = { color: [0, 255, 0], inner: 18, outer: 95, despill: true };
+    const root = document.createElement('dialog');
+    root.id = 'preparation';
+    root.className = 'prep';
+    document.body.append(root);
+    try {
+        apiURL = localStorage.getItem('bone-gateway-url') ?? '';
+    }
+    catch { }
+    const activeCharacter = () => state.characters.find(v => v.id === state.activeCharacter), activeSheet = () => state.sheets.find(v => v.id === state.activeSheet);
+    function save() {
+        modified = true;
+        clearTimeout(saveTimer);
+        saveTimer = window.setTimeout(() => {
+            try {
+                const safe = (0, production_js_1.parsePreparation)(state);
+                void stored(safe).catch(() => hooks.notice('准备流程本地保存失败，请下载“准备工程”备份。', true));
+            }
+            catch (e) {
+                hooks.notice(e.message, true);
+            }
+        }, 450);
+    }
+    async function run(work) {
+        if (processing)
+            return;
+        modified = true;
+        processing = true;
+        root.classList.add('processing');
+        const msg = $('prep-status');
+        if (msg)
+            msg.textContent = '正在处理…';
+        await waitPaint();
+        try {
+            await work();
+            save();
+        }
+        catch (e) {
+            hooks.notice(e.message, true);
+            report = e.message;
+        }
+        finally {
+            processing = false;
+            root.classList.remove('processing');
+            render();
+        }
+    }
+    function render() {
+        const role = activeCharacter(), sheet = activeSheet(), qa = (0, production_js_1.coverage)(state);
+        root.innerHTML = `<div class="prep-header"><div><span class="eyebrow">AI BONE STUDIO / 0.3 BETA</span><h2>从一个想法，到一个会动的角色。</h2></div><button data-action="close">返回拼装画板 ↗</button></div>
+  <nav class="prep-steps">${['准备角色', '选择用途', '拆件检查台', '服务与任务'].map((s, i) => `<button data-step="${i}" class="${i === step ? 'active' : ''}"><b>0${i + 1}</b>${s}</button>`).join('')}</nav>
+  <div class="prep-body">${step === 0 ? `<div class="prep-grid"><section><h3>01 / 准备你的角色</h3><p>可以描述生成，也可以上传已有原画。已有透明部件？直接返回画板导入，不需要配置 API。</p><label>角色名称<input id="prep-name" value="${esc(state.name)}" maxlength="100"></label><label>描述与需求<textarea id="prep-description" rows="5" maxlength="10000">${esc(state.description)}</textarea></label><div class="prep-actions"><input id="prep-amend" placeholder="追加修改，如：帽子更简单，不带法杖" maxlength="1000"><button data-action="amend">加入需求</button></div><p class="micro">需求整理使用固定模板，不会因为输入文字而产生费用。</p>${role ? '<label><span><input type="checkbox" id="role-reference"> 参考当前版本修改（图生图，不覆盖旧图）</span></label>' : ''}<div class="prep-actions"><button class="primary" data-action="generate-role">生成角色（需服务）</button><label class="button-label">上传角色<input id="prep-role-file" type="file" accept="image/png,image/jpeg,image/webp" hidden></label></div><details><summary>查看可复制的角色提示词</summary><textarea readonly rows="5">${esc((0, production_js_1.characterPrompt)(state))}</textarea></details><div class="help-card">这一步可以跳过。原画仅保存在本地；点击生成并确认后，选定图片与提示词才会发送给你配置的服务。</div></section>
+  <section><h3>角色版本 <small>${state.characters.length} / 20</small></h3>${role ? `<div class="role-preview"><img src="${role.image}" alt="当前角色原画"></div><div class="prep-actions"><button data-action="adopt" class="primary">${role.adopted ? '✓ 已采用此版本' : '采用此版本'}</button><button data-step="1">下一步 →</button></div><p class="micro">不会覆盖原画。后续修改和选定视图另存为新版本。</p><details><summary>设计稿含多个视图？裁出本次使用的角色</summary><div class="prep-four">${['x', 'y', 'width', 'height'].map((id, i) => `<label>${['左侧 X', '顶部 Y', '宽度', '高度'][i]}<input id="crop-${id}" type="number" value="${i < 2 ? 0 : i === 2 ? role.width : role.height}" min="0"></label>`).join('')}</div><button data-action="crop-role">裁选为新版本（像素坐标）</button></details><div class="versions">${state.characters.map((v, i) => `<button data-role="${v.id}" class="${v.id === state.activeCharacter ? 'active' : ''}">V${i + 1} ${esc(v.name)}${v.adopted ? ' ✓' : ''}</button>`).join('')}</div>` : '<div class="prep-empty">先上传一张角色原画，或配置生成服务。<br>不用三视图也可以开始。</div>'}<button data-action="role-to-sheet" ${role ? '' : 'disabled'}>我上传的已经是纯色部件图 → 检查台</button></section></div>` : ''}
+  ${step === 1 ? `<div class="prep-grid"><section><h3>02 / 动作决定怎么拆</h3><label>本次角色视图<select id="prep-view">${['正面', '侧面', '四分之三侧面', '背面'].map(v => `<option ${v === state.view ? 'selected' : ''}>${v}</option>`).join('')}</select></label><div class="purpose-options">${[['head', '头像与表情', '独立五官、睁闭眼、嘴型'], ['idle', '全身待机', '加上躯干、手臂、裙摆和腿'], ['game', '基础游戏动作规划', '共用一套素材；七动作仍待逐项实现']].map(([id, label, help]) => `<label><input type="checkbox" data-purpose="${id}" ${state.purposes.includes(id) ? 'checked' : ''}><b>${label}</b><small>${help}</small></label>`).join('')}</div><div class="warning">正面图不能自动变成自然的侧面跑步。第一阶段重点是头像与表情；全身清单可编辑，但七个完整动作模板未在本版交付。</div><label>本批次纯色背景<input type="color" id="prep-color" value="${state.color}"></label><button data-action="recommend" ${role ? '' : 'disabled'}>按原画配色建议背景色</button><p class="micro">固定“纯色生成 → 程序抠图”。没有模型原生透明选项。建议色仍需要检查是否与角色局部撞色。</p><button data-step="2" class="primary">进入拆件检查台 →</button></section><section><h3>部件清单 <small>${state.specs.length} 项</small></h3><div class="specs">${state.specs.map(s => `<div><span><b>${esc(s.label)}</b><small>${esc(s.id)} / ${esc(s.group)}</small></span><button data-remove-spec="${s.id}" title="不需要此部件">×</button></div>`).join('')}</div><div class="prep-actions"><input id="custom-spec" placeholder="新增部件名称，如：张嘴"><button data-action="add-spec">新增</button><button data-action="reset-specs">恢复预设清单</button></div><p class="micro">删除清单项不删除旧图片；已确认素材会保留，便于返回修复。L/R 指角色自身左右。</p></section></div>` : ''}
+  ${step === 2 ? `<div class="prep-work"><section class="sheet-panel"><h3>03 / 先抠除背景，再确认部件</h3><div class="prep-actions"><label class="button-label primary">上传纯色部件图<input id="prep-sheet-file" type="file" accept="image/png,image/jpeg,image/webp" hidden></label><button data-action="demo-sheet">试用练习拆件图</button></div><div class="prep-actions"><select id="generate-group"><option value="all">生成全部清单</option>${[...new Set(state.specs.map(s => s.group))].map(g => `<option value="group:${esc(g)}">只生成：${esc(g)}</option>`).join('')}${state.specs.map(s => `<option value="part:${s.id}">仅重做：${esc(s.label)}</option>`).join('')}</select><button data-action="generate-parts">参考角色生成（需服务）</button></div><details><summary>复制拆件提示词，在其他工具中生图</summary><textarea id="parts-prompt" readonly rows="6">${esc(state.specs.length ? (0, production_js_1.partsPrompt)(state) : '先添加部件清单。')}</textarea><button data-action="copy-prompt">复制提示词</button></details>
+  ${sheet ? `<select id="sheet-select">${state.sheets.map((s, i) => `<option value="${s.id}" ${s.id === sheet.id ? 'selected' : ''}>${i + 1}. ${esc(s.name)}</option>`).join('')}</select><div class="key-controls"><label>抠图背景色<input type="color" id="key-color" value="${(0, chroma_js_1.rgbHex)(keyOptions.color)}"></label><label>去除容差<input id="key-inner" type="number" min="0" max="180" value="${keyOptions.inner}"></label><label>边缘过渡<input id="key-outer" type="number" min="1" max="250" value="${keyOptions.outer}"></label><label><input type="checkbox" id="key-despill" ${keyOptions.despill ? 'checked' : ''}>边缘去色</label></div><div class="prep-actions"><button data-action="measure">采用实测背景色</button><button data-action="key" class="primary">重新抠图</button></div><p class="micro">仅改变当前预览，已确认的候选不会被覆盖；重新抠图会清空当前画笔修改。</p><div class="prep-actions"><select id="mask-tool"><option value="box">框选零件 / 拆开粘连</option><option value="erase">擦除蒙版</option><option value="restore">恢复原始像素</option></select><label class="compact">笔刷<input id="brush-radius" type="number" min="1" max="80" value="10"></label><button data-action="mask-undo">撤销画笔</button><select id="inspect-bg"><option value="checker">检查网格</option><option value="white">白底</option><option value="dark">深色底</option><option value="original">原始纯色图</option></select></div><div id="mask-wrap" class="mask-wrap checker"><canvas id="mask-canvas" aria-label="抠图和框选画板"></canvas></div><div class="prep-actions"><button data-action="crop-box">将框选加入候选</button><button data-action="detect">自动检测候选区域</button></div><details><summary>规则网格切分（保留同一格内的分离像素）</summary><div class="prep-actions"><label>列<input id="grid-cols" type="number" min="1" max="12" value="3"></label><label>行<input id="grid-rows" type="number" min="1" max="12" value="4"></label><button data-action="grid">按网格加入候选</button></div></details><p class="micro">框选可把同一零件的睫毛、高光一起圈入，也可以将粘连件分开。画笔修改只保留在本次预览；裁出候选会保存修正结果，原图始终保留。</p>` : '<div class="prep-empty">纯色图在这里抠图。已有独立透明 PNG？返回画板直接导入，不需要再加背景。</div>'}</section>
+  <section class="candidate-panel"><h3>检查与归组 <small>已确认 ${qa.approved} / ${state.specs.length}</small></h3><p class="micro">自动区域≠语义部件。逐个指定名称并看白底/深底，再确认。勾选几个候选可以合成一件。</p><div class="candidate-grid">${state.candidates.filter(c => c.status !== 'archived').map(c => `<article data-candidate="${c.id}" class="candidate ${c.status}"><label class="candidate-check"><input type="checkbox" data-select-candidate="${c.id}">归组</label><div class="candidate-image checker"><img src="${c.image}" alt="${esc(c.name)}"></div><select data-semantic="${c.id}"><option value="">请选择部件名称</option>${state.specs.map(s => `<option value="${s.id}" ${s.id === c.semanticId ? 'selected' : ''}>${esc(s.label)}</option>`).join('')}</select><small>${c.width}×${c.height} · ${c.status === 'approved' ? '✓ 已确认' : c.status === 'repair' ? '需修复' : '待确认'}${c.imported ? ' · 已送入画板' : ''}</small>${c.warnings.length ? `<small class="warn">${esc(c.warnings.join(' '))}</small>` : ''}<div class="prep-actions"><button data-approve="${c.id}">${c.status === 'approved' ? '撤回确认' : '确认可用'}</button><button data-archive="${c.id}">归档</button></div></article>`).join('')}</div><div class="prep-actions"><button data-action="merge">合并勾选候选</button><button data-action="unarchive">恢复最近归档</button><button data-action="mark-repair">勾选项标需修复</button></div><div class="warning">缺少：${qa.missing.length ? esc(qa.missing.map(s => s.label).join('、')) : '没有缺项'}${qa.duplicates.length ? `；重复：${esc(qa.duplicates.join(','))}` : ''}</div><div class="prep-actions"><button data-action="send-parts" class="primary" ${qa.approved ? '' : 'disabled'}>已确认部件 → 拼装画板</button><button data-action="download-parts" ${qa.approved ? '' : 'disabled'}>下载透明部件 ZIP</button></div><p class="micro">不会依据素材板坐标假装自动拼成人物。清单不完整时可以确认后导入部分素材；缺项保留提醒。</p></section></div>` : ''}
+  ${step === 3 ? `<div class="prep-grid"><section><h3>连接你的生图服务</h3><p>公开 GitHub Pages 仅托管网页，不能存储供应商密钥或运行生成任务。未连接服务时，其他本地功能仍可使用。</p><label>安全网关地址<input id="gateway-url" type="url" placeholder="https://你的网关域名" value="${esc(apiURL)}" autocomplete="off"></label><label>服务访问口令（不是 OpenAI / Gemini API Key）<input id="gateway-token" type="password" placeholder="由服务管理员提供；仅保存在当前页面内存" autocomplete="off" value="${esc(access)}"></label><div class="prep-actions"><button data-action="connect" class="primary">连接服务（不触发生图）</button><button data-action="disconnect">退出服务</button></div><p class="micro">连接只检查我们的网关配置，不代表供应商接口已完成付费验证。API Key 和上游地址由管理员在后端环境配置；不写入 GitHub 或工程。</p><label>选择图片服务<select id="provider">${providers.length ? providers.map(p => `<option value="${esc(p.id)}" ${p.id === providerId ? 'selected' : ''}>${esc(p.label)} / ${esc(p.model)}</option>`).join('') : '<option>尚未连接</option>'}</select></label><p>${esc(taskMessage)}</p><div class="warning">生成和测试都可能收费。费用目前显示“未知”，由供应商实际账单确认。提交前会再次确认；不会因刷新或网络错误自动重试。部件始终使用不透明纯色背景。</div><p class="micro">后端代码在 apps/gateway。按其 README 部署并配置密钥后，填写网关地址即可。本次站点不假装已经配置收费服务。</p></section><section><h3>可恢复的生成任务</h3><button data-action="refresh-jobs">刷新任务列表</button><p class="micro">刷新只查询，不发起新的付费生成。重新打开网页需再次输入服务访问口令。默认服务端保留 7 天，可手动删除输入和结果；本地版本不会一起删除。</p><div class="task-list">${lastJobs.map(j => `<article><b>${j.kind === 'parts' ? '部件生成' : '角色生成'}</b><span>${esc(j.status)} · ${esc(j.id.slice(0, 10))}</span>${j.error ? `<p>${esc(j.error)}</p>` : ''}<div class="prep-actions"><button data-job-use="${j.id}" ${j.status === 'succeeded' ? '' : 'disabled'}>取回到准备流程</button><button data-job-delete="${j.id}" ${['queued', 'running'].includes(j.status) ? 'disabled' : ''}>删除服务端记录</button></div></article>`).join('') || '<div class="prep-empty">没有读取到任务。连接服务后可以恢复已提交任务。</div>'}</div></section></div>` : ''}
+  </div><footer class="prep-footer"><span id="prep-status" role="status">${esc(report || '本地准备流程 · 无 API 也可使用 · 每个阶段都可跳过')}</span><div class="prep-actions"><button data-action="save-prep">保存准备工程</button><label class="button-label">打开准备工程<input id="prep-open" type="file" accept=".json" hidden></label><button data-action="clear-prep">清空本地准备</button></div></footer>`;
+        if (step === 2 && sheet) {
+            drawMask();
+            bindMask();
+        }
+    }
+    function drawMask() {
+        const c = $('mask-canvas');
+        if (!c || !keyed)
+            return;
+        const bg = $('inspect-bg')?.value ?? 'checker';
+        const r = bg === 'original' ? original : keyed;
+        c.width = r.width;
+        c.height = r.height;
+        const ctx = c.getContext('2d');
+        ctx.putImageData(new ImageData(new Uint8ClampedArray(r.data), r.width, r.height), 0, 0);
+        ctx.strokeStyle = '#ee813e';
+        ctx.lineWidth = Math.max(2, r.width / 400);
+        for (const b of rects)
+            ctx.strokeRect(b.x, b.y, b.width, b.height);
+        if (box) {
+            ctx.strokeStyle = '#6e36fa';
+            ctx.strokeRect(box.x, box.y, box.width, box.height);
+        }
+    }
+    function bindMask() {
+        const c = $('mask-canvas');
+        if (!c)
+            return;
+        const at = (e) => { const b = c.getBoundingClientRect(); return { x: (e.clientX - b.left) * c.width / b.width, y: (e.clientY - b.top) * c.height / b.height }; };
+        const paint = (e) => {
+            if (!keyed || !original)
+                return;
+            const p = at(e);
+            (0, chroma_js_1.brushMask)(keyed, original, p.x, p.y, Number($('brush-radius').value) || 10, $('mask-tool').value === 'restore');
+            maskEdited = true;
+            drawMask();
+        };
+        c.onpointerdown = e => {
+            if (processing || !keyed)
+                return;
+            e.preventDefault();
+            c.setPointerCapture(e.pointerId);
+            const tool = $('mask-tool').value;
+            if (tool === 'box') {
+                boxStart = at(e);
+                box = null;
+                rects = [];
+            }
+            else {
+                maskUndo.push(new Uint8ClampedArray(keyed.data));
+                if (maskUndo.length > 4)
+                    maskUndo.shift();
+                brushStart = true;
+                paint(e);
+            }
+        };
+        c.onpointermove = e => {
+            if (brushStart) {
+                paint(e);
+                return;
+            }
+            if (boxStart) {
+                const p = at(e);
+                box = { x: Math.min(p.x, boxStart.x), y: Math.min(p.y, boxStart.y), width: Math.abs(p.x - boxStart.x), height: Math.abs(p.y - boxStart.y) };
+                drawMask();
+            }
+        };
+        c.onpointerup = () => { brushStart = false; boxStart = null; };
+        c.onpointercancel = () => { brushStart = false; boxStart = null; };
+    }
+    async function loadSheet() {
+        original = keyed = null;
+        rects = [];
+        box = null;
+        maskUndo = [];
+        maskEdited = false;
+        const s = activeSheet();
+        if (!s)
+            return;
+        original = await rasterFrom(s.image);
+        if (original.width * original.height > 4194304)
+            throw new Error('首版手机抠图限制 400 万像素，请先裁图或缩小到 2048×2048 以内。');
+        keyOptions = { ...keyOptions, color: (0, chroma_js_1.hexRGB)(s.color) };
+        await rekey();
+    }
+    async function rekey() {
+        if (!original)
+            return;
+        const check = (0, chroma_js_1.backgroundReport)(original, keyOptions.color);
+        if (!check.opaque)
+            throw new Error('这张图带透明边框。已抠好的透明零件请返回画板直接导入；AI 拆件请提供纯色原图。');
+        keyed = (0, chroma_js_1.keyRaster)(original, keyOptions);
+        maskEdited = false;
+        maskUndo = [];
+        rects = [];
+        box = null;
+        const stats = (0, chroma_js_1.alphaStats)(keyed);
+        report = `背景一致度 ${Math.round(check.uniformity * 100)}%，前景 ${stats.foreground} 像素。${check.warnings.join(' ')} ${stats.transparent === 0 ? '未去除背景，请检查色值！' : ''}`;
+    }
+    async function newSheet(r, name, roleId = state.activeCharacter) {
+        if (r.width * r.height > 4194304)
+            throw new Error('首版抠图限制 400 万像素，请先缩小到 2048×2048 以内。');
+        if (state.sheets.length >= 30)
+            throw new Error('最多 30 张部件源图，请保存并新建准备工程。');
+        const id = (0, model_js_1.uid)('sheet');
+        state.sheets.push({ id, name: name.slice(0, 120), image: rasterURL(r), width: r.width, height: r.height, color: state.color, roleId, createdAt: new Date().toISOString() });
+        state.activeSheet = id;
+        step = 2;
+        await loadSheet();
+    }
+    function candidateFrom(rect) {
+        if (!keyed || !activeSheet())
+            throw new Error('先上传部件图并抠图。');
+        if (state.candidates.length >= 256)
+            throw new Error('候选最多 256 项。');
+        const cut = (0, chroma_js_1.cropRaster)(keyed, rect), stats = (0, chroma_js_1.alphaStats)(cut.image);
+        return { id: (0, model_js_1.uid)('candidate'), name: '未命名候选', semanticId: '', sheetId: state.activeSheet, image: rasterURL(cut.image), width: cut.image.width, height: cut.image.height, bounds: cut.bounds, status: 'review', key: { ...keyOptions, color: [...keyOptions.color] }, keyVersion: chroma_js_1.KEY_VERSION, warnings: [...(stats.foreground < 8 ? ['前景很少，请复核'] : []), ...(original ? (0, chroma_js_1.backgroundReport)(original, keyOptions.color).warnings : [])], imported: false, maskEdited };
+    }
+    const checkedIDs = () => [...root.querySelectorAll('[data-select-candidate]:checked')].map(e => e.dataset.selectCandidate);
+    async function api(path, method = 'GET', body) {
+        const url = new URL(apiURL);
+        if (url.protocol !== 'https:' && !(url.protocol === 'http:' && ['localhost', '127.0.0.1'].includes(url.hostname)))
+            throw new Error('服务必须使用 HTTPS（本机开发除外）。');
+        if (url.username || url.password || url.search || url.hash)
+            throw new Error('网关地址不能包含账号、查询参数或片段。');
+        if (!access)
+            throw new Error('先输入服务访问口令。');
+        const response = await fetch(`${apiURL.replace(/\/$/, '')}${path}`, { method, headers: { 'Authorization': `Bearer ${access}`, ...(body ? { 'Content-Type': 'application/json' } : {}) }, body: body ? JSON.stringify(body) : undefined, signal: AbortSignal.timeout(20000), redirect: 'error' });
+        const payload = await response.json().catch(() => null);
+        if (!response.ok)
+            throw new Error(payload?.error ?? `服务返回 ${response.status}`);
+        return payload;
+    }
+    async function refreshJobs() {
+        const result = await api('/jobs');
+        if (!Array.isArray(result.jobs))
+            throw new Error('任务响应格式不兼容。');
+        if (result.jobs.length > 200)
+            throw new Error('服务返回过多任务。');
+        lastJobs = result.jobs.map(checkedRemoteJob);
+        for (const j of lastJobs) {
+            const ref = state.jobs.find(v => v.id === j.id);
+            if (ref)
+                ref.status = j.status;
+        }
+        taskMessage = `已连接，找到 ${lastJobs.length} 个服务端任务。`;
+    }
+    async function generate(kind) {
+        const provider = providers.find(v => v.id === providerId);
+        if (!provider) {
+            step = 3;
+            report = '先连接安全网关；也可以复制提示词，在其他生图工具生成后上传。';
+            return;
+        }
+        const role = activeCharacter(), editing = kind === 'parts' || !!$('role-reference')?.checked;
+        if (kind === 'parts' && (!role || !role.adopted))
+            throw new Error('先在“准备角色”中采用一个原画版本。');
+        if (!(editing ? provider.edit : provider.generate))
+            throw new Error('这个服务未配置对应的图片生成/编辑能力，不会退化成其他请求。');
+        const group = $('generate-group')?.value ?? 'all', ids = state.specs.filter(s => group === 'all' || group === `group:${s.group}` || group === `part:${s.id}`).map(s => s.id);
+        const prompt = kind === 'character' ? (0, production_js_1.characterPrompt)(state) : (0, production_js_1.partsPrompt)(state, ids);
+        if (!confirm(`将向 ${provider.label} / ${provider.model} 发送${editing ? '选定角色图片与' : ''}提示词，生成一张${kind === 'parts' ? '纯色部件图' : '角色图'}。费用未知，供应商可能计费。是否提交一次？`))
+            return;
+        const requestId = (0, model_js_1.uid)('request'), ref = { id: requestId, requestId, kind, provider: provider.id, roleId: editing ? role?.id ?? null : null, specIds: ids, color: state.color, imported: false, status: 'submitting', createdAt: new Date().toISOString() };
+        state.jobs.push(ref);
+        await stored((0, production_js_1.parsePreparation)(state));
+        try {
+            const result = await api('/jobs', 'POST', { requestId, kind, provider: provider.id, prompt, reference: editing ? role.image : undefined, color: state.color, confirmed: true });
+            checkedRemoteJob(result.job);
+            if (result.job.id !== requestId)
+                throw new Error('服务返回的任务编号不匹配。');
+            ref.id = result.job.id;
+            ref.status = result.job.status;
+            report = '任务已提交。可以切后台；到“服务与任务”刷新查询，不会重复生成。';
+        }
+        catch (e) {
+            ref.status = 'unknown';
+            report = '提交结果未知：请在服务任务列表查询，不要直接再次点击生成。';
+            hooks.notice(report, true);
+        }
+        step = 3;
+        await refreshJobs().catch(() => { });
+    }
+    async function useJob(id) {
+        const j = checkedRemoteJob(await api(`/jobs/${encodeURIComponent(id)}`));
+        const ref = state.jobs.find(v => v.id === id || v.requestId === j.requestId);
+        if (ref?.imported && !confirm('这个任务已经取回过。再复制一份？不会再调用生图。'))
+            return;
+        if (j.status !== 'succeeded' || !j.images?.length)
+            throw new Error('任务尚未成功或没有返回图片。');
+        if (j.kind === 'parts' && !ref)
+            throw new Error('本地没有此部件任务的角色和背景记录。请先打开当时的准备工程，再取回，避免错误关联。');
+        for (const result of j.images) {
+            if (!/^data:image\/(png|jpeg|webp);base64,[A-Za-z0-9+/=]+$/.test(result.dataUrl) || result.dataUrl.length > 30 * 1024 * 1024)
+                throw new Error('服务图片格式不安全或过大。');
+            const r = await rasterFrom(result.dataUrl);
+            if (j.kind === 'character') {
+                (0, production_js_1.addCharacter)(state, rasterURL(r), r.width, r.height, '生成角色', ref?.roleId ?? undefined);
+                step = 0;
+            }
+            else {
+                const previous = state.color;
+                state.color = ref.color;
+                try {
+                    await newSheet(r, '生成部件图', ref.roleId);
+                }
+                finally {
+                    state.color = previous;
+                }
+            }
+        }
+        if (ref)
+            ref.imported = true;
+        report = '结果已取回。生成结果仍需检查，未自动标记为可用。';
+    }
+    async function demoSheet() {
+        const canvas = document.createElement('canvas');
+        canvas.width = 900;
+        canvas.height = 900;
+        const c = canvas.getContext('2d');
+        c.fillStyle = '#00ff00';
+        c.fillRect(0, 0, 900, 900);
+        for (let i = 0; i < 12; i++) {
+            const x = (i % 3) * 300 + 150, y = Math.floor(i / 3) * 225 + 112;
+            c.save();
+            c.translate(x, y);
+            c.fillStyle = '#ccb9f1';
+            c.strokeStyle = '#513461';
+            c.lineWidth = 6;
+            if (i === 0) {
+                c.fillStyle = '#ffdfd2';
+                c.beginPath();
+                c.ellipse(0, 0, 82, 89, 0, 0, Math.PI * 2);
+                c.fill();
+                c.stroke();
+            }
+            else if (i < 5) {
+                c.beginPath();
+                c.roundRect(-90, -65, 180, i === 1 ? 150 : 100, 40);
+                c.fill();
+                c.stroke();
+            }
+            else if (i < 7) {
+                c.beginPath();
+                c.moveTo(-45, 5);
+                c.quadraticCurveTo(0, -20, 45, 2);
+                c.stroke();
+            }
+            else if (i < 9) {
+                c.fillStyle = '#684593';
+                c.beginPath();
+                c.ellipse(0, 0, 27, 40, 0, 0, Math.PI * 2);
+                c.fill();
+                c.fillStyle = 'white';
+                c.beginPath();
+                c.arc(-8, -15, 8, 0, Math.PI * 2);
+                c.fill();
+            }
+            else {
+                c.beginPath();
+                c.moveTo(-40, -5);
+                c.quadraticCurveTo(0, 25, 40, -5);
+                c.stroke();
+            }
+            c.restore();
+        }
+        state.color = '#00ff00';
+        state.specs = (0, production_js_1.specsFor)(['head']);
+        await newSheet({ width: 900, height: 900, data: c.getImageData(0, 0, 900, 900).data }, '本地几何练习图（不是 AI 生成）', null);
+        report = '练习图为 3 列×4 行，可试用网格切分与逐件确认。';
+    }
+    root.addEventListener('click', e => {
+        const t = e.target, b = t.closest('button');
+        if (!b || processing)
+            return;
+        const stepValue = b.dataset.step;
+        if (stepValue !== undefined) {
+            step = Number(stepValue);
+            render();
+            return;
+        }
+        if (b.dataset.role) {
+            state.activeCharacter = b.dataset.role;
+            save();
+            render();
+            return;
+        }
+        if (b.dataset.removeSpec) {
+            if (state.specs.length <= 1) {
+                hooks.notice('至少保留一个部件清单项。', true);
+                return;
+            }
+            state.specs = state.specs.filter(s => s.id !== b.dataset.removeSpec);
+            save();
+            render();
+            return;
+        }
+        void run(async () => {
+            if (b.dataset.approve) {
+                const c = state.candidates.find(c => c.id === b.dataset.approve);
+                if (c.status === 'approved')
+                    c.status = 'review';
+                else {
+                    if (c.warnings.length && !confirm('该候选存在提醒。请确认已检查白底、深色底和轮廓后继续。'))
+                        return;
+                    (0, production_js_1.approveCandidate)(state, c.id);
+                }
+                return;
+            }
+            if (b.dataset.archive) {
+                const c = state.candidates.find(c => c.id === b.dataset.archive);
+                c.status = 'archived';
+                return;
+            }
+            if (b.dataset.jobUse) {
+                await useJob(b.dataset.jobUse);
+                return;
+            }
+            if (b.dataset.jobDelete) {
+                if (confirm('删除这个服务端任务的输入和结果？已取回的本地图片保留。')) {
+                    await api(`/jobs/${b.dataset.jobDelete}`, 'DELETE');
+                    await refreshJobs();
+                }
+                return;
+            }
+            switch (b.dataset.action) {
+                case 'close':
+                    root.close();
+                    break;
+                case 'amend': {
+                    const v = $('prep-amend').value.trim();
+                    if (v)
+                        state.description += '\n调整：' + v;
+                    break;
+                }
+                case 'adopt': {
+                    const v = activeCharacter();
+                    if (v) {
+                        v.adopted = true;
+                        report = '已采用当前版本，其他原图保留。';
+                    }
+                    break;
+                }
+                case 'crop-role': {
+                    const role = activeCharacter();
+                    if (!role)
+                        break;
+                    const r = await rasterFrom(role.image);
+                    const nums = ['x', 'y', 'width', 'height'].map(k => Number($(`crop-${k}`).value));
+                    const [x, y, w, h] = nums;
+                    if (!nums.every(Number.isFinite) || x < 0 || y < 0 || w < 1 || h < 1 || x + w > r.width || y + h > r.height)
+                        throw new Error('裁选范围超出原图。');
+                    const canvas = document.createElement('canvas');
+                    canvas.width = w;
+                    canvas.height = h;
+                    const image = await rasterFrom(role.image);
+                    const full = document.createElement('canvas');
+                    full.width = r.width;
+                    full.height = r.height;
+                    full.getContext('2d').putImageData(new ImageData(image.data, image.width, image.height), 0, 0);
+                    canvas.getContext('2d').drawImage(full, x, y, w, h, 0, 0, w, h);
+                    (0, production_js_1.addCharacter)(state, canvas.toDataURL(), canvas.width, canvas.height, role.name + ' / 裁选', role.id);
+                    break;
+                }
+                case 'role-to-sheet': {
+                    const role = activeCharacter();
+                    if (role)
+                        await newSheet(await rasterFrom(role.image), '从上传图进入拆件');
+                    break;
+                }
+                case 'recommend': {
+                    const v = activeCharacter();
+                    if (v) {
+                        state.color = (0, chroma_js_1.rgbHex)((0, chroma_js_1.recommendColor)(await rasterFrom(v.image)));
+                        report = '已建议背景色；请仍检查角色是否有相同颜色。';
+                    }
+                    break;
+                }
+                case 'reset-specs':
+                    state.specs = (0, production_js_1.specsFor)(state.purposes);
+                    break;
+                case 'add-spec': {
+                    const name = $('custom-spec').value.trim();
+                    if (name)
+                        state.specs.push({ id: (0, model_js_1.uid)('custom'), label: name.slice(0, 120), group: '自定义', instruction: '独立部件，补全动画需要的隐藏区域' });
+                    break;
+                }
+                case 'generate-role':
+                    await generate('character');
+                    break;
+                case 'generate-parts':
+                    await generate('parts');
+                    break;
+                case 'copy-prompt':
+                    await navigator.clipboard.writeText((0, production_js_1.partsPrompt)(state));
+                    report = '提示词已复制，可在其他生图工具中使用。';
+                    break;
+                case 'demo-sheet':
+                    await demoSheet();
+                    break;
+                case 'measure':
+                    if (original)
+                        keyOptions.color = (0, chroma_js_1.backgroundReport)(original, keyOptions.color).measured;
+                    await rekey();
+                    break;
+                case 'key': {
+                    keyOptions = { color: (0, chroma_js_1.hexRGB)($('key-color').value), inner: Number($('key-inner').value), outer: Number($('key-outer').value), despill: $('key-despill').checked };
+                    await rekey();
+                    break;
+                }
+                case 'mask-undo':
+                    if (keyed && maskUndo.length)
+                        keyed.data = maskUndo.pop();
+                    break;
+                case 'crop-box':
+                    if (!box || box.width < 1 || box.height < 1)
+                        throw new Error('先在预览上拖出一个矩形。');
+                    state.candidates.push(candidateFrom(box));
+                    box = null;
+                    break;
+                case 'detect':
+                    if (keyed) {
+                        rects = (0, chroma_js_1.componentRects)(keyed);
+                        if (!confirm(`检测到 ${rects.length} 个连通区域（不等于部件数量）。加入待确认候选？细小睫毛可稍后合并。`))
+                            break;
+                        for (const r of rects)
+                            state.candidates.push(candidateFrom(r));
+                        report = `已加入 ${rects.length} 个候选，没有自动认定合格。`;
+                    }
+                    break;
+                case 'grid': {
+                    if (!keyed)
+                        break;
+                    const cols = Number($('grid-cols').value), rows = Number($('grid-rows').value);
+                    if (!Number.isInteger(cols) || !Number.isInteger(rows) || cols < 1 || rows < 1 || cols * rows > 100)
+                        throw new Error('网格数量无效。');
+                    for (let y = 0; y < rows; y++)
+                        for (let x = 0; x < cols; x++) {
+                            try {
+                                const c = candidateFrom({ x: Math.floor(x * keyed.width / cols), y: Math.floor(y * keyed.height / rows), width: Math.floor((x + 1) * keyed.width / cols) - Math.floor(x * keyed.width / cols), height: Math.floor((y + 1) * keyed.height / rows) - Math.floor(y * keyed.height / rows) });
+                                const s = state.specs[y * cols + x];
+                                if (s) {
+                                    c.semanticId = s.id;
+                                    c.name = s.label;
+                                }
+                                state.candidates.push(c);
+                            }
+                            catch (err) {
+                                if (!err.message.includes('没有前景'))
+                                    throw err;
+                            }
+                        }
+                    report = '已按网格产生候选；名称仅按清单顺序建议，须逐件核对。';
+                    break;
+                }
+                case 'merge': {
+                    const ids = checkedIDs(), selected = state.candidates.filter(c => ids.includes(c.id));
+                    if (selected.length < 2)
+                        throw new Error('至少勾选两个属于同一部件的候选。');
+                    if (selected.some(c => c.status === 'approved'))
+                        throw new Error('请先撤回确认，再合并；已确认件不会被自动改写。');
+                    if (selected.some(c => c.sheetId !== state.activeSheet))
+                        throw new Error('只能合并当前源图的候选。');
+                    const x = Math.min(...selected.map(c => c.bounds.x)), y = Math.min(...selected.map(c => c.bounds.y)), endX = Math.max(...selected.map(c => c.bounds.x + c.bounds.width)), endY = Math.max(...selected.map(c => c.bounds.y + c.bounds.height));
+                    state.candidates.push(candidateFrom({ x, y, width: endX - x, height: endY - y }));
+                    selected.forEach(c => c.status = 'archived');
+                    report = '已按原图位置合并。请检查包围范围内是否混入其他素材。';
+                    break;
+                }
+                case 'mark-repair': {
+                    const ids = checkedIDs();
+                    state.candidates.filter(c => ids.includes(c.id)).forEach(c => c.status = 'repair');
+                    break;
+                }
+                case 'unarchive': {
+                    const c = [...state.candidates].reverse().find(c => c.status === 'archived');
+                    if (c)
+                        c.status = 'review';
+                    break;
+                }
+                case 'send-parts': {
+                    const approved = state.candidates.filter(c => c.status === 'approved' && !c.imported);
+                    if (!approved.length)
+                        throw new Error('所有已确认件已经导入。为避免重复导入，请在画板继续编辑。');
+                    const qa = (0, production_js_1.coverage)(state);
+                    if (qa.missing.length && !confirm(`还有 ${qa.missing.length} 个缺项。先导入 ${approved.length} 个已确认零件？`))
+                        break;
+                    await hooks.importAssets(approved.map(c => ({ id: (0, model_js_1.uid)('asset'), name: c.semanticId, width: c.width, height: c.height, dataUrl: c.image, hasAlpha: true })));
+                    approved.forEach(c => c.imported = true);
+                    root.close();
+                    break;
+                }
+                case 'download-parts': {
+                    const items = state.candidates.filter(c => c.status === 'approved');
+                    const entries = items.map(c => ({ name: `parts/${c.semanticId}.png`, bytes: Uint8Array.from(atob(c.image.split(',')[1]), v => v.charCodeAt(0)) }));
+                    entries.push((0, zip_js_1.textEntry)('manifest.json', JSON.stringify({ format: 'ai-bone-parts', version: '0.3', backgroundPolicy: 'chroma-only', coordinates: 'source sheet pixels, not character setup', parts: items.map(({ image, ...c }) => ({ ...c, file: `parts/${c.semanticId}.png` })) }, null, 2)));
+                    (0, io_js_1.download)('character-parts.zip', (0, zip_js_1.writeZip)(entries), 'application/zip');
+                    break;
+                }
+                case 'save-prep':
+                    (0, io_js_1.download)('character.prep.json', JSON.stringify((0, production_js_1.parsePreparation)(state)), 'application/json');
+                    break;
+                case 'clear-prep':
+                    if (confirm('清空本地角色准备状态？不删除画板工程或云端任务。请先下载准备工程。')) {
+                        state = (0, production_js_1.newPreparation)();
+                        original = keyed = null;
+                        step = 0;
+                    }
+                    break;
+                case 'connect': {
+                    apiURL = $('gateway-url').value.trim().replace(/\/$/, '');
+                    access = $('gateway-token').value.trim();
+                    const c = await api('/capabilities');
+                    if (!Array.isArray(c.providers) || c.providers.length > 20 || c.providers.some(p => !p || typeof p.id !== 'string' || !/^[a-zA-Z0-9_-]{1,80}$/.test(p.id) || typeof p.label !== 'string' || typeof p.model !== 'string' || p.label.length > 200 || p.model.length > 200 || typeof p.generate !== 'boolean' || typeof p.edit !== 'boolean'))
+                        throw new Error('服务不是兼容的 Bone Studio 网关。');
+                    providers = c.providers;
+                    providerId = providers[0]?.id ?? '';
+                    try {
+                        localStorage.setItem('bone-gateway-url', apiURL);
+                    }
+                    catch { }
+                    await refreshJobs();
+                    break;
+                }
+                case 'disconnect':
+                    access = '';
+                    providers = [];
+                    lastJobs = [];
+                    taskMessage = '已退出，供应商密钥始终未发到浏览器。';
+                    break;
+                case 'refresh-jobs':
+                    await refreshJobs();
+                    break;
+            }
+        });
+    });
+    root.addEventListener('input', e => {
+        const t = e.target;
+        switch (t.id) {
+            case 'prep-name':
+                state.name = t.value;
+                break;
+            case 'prep-description':
+                state.description = t.value;
+                break;
+            case 'gateway-token':
+                access = t.value;
+                return;
+            case 'gateway-url':
+                apiURL = t.value;
+                return;
+            default: return;
+        }
+        save();
+    });
+    root.addEventListener('change', e => {
+        if (processing)
+            return;
+        const t = e.target;
+        if (t.id === 'inspect-bg') {
+            const wrap = $('mask-wrap');
+            wrap.className = 'mask-wrap ' + t.value;
+            drawMask();
+            return;
+        }
+        if (t.dataset.semantic) {
+            const c = state.candidates.find(c => c.id === t.dataset.semantic);
+            c.semanticId = t.value;
+            c.name = state.specs.find(s => s.id === t.value)?.label ?? '未命名';
+            c.status = 'review';
+            save();
+            render();
+            return;
+        }
+        if (t.dataset.purpose) {
+            const p = t.dataset.purpose;
+            state.purposes = t.checked ? [...new Set([...state.purposes, p])] : state.purposes.filter(v => v !== p);
+            if (!state.purposes.length)
+                state.purposes = ['head'];
+            state.specs = (0, production_js_1.specsFor)(state.purposes);
+            save();
+            render();
+            return;
+        }
+        if (t.id === 'prep-view') {
+            state.view = t.value;
+            save();
+            return;
+        }
+        if (t.id === 'prep-color') {
+            state.color = t.value;
+            save();
+            return;
+        }
+        if (t.id === 'provider') {
+            providerId = t.value;
+            return;
+        }
+        if (t.id === 'sheet-select') {
+            state.activeSheet = t.value;
+            void run(loadSheet);
+            return;
+        }
+        const file = t.files?.[0];
+        if (!file)
+            return;
+        void run(async () => {
+            if (t.id === 'prep-open') {
+                if (file.size > 130 * 1024 * 1024)
+                    throw new Error('准备工程过大。');
+                const next = (0, production_js_1.parsePreparation)(JSON.parse(await file.text()));
+                if (state.characters.length && !confirm('打开其他准备工程？当前状态将替换，请先备份。'))
+                    return;
+                state = next;
+                original = keyed = null;
+                if (state.activeSheet)
+                    await loadSheet();
+                step = 0;
+                return;
+            }
+            const r = await fileRaster(file);
+            if (t.id === 'prep-role-file') {
+                (0, production_js_1.addCharacter)(state, rasterURL(r), r.width, r.height, file.name.slice(0, 120));
+                report = '已保留原画。采用此版本后继续。';
+            }
+            else if (t.id === 'prep-sheet-file')
+                await newSheet(r, file.name);
+        });
+    });
+    const open = () => {
+        render();
+        if (!root.open)
+            root.showModal();
+    };
+    void stored().then(s => {
+        if (s && !modified) {
+            state = s;
+            report = '已恢复上次角色准备状态。';
+            if (state.activeSheet)
+                void loadSheet().then(() => {
+                    if (root.open)
+                        render();
+                }).catch(e => hooks.notice(e.message, true));
+            if (root.open)
+                render();
+        }
+    }).catch(() => { });
+    root.addEventListener('cancel', () => {
+        if (processing)
+            hooks.notice('当前图像处理仍会完成，重新打开可继续。');
+    });
+    return { open };
+}
+
+};
 factories['./app.js']=(module,exports,require)=>{
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+const preparation_ui_js_1 = require("./preparation-ui.js");
 const model_js_1 = require("./model.js");
+const model_js_2 = require("./model.js");
 const images_js_1 = require("./images.js");
 const spine_js_1 = require("./spine.js");
 const zip_js_1 = require("./zip.js");
@@ -993,16 +2321,17 @@ const $ = (id) => {
 };
 const esc = (v) => String(v).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 const num = (v) => String(Math.round(v * 1000) / 1000);
-let project = (0, model_js_1.newProject)(), selection = null, mode = 'assemble', tool = 'select';
+let project = (0, model_js_2.newProject)(), selection = null, mode = 'assemble', tool = 'select';
 let clipId = project.clips[0].id, time = 0, zoom = 0.75, playing = false, busy = false;
 let drag = null, chainStart = null, chainParent = 'root', hover = null;
 let sliderBefore = null, savedCandidate = null, revision = 0;
 let saveTimer = 0, toastTimer = 0;
+let expressionPartId = '', alignVariantId = 'base';
 const undo = [], redo = [], canvas = $('board');
 const currentClip = () => project.clips.find(c => c.id === clipId) ?? project.clips[0];
 const activePart = () => selection?.kind === 'part' ? project.parts.find(p => p.id === selection.id) : undefined;
 const activeBone = () => selection?.kind === 'bone' ? project.bones.find(b => b.id === selection.id) : activePart() ? project.bones.find(b => b.id === activePart().boneId) : undefined;
-const pose = (id, p = project) => (0, model_js_1.sampleTrack)((p.clips.find(c => c.id === clipId) ?? p.clips[0])?.tracks[id], time);
+const pose = (id, p = project) => (0, model_js_2.sampleTrack)((p.clips.find(c => c.id === clipId) ?? p.clips[0])?.tracks[id], time);
 function toast(message, error = false) {
     $('status').textContent = message;
     const box = $('toast');
@@ -1013,7 +2342,7 @@ function toast(message, error = false) {
     toastTimer = window.setTimeout(() => box.hidden = true, error ? 8000 : 4500);
 }
 function remember(before = project) {
-    undo.push((0, model_js_1.cloneProject)(before));
+    undo.push((0, model_js_2.cloneProject)(before));
     if (undo.length > 40)
         undo.shift();
     redo.length = 0;
@@ -1041,7 +2370,7 @@ function edit(mutator, message) {
     if (busy)
         return;
     try {
-        const next = (0, model_js_1.cloneProject)(project);
+        const next = (0, model_js_2.cloneProject)(project);
         mutator(next);
         remember();
         project = next;
@@ -1111,7 +2440,7 @@ function fit() {
     const box = $('canvas-scroll');
     if (!box.clientWidth || !box.clientHeight)
         return;
-    zoom = (0, model_js_1.clamp)(Math.min((box.clientWidth - 40) / project.canvas.width, (box.clientHeight - 40) / project.canvas.height), 0.12, 1.25);
+    zoom = (0, model_js_2.clamp)(Math.min((box.clientWidth - 40) / project.canvas.width, (box.clientHeight - 40) / project.canvas.height), 0.12, 1.25);
     resizeBoard();
     draw();
 }
@@ -1147,7 +2476,7 @@ function draw() {
     const ctx = canvas.getContext('2d');
     ctx.setTransform(canvas.width / project.canvas.width, 0, 0, canvas.height / project.canvas.height, 0, 0);
     ctx.clearRect(0, 0, project.canvas.width, project.canvas.height);
-    const clip = mode === 'animate' ? currentClip() : undefined, worlds = (0, model_js_1.worldBones)(project, clip, time);
+    const clip = previewClip(), worlds = (0, model_js_2.worldBones)(project, clip, time);
     ctx.save();
     ctx.strokeStyle = '#80849b55';
     ctx.lineWidth = 1 / zoom;
@@ -1160,8 +2489,8 @@ function draw() {
     ctx.restore();
     (0, images_js_1.drawCharacter)(ctx, project, clip, time);
     if (mode === 'rig' || mode === 'animate') {
-        for (const b of (0, model_js_1.sortedBones)(project)) {
-            const m = worlds.get(b.id), a = (0, model_js_1.point)(m, 0, 0), end = (0, model_js_1.point)(m, b.length, 0), selected = selection?.kind === 'bone' && selection.id === b.id;
+        for (const b of (0, model_js_2.sortedBones)(project)) {
+            const m = worlds.get(b.id), a = (0, model_js_2.point)(m, 0, 0), end = (0, model_js_2.point)(m, b.length, 0), selected = selection?.kind === 'bone' && selection.id === b.id;
             ctx.save();
             ctx.strokeStyle = selected ? '#f09b29' : '#238d79';
             ctx.fillStyle = selected ? '#ffba4980' : '#64d8b466';
@@ -1194,7 +2523,7 @@ function draw() {
     }
     const selected = activePart();
     if (selected && selected.visible && mode !== 'export') {
-        const asset = project.assets.find(a => a.id === selected.assetId), corners = (0, model_js_1.partCorners)(selected, asset, worlds), handle = rotationHandle(corners);
+        const asset = project.assets.find(a => a.id === selected.assetId), corners = (0, model_js_2.partCorners)(selected, asset, worlds), handle = rotationHandle(corners);
         ctx.save();
         ctx.strokeStyle = '#8061cf';
         ctx.fillStyle = '#fff';
@@ -1213,7 +2542,7 @@ function draw() {
             ctx.fill();
             ctx.stroke();
         }
-        const pivot = (0, model_js_1.point)(worlds.get(selected.boneId), selected.x, selected.y);
+        const pivot = (0, model_js_2.point)(worlds.get(selected.boneId), selected.x, selected.y);
         ctx.strokeStyle = '#dc596f';
         ctx.beginPath();
         ctx.arc(pivot.x, pivot.y, 5 / zoom, 0, Math.PI * 2);
@@ -1236,7 +2565,10 @@ function hitPart(at, worlds) {
     for (const part of [...project.parts].sort((a, b) => b.z - a.z)) {
         if (!part.visible || part.opacity <= 0)
             continue;
-        const a = project.assets.find(v => v.id === part.assetId), pos = (0, model_js_1.point)((0, model_js_1.inverse)((0, model_js_1.partMatrix)(part, a, worlds)), at.x, at.y);
+        const state = (0, model_js_1.sampleAttachment)(previewClip(), part.id, time);
+        if (state === null)
+            continue;
+        const resolved = (0, model_js_1.variantPart)(project, part, state), a = resolved.asset, pos = (0, model_js_2.point)((0, model_js_2.inverse)((0, model_js_2.partMatrix)(resolved.part, a, worlds)), at.x, at.y);
         const x = Math.floor(pos.x), y = Math.floor(pos.y), ready = images_js_1.decoded.get(a.id);
         if (x >= 0 && y >= 0 && x < a.width && y < a.height && ready && ready.pixels[(y * a.width + x) * 4 + 3] > 16)
             return part;
@@ -1251,19 +2583,19 @@ function hitBone(at, worlds) {
         order.unshift(active);
     }
     for (const b of order) {
-        const m = worlds.get(b.id), a = (0, model_js_1.point)(m, 0, 0), z = (0, model_js_1.point)(m, b.length, 0), threshold = 11 / zoom;
+        const m = worlds.get(b.id), a = (0, model_js_2.point)(m, 0, 0), z = (0, model_js_2.point)(m, b.length, 0), threshold = 11 / zoom;
         if (b.length > 0 && distance(at, z) < threshold)
             return { bone: b, tip: true };
         if (distance(at, a) < threshold)
             return { bone: b, tip: false };
-        const dx = z.x - a.x, dy = z.y - a.y, t = (0, model_js_1.clamp)(((at.x - a.x) * dx + (at.y - a.y) * dy) / Math.max(1, dx * dx + dy * dy), 0, 1);
+        const dx = z.x - a.x, dy = z.y - a.y, t = (0, model_js_2.clamp)(((at.x - a.x) * dx + (at.y - a.y) * dy) / Math.max(1, dx * dx + dy * dy), 0, 1);
         if (distance(at, { x: a.x + t * dx, y: a.y + t * dy }) < 7 / zoom)
             return { bone: b, tip: false };
     }
     return undefined;
 }
 function beginDrag(kind, id, at, e) {
-    drag = { kind, id, start: at, before: (0, model_js_1.cloneProject)(project), moved: false };
+    drag = { kind, id, start: at, before: (0, model_js_2.cloneProject)(project), moved: false };
     canvas.setPointerCapture(e.pointerId);
 }
 canvas.addEventListener('pointerdown', e => {
@@ -1272,7 +2604,7 @@ canvas.addEventListener('pointerdown', e => {
     e.preventDefault();
     playing = false;
     canvas.focus();
-    const at = pointer(e), worlds = (0, model_js_1.worldBones)(project, mode === 'animate' ? currentClip() : undefined, time);
+    const at = pointer(e), worlds = (0, model_js_2.worldBones)(project, mode === 'animate' ? currentClip() : undefined, time);
     if (tool === 'draw') {
         if (!chainStart) {
             chainStart = at;
@@ -1282,7 +2614,7 @@ canvas.addEventListener('pointerdown', e => {
         }
         else {
             let id = '';
-            edit(p => id = (0, model_js_1.addBone)(p, chainStart, at, chainParent));
+            edit(p => id = (0, model_js_2.addBone)(p, chainStart, at, chainParent));
             if (id) {
                 chainParent = id;
                 chainStart = at;
@@ -1293,8 +2625,8 @@ canvas.addEventListener('pointerdown', e => {
         return;
     }
     if (tool === 'pivot' && activePart()) {
-        const part = activePart(), a = project.assets.find(v => v.id === part.assetId), local = (0, model_js_1.point)((0, model_js_1.inverse)((0, model_js_1.partMatrix)(part, a, worlds)), at.x, at.y);
-        edit(p => (0, model_js_1.movePivot)(p, part.id, (0, model_js_1.clamp)(local.x / a.width, 0, 1), (0, model_js_1.clamp)(local.y / a.height, 0, 1)), '旋转点已调整，图片位置保持不变。');
+        const part = activePart(), a = project.assets.find(v => v.id === part.assetId), local = (0, model_js_2.point)((0, model_js_2.inverse)((0, model_js_2.partMatrix)(part, a, worlds)), at.x, at.y);
+        edit(p => (0, model_js_2.movePivot)(p, part.id, (0, model_js_2.clamp)(local.x / a.width, 0, 1), (0, model_js_2.clamp)(local.y / a.height, 0, 1)), '旋转点已调整，图片位置保持不变。');
         tool = 'select';
         render();
         return;
@@ -1303,7 +2635,7 @@ canvas.addEventListener('pointerdown', e => {
         const hit = hitBone(at, worlds);
         if (hit) {
             if (tool === 'bind' && activePart()) {
-                edit(p => (0, model_js_1.bindPart)(p, activePart().id, hit.bone.id), '已绑定：零件保持原位，现在会跟随这个关节。');
+                edit(p => (0, model_js_2.bindPart)(p, activePart().id, hit.bone.id), '已绑定：零件保持原位，现在会跟随这个关节。');
                 tool = 'select';
                 render();
                 return;
@@ -1321,7 +2653,7 @@ canvas.addEventListener('pointerdown', e => {
     }
     const part = activePart();
     if (part && !part.locked && mode !== 'animate') {
-        const corners = (0, model_js_1.partCorners)(part, project.assets.find(a => a.id === part.assetId), worlds);
+        const corners = (0, model_js_2.partCorners)(part, project.assets.find(a => a.id === part.assetId), worlds);
         if (distance(at, rotationHandle(corners)) < 13 / zoom) {
             beginDrag('part-rotate', part.id, at, e);
             return;
@@ -1361,20 +2693,20 @@ canvas.addEventListener('pointermove', e => {
         remember(drag.before);
         drag.moved = true;
     }
-    const before = drag.before, baseClip = before.clips.find(c => c.id === clipId), worlds = (0, model_js_1.worldBones)(before, mode === 'animate' ? baseClip : undefined, time);
+    const before = drag.before, baseClip = before.clips.find(c => c.id === clipId), worlds = (0, model_js_2.worldBones)(before, mode === 'animate' ? baseClip : undefined, time);
     if (drag.kind.startsWith('part')) {
         const initial = before.parts.find(a => a.id === drag.id), target = project.parts.find(a => a.id === drag.id), parent = worlds.get(initial.boneId);
         if (drag.kind === 'part-move') {
-            const start = (0, model_js_1.point)((0, model_js_1.inverse)(parent), drag.start.x, drag.start.y), end = (0, model_js_1.point)((0, model_js_1.inverse)(parent), at.x, at.y);
+            const start = (0, model_js_2.point)((0, model_js_2.inverse)(parent), drag.start.x, drag.start.y), end = (0, model_js_2.point)((0, model_js_2.inverse)(parent), at.x, at.y);
             target.x = initial.x + end.x - start.x;
             target.y = initial.y + end.y - start.y;
         }
         else {
-            const pivot = (0, model_js_1.point)(parent, initial.x, initial.y);
+            const pivot = (0, model_js_2.point)(parent, initial.x, initial.y);
             if (drag.kind === 'part-rotate')
-                target.rotation = initial.rotation + (0, model_js_1.degrees)(Math.atan2(at.y - pivot.y, at.x - pivot.x) - Math.atan2(drag.start.y - pivot.y, drag.start.x - pivot.x));
+                target.rotation = initial.rotation + (0, model_js_2.degrees)(Math.atan2(at.y - pivot.y, at.x - pivot.x) - Math.atan2(drag.start.y - pivot.y, drag.start.x - pivot.x));
             else {
-                const ratio = (0, model_js_1.clamp)(distance(at, pivot) / Math.max(1, distance(drag.start, pivot)), 0.05, 20);
+                const ratio = (0, model_js_2.clamp)(distance(at, pivot) / Math.max(1, distance(drag.start, pivot)), 0.05, 20);
                 target.scaleX = initial.scaleX * ratio;
                 target.scaleY = initial.scaleY * ratio;
             }
@@ -1383,20 +2715,20 @@ canvas.addEventListener('pointermove', e => {
     else {
         const initial = before.bones.find(b => b.id === drag.id), target = project.bones.find(b => b.id === drag.id);
         const parent = initial.parentId ? worlds.get(initial.parentId) : [1, 0, 0, 1, 0, 0];
-        const local = (0, model_js_1.point)((0, model_js_1.inverse)(parent), at.x, at.y), start = (0, model_js_1.point)((0, model_js_1.inverse)(parent), drag.start.x, drag.start.y);
-        const k = mode === 'animate' ? (0, model_js_1.sampleTrack)(baseClip?.tracks[initial.id], time) : (0, model_js_1.restPose)();
+        const local = (0, model_js_2.point)((0, model_js_2.inverse)(parent), at.x, at.y), start = (0, model_js_2.point)((0, model_js_2.inverse)(parent), drag.start.x, drag.start.y);
+        const k = mode === 'animate' ? (0, model_js_2.sampleTrack)(baseClip?.tracks[initial.id], time) : (0, model_js_2.restPose)();
         if (drag.kind === 'bone-move') {
             k.x += local.x - start.x;
             k.y += local.y - start.y;
         }
         else {
             const dx = local.x - initial.x - k.x, dy = local.y - initial.y - k.y;
-            k.rotation = (0, model_js_1.degrees)(Math.atan2(dy, dx)) - initial.rotation;
+            k.rotation = (0, model_js_2.degrees)(Math.atan2(dy, dx)) - initial.rotation;
             if (mode !== 'animate')
                 target.length = Math.max(2, Math.hypot(dx, dy) / initial.scale);
         }
         if (mode === 'animate')
-            (0, model_js_1.setKey)(currentClip(), initial.id, time, k);
+            (0, model_js_2.setKey)(currentClip(), initial.id, time, k);
         else {
             target.x = initial.x + k.x;
             target.y = initial.y + k.y;
@@ -1432,6 +2764,7 @@ function range(id, label, value, min, max, step, unit = '') {
     return `<label class="property"><span>${label}<b id="${id}-value">${num(value)}${unit}</b></span><input id="${id}" type="range" min="${min}" max="${max}" step="${step}" value="${value}"></label>`;
 }
 function renderProperties() {
+    renderExpressions();
     const holder = $('properties'), part = activePart(), bone = activeBone();
     if (mode === 'export') {
         $('inspector-title').textContent = '导出检查';
@@ -1441,13 +2774,13 @@ function renderProperties() {
     }
     if (part && mode !== 'animate') {
         $('inspector-title').textContent = '零件属性';
-        holder.innerHTML = `<label class="property"><span>零件名字</span><input id="part-name" value="${esc(part.name)}" maxlength="120"></label><label class="property"><span>跟随哪个关节</span><select id="part-bind">${(0, model_js_1.sortedBones)(project).map(b => `<option value="${b.id}" ${b.id === part.boneId ? 'selected' : ''}>${esc(b.name)}</option>`).join('')}</select></label><div class="property-row">${field('part-x', '位置 X（关节内）', part.x)}${field('part-y', '位置 Y（关节内）', part.y)}</div>${range('part-rotation', '转动', part.rotation, -360, 360, 1, '°')}${range('part-scale', '等比缩放', Math.abs(part.scaleX), 0.05, 4, 0.01)}<div class="button-row"><button id="flip-x">水平镜像</button><button id="flip-y">垂直镜像</button></div><div class="button-row"><button id="layer-up">向前一层</button><button id="layer-down">向后一层</button></div><div class="property-group"><label class="property"><span>旋转点 <b>红色圆点</b></span></label><div class="property-row">${field('pivot-x', '横向 0～1', part.pivotX, 'min="0" max="1" step="0.01"')}${field('pivot-y', '纵向 0～1', part.pivotY, 'min="0" max="1" step="0.01"')}</div><div class="button-row"><button id="pivot-center">居中</button><button id="pivot-top">顶端</button><button id="pivot-click">画布点选</button></div><p class="micro">改旋转点不会让图片跳位。头发通常把旋转点放在发根。</p><button id="joint-for-part" class="full">在旋转点创建关节并绑定</button></div>${range('part-opacity', '不透明度', part.opacity, 0, 1, 0.01)}<div class="button-row"><button id="toggle-lock">${part.locked ? '解锁零件' : '锁定零件'}</button><button id="duplicate-part">复制零件</button><button id="delete-selected" class="danger">删除</button></div><p class="micro">也可拖动紫色顶端圆点旋转，拖右下圆点缩放。锁定后不能移动。</p>`;
+        holder.innerHTML = `<label class="property"><span>零件名字</span><input id="part-name" value="${esc(part.name)}" maxlength="120"></label><label class="property"><span>跟随哪个关节</span><select id="part-bind">${(0, model_js_2.sortedBones)(project).map(b => `<option value="${b.id}" ${b.id === part.boneId ? 'selected' : ''}>${esc(b.name)}</option>`).join('')}</select></label><div class="property-row">${field('part-x', '位置 X（关节内）', part.x)}${field('part-y', '位置 Y（关节内）', part.y)}</div>${range('part-rotation', '转动', part.rotation, -360, 360, 1, '°')}${range('part-scale', '等比缩放', Math.abs(part.scaleX), 0.05, 4, 0.01)}<div class="button-row"><button id="flip-x">水平镜像</button><button id="flip-y">垂直镜像</button></div><div class="button-row"><button id="layer-up">向前一层</button><button id="layer-down">向后一层</button></div><div class="property-group"><label class="property"><span>旋转点 <b>红色圆点</b></span></label><div class="property-row">${field('pivot-x', '横向 0～1', part.pivotX, 'min="0" max="1" step="0.01"')}${field('pivot-y', '纵向 0～1', part.pivotY, 'min="0" max="1" step="0.01"')}</div><div class="button-row"><button id="pivot-center">居中</button><button id="pivot-top">顶端</button><button id="pivot-click">画布点选</button></div><p class="micro">改旋转点不会让图片跳位。头发通常把旋转点放在发根。</p><button id="joint-for-part" class="full">在旋转点创建关节并绑定</button></div>${range('part-opacity', '不透明度', part.opacity, 0, 1, 0.01)}<div class="button-row"><button id="toggle-lock">${part.locked ? '解锁零件' : '锁定零件'}</button><button id="duplicate-part">复制零件</button><button id="delete-selected" class="danger">删除</button></div><p class="micro">也可拖动紫色顶端圆点旋转，拖右下圆点缩放。锁定后不能移动。</p>`;
         return;
     }
     if (bone) {
         $('inspector-title').textContent = mode === 'animate' ? '让关节动起来' : '关节属性';
         const k = pose(bone.id), animated = mode === 'animate';
-        holder.innerHTML = `<label class="property"><span>关节名字</span><input id="bone-name" value="${esc(bone.name)}" maxlength="120"></label>${animated ? `<div class="help-card"><strong>正在记住 ${num(time)} 秒的姿势</strong>拖动时间条到另一个时刻，再转动关节。播放时会自动连接两个姿势。</div><div class="property-row">${field('pose-x', '平移 X（相对初始）', k.x)}${field('pose-y', '平移 Y（相对初始）', k.y)}</div>${range('pose-rotation', '转动角度', k.rotation, -180, 180, 1, '°')}${range('pose-scale', '等比伸缩', k.scale, 0.2, 2, 0.01)}<div class="button-row"><button id="preset-wave">轻轻摆动</button><button id="preset-breathe">呼吸起伏</button></div><button id="pose-reset" class="full">此刻回到初始姿势</button><p class="micro">模板只作用于当前选中的关节，会替换它在当前动作中的关键帧；其他关节不变。</p>` : `<label class="property"><span>父关节</span><select id="bone-parent" ${bone.id === 'root' || (0, model_js_1.hasKeys)(project) ? 'disabled' : ''}>${(0, model_js_1.sortedBones)(project).filter(b => b.id !== bone.id).map(b => `<option value="${b.id}" ${b.id === bone.parentId ? 'selected' : ''}>${esc(b.name)}</option>`).join('')}</select></label><div class="property-row">${field('bone-x', '起点 X（父级内）', bone.x)}${field('bone-y', '起点 Y（父级内）', bone.y)}</div>${range('bone-rotation', '初始朝向', bone.rotation, -360, 360, 1, '°')}${field('bone-length', '骨骼长度', bone.length, 'min="0" max="4096"')}${range('bone-scale', '等比缩放', bone.scale, 0.1, 3, 0.01)}<p class="micro">拖起点移动整个骨骼链；拖末端改变长度与朝向。旋转父关节时，子关节和已绑定图片一起跟随。</p><div class="button-row"><button id="toggle-lock">${bone.locked ? '解锁关节' : '锁定关节'}</button><button id="delete-selected" class="danger" ${bone.id === 'root' || (0, model_js_1.hasKeys)(project) ? 'disabled' : ''}>删除关节</button></div>${(0, model_js_1.hasKeys)(project) ? '<div class="warning">为保护已有动作，修改父级 / 删除关节前需要先保存备份并清空动作。</div><button id="clear-animations" class="full">清空动作关键帧，继续改骨架</button>' : ''}`}`;
+        holder.innerHTML = `<label class="property"><span>关节名字</span><input id="bone-name" value="${esc(bone.name)}" maxlength="120"></label>${animated ? `<div class="help-card"><strong>正在记住 ${num(time)} 秒的姿势</strong>拖动时间条到另一个时刻，再转动关节。播放时会自动连接两个姿势。</div><div class="property-row">${field('pose-x', '平移 X（相对初始）', k.x)}${field('pose-y', '平移 Y（相对初始）', k.y)}</div>${range('pose-rotation', '转动角度', k.rotation, -180, 180, 1, '°')}${range('pose-scale', '等比伸缩', k.scale, 0.2, 2, 0.01)}<div class="button-row"><button id="preset-wave">轻轻摆动</button><button id="preset-breathe">呼吸起伏</button></div><button id="pose-reset" class="full">此刻回到初始姿势</button><p class="micro">模板只作用于当前选中的关节，会替换它在当前动作中的关键帧；其他关节不变。</p>` : `<label class="property"><span>父关节</span><select id="bone-parent" ${bone.id === 'root' || (0, model_js_2.hasKeys)(project) ? 'disabled' : ''}>${(0, model_js_2.sortedBones)(project).filter(b => b.id !== bone.id).map(b => `<option value="${b.id}" ${b.id === bone.parentId ? 'selected' : ''}>${esc(b.name)}</option>`).join('')}</select></label><div class="property-row">${field('bone-x', '起点 X（父级内）', bone.x)}${field('bone-y', '起点 Y（父级内）', bone.y)}</div>${range('bone-rotation', '初始朝向', bone.rotation, -360, 360, 1, '°')}${field('bone-length', '骨骼长度', bone.length, 'min="0" max="4096"')}${range('bone-scale', '等比缩放', bone.scale, 0.1, 3, 0.01)}<p class="micro">拖起点移动整个骨骼链；拖末端改变长度与朝向。旋转父关节时，子关节和已绑定图片一起跟随。</p><div class="button-row"><button id="toggle-lock">${bone.locked ? '解锁关节' : '锁定关节'}</button><button id="delete-selected" class="danger" ${bone.id === 'root' || (0, model_js_2.hasKeys)(project) ? 'disabled' : ''}>删除关节</button></div>${(0, model_js_2.hasKeys)(project) ? '<div class="warning">为保护已有动作，修改父级 / 删除关节前需要先保存备份并清空动作。</div><button id="clear-animations" class="full">清空动作关键帧，继续改骨架</button>' : ''}`}`;
         return;
     }
     $('inspector-title').textContent = '操作向导';
@@ -1462,7 +2795,7 @@ function render() {
     $('project-name').value = project.name;
     $('part-count').textContent = String(project.parts.length);
     $('parts-list').innerHTML = project.parts.length ? [...project.parts].sort((a, b) => b.z - a.z).map(p => `<div class="part-row ${selection?.id === p.id ? 'selected' : ''}" data-part="${p.id}" role="button" tabindex="0" aria-label="选择 ${esc(p.name)}"><div class="thumb"><img src="${project.assets.find(a => a.id === p.assetId).dataUrl}" alt=""></div><span class="part-name">${esc(p.name)}</span><div class="row-tools"><button data-visible="${p.id}" title="${p.visible ? '隐藏' : '显示'}">${p.visible ? '◉' : '○'}</button><button data-lock="${p.id}" title="${p.locked ? '解锁' : '锁定'}">${p.locked ? '▣' : '◇'}</button></div></div>`).join('') : '<p class="micro">这里会显示你导入的零件。<br>PNG 的透明背景不会被画进角色。</p>';
-    $('bones-list').innerHTML = (0, model_js_1.sortedBones)(project).map(b => {
+    $('bones-list').innerHTML = (0, model_js_2.sortedBones)(project).map(b => {
         let depth = 0, parent = b.parentId;
         while (parent) {
             depth++;
@@ -1512,11 +2845,11 @@ function mutateProperty(p, id, value) {
         return;
     }
     if (id === 'part-bind' && part) {
-        (0, model_js_1.bindPart)(p, part.id, value);
+        (0, model_js_2.bindPart)(p, part.id, value);
         return;
     }
     if (id === 'bone-parent' && bone) {
-        (0, model_js_1.reparentBone)(p, bone.id, value);
+        (0, model_js_2.reparentBone)(p, bone.id, value);
         return;
     }
     const n = Number(value);
@@ -1527,28 +2860,28 @@ function mutateProperty(p, id, value) {
             throw new Error('请先解锁零件。');
         switch (id) {
             case 'part-x':
-                part.x = (0, model_js_1.clamp)(n, -10000, 10000);
+                part.x = (0, model_js_2.clamp)(n, -10000, 10000);
                 break;
             case 'part-y':
-                part.y = (0, model_js_1.clamp)(n, -10000, 10000);
+                part.y = (0, model_js_2.clamp)(n, -10000, 10000);
                 break;
             case 'part-rotation':
                 part.rotation = n;
                 break;
             case 'part-scale': {
-                const ratio = (0, model_js_1.clamp)(n, 0.05, 4) / Math.abs(part.scaleX);
+                const ratio = (0, model_js_2.clamp)(n, 0.05, 4) / Math.abs(part.scaleX);
                 part.scaleX *= ratio;
                 part.scaleY *= ratio;
                 break;
             }
             case 'part-opacity':
-                part.opacity = (0, model_js_1.clamp)(n, 0, 1);
+                part.opacity = (0, model_js_2.clamp)(n, 0, 1);
                 break;
             case 'pivot-x':
-                (0, model_js_1.movePivot)(p, part.id, (0, model_js_1.clamp)(n, 0, 1), part.pivotY);
+                (0, model_js_2.movePivot)(p, part.id, (0, model_js_2.clamp)(n, 0, 1), part.pivotY);
                 break;
             case 'pivot-y':
-                (0, model_js_1.movePivot)(p, part.id, part.pivotX, (0, model_js_1.clamp)(n, 0, 1));
+                (0, model_js_2.movePivot)(p, part.id, part.pivotX, (0, model_js_2.clamp)(n, 0, 1));
                 break;
         }
     }
@@ -1559,28 +2892,28 @@ function mutateProperty(p, id, value) {
             const c = p.clips.find(c => c.id === clipId) ?? p.clips[0];
             if (!c)
                 return;
-            const k = (0, model_js_1.sampleTrack)(c.tracks[bone.id], time);
+            const k = (0, model_js_2.sampleTrack)(c.tracks[bone.id], time);
             if (id === 'pose-x')
-                k.x = (0, model_js_1.clamp)(n, -10000, 10000);
+                k.x = (0, model_js_2.clamp)(n, -10000, 10000);
             if (id === 'pose-y')
-                k.y = (0, model_js_1.clamp)(n, -10000, 10000);
+                k.y = (0, model_js_2.clamp)(n, -10000, 10000);
             if (id === 'pose-rotation')
                 k.rotation = n;
             if (id === 'pose-scale')
-                k.scale = (0, model_js_1.clamp)(n, 0.1, 10);
-            (0, model_js_1.setKey)(c, bone.id, time, k);
+                k.scale = (0, model_js_2.clamp)(n, 0.1, 10);
+            (0, model_js_2.setKey)(c, bone.id, time, k);
         }
         else {
             if (id === 'bone-x')
-                bone.x = (0, model_js_1.clamp)(n, -10000, 10000);
+                bone.x = (0, model_js_2.clamp)(n, -10000, 10000);
             if (id === 'bone-y')
-                bone.y = (0, model_js_1.clamp)(n, -10000, 10000);
+                bone.y = (0, model_js_2.clamp)(n, -10000, 10000);
             if (id === 'bone-rotation')
                 bone.rotation = n;
             if (id === 'bone-scale')
-                bone.scale = (0, model_js_1.clamp)(n, 0.1, 10);
+                bone.scale = (0, model_js_2.clamp)(n, 0.1, 10);
             if (id === 'bone-length')
-                bone.length = (0, model_js_1.clamp)(n, 0, 4096);
+                bone.length = (0, model_js_2.clamp)(n, 0, 4096);
         }
     }
 }
@@ -1590,7 +2923,7 @@ $('properties').addEventListener('input', e => {
         return;
     try {
         if (!sliderBefore)
-            sliderBefore = (0, model_js_1.cloneProject)(project);
+            sliderBefore = (0, model_js_2.cloneProject)(project);
         playing = false;
         mutateProperty(project, input.id, input.value);
         const label = document.getElementById(`${input.id}-value`);
@@ -1630,12 +2963,15 @@ function deleteSelection() {
         if (chosen.kind === 'bone') {
             if (p.bones.find(b => b.id === chosen.id).locked)
                 throw new Error('请先解锁关节。');
-            (0, model_js_1.deleteBone)(p, chosen.id);
+            (0, model_js_2.deleteBone)(p, chosen.id);
         }
         else {
             if (p.parts.find(a => a.id === chosen.id).locked)
                 throw new Error('请先解锁零件。');
             p.parts = p.parts.filter(a => a.id !== chosen.id);
+            for (const c of p.clips)
+                if (c.attachments)
+                    delete c.attachments[chosen.id];
         }
     });
 }
@@ -1643,7 +2979,7 @@ function reorder(direction) {
     const selected = activePart();
     if (!selected)
         return;
-    edit(p => { const order = [...p.parts].sort((a, b) => a.z - b.z), i = order.findIndex(a => a.id === selected.id), next = (0, model_js_1.clamp)(i + direction, 0, order.length - 1); [order[i], order[next]] = [order[next], order[i]]; order.forEach((a, i) => a.z = i); });
+    edit(p => { const order = [...p.parts].sort((a, b) => a.z - b.z), i = order.findIndex(a => a.id === selected.id), next = (0, model_js_2.clamp)(i + direction, 0, order.length - 1); [order[i], order[next]] = [order[next], order[i]]; order.forEach((a, i) => a.z = i); });
 }
 $('properties').addEventListener('click', e => {
     const button = e.target.closest('button');
@@ -1695,15 +3031,15 @@ $('properties').addEventListener('click', e => {
             break;
         case 'duplicate-part':
             if (part)
-                edit(p => { const copy = { ...part, id: (0, model_js_1.uid)('part'), name: `${part.name} 副本`, x: part.x + 15, y: part.y + 15, z: Math.max(...p.parts.map(a => a.z)) + 1 }; p.parts.push(copy); selection = { kind: 'part', id: copy.id }; });
+                edit(p => { const copy = { ...part, id: (0, model_js_2.uid)('part'), name: `${part.name} 副本`, x: part.x + 15, y: part.y + 15, z: Math.max(...p.parts.map(a => a.z)) + 1 }; p.parts.push(copy); selection = { kind: 'part', id: copy.id }; });
             break;
         case 'pivot-center':
             if (part)
-                edit(p => (0, model_js_1.movePivot)(p, part.id, 0.5, 0.5));
+                edit(p => (0, model_js_2.movePivot)(p, part.id, 0.5, 0.5));
             break;
         case 'pivot-top':
             if (part)
-                edit(p => (0, model_js_1.movePivot)(p, part.id, 0.5, 0));
+                edit(p => (0, model_js_2.movePivot)(p, part.id, 0.5, 0));
             break;
         case 'pivot-click':
             if (part) {
@@ -1714,7 +3050,7 @@ $('properties').addEventListener('click', e => {
             break;
         case 'joint-for-part':
             if (part) {
-                edit(p => { const worlds = (0, model_js_1.worldBones)(p), at = (0, model_js_1.point)(worlds.get(part.boneId), part.x, part.y), id = (0, model_js_1.addBone)(p, at, { x: at.x + 55, y: at.y }, part.boneId); p.bones.find(b => b.id === id).name = `${part.name}关节`; (0, model_js_1.bindPart)(p, part.id, id); selection = { kind: 'bone', id }; });
+                edit(p => { const worlds = (0, model_js_2.worldBones)(p), at = (0, model_js_2.point)(worlds.get(part.boneId), part.x, part.y), id = (0, model_js_2.addBone)(p, at, { x: at.x + 55, y: at.y }, part.boneId); p.bones.find(b => b.id === id).name = `${part.name}关节`; (0, model_js_2.bindPart)(p, part.id, id); selection = { kind: 'bone', id }; });
                 mode = 'rig';
                 render();
                 break;
@@ -1730,27 +3066,27 @@ $('properties').addEventListener('click', e => {
                     const c = p.clips.find(v => v.id === currentClip().id);
                     c.tracks[bone.id] = [];
                     for (const [fraction, value] of (breathe ? [[0, 0], [0.5, 1], [1, 0]] : [[0, 0], [0.25, -1], [0.75, 1], [1, 0]]))
-                        (0, model_js_1.setKey)(c, bone.id, c.duration * fraction, { x: 0, y: breathe ? -4 * value : 0, rotation: breathe ? 0 : 12 * value, scale: breathe ? 1 + 0.02 * value : 1 });
+                        (0, model_js_2.setKey)(c, bone.id, c.duration * fraction, { x: 0, y: breathe ? -4 * value : 0, rotation: breathe ? 0 : 12 * value, scale: breathe ? 1 + 0.02 * value : 1 });
                 }, '模板已生成，点击播放看看。');
                 break;
             }
             break;
         case 'pose-reset':
             if (bone && currentClip())
-                edit(p => (0, model_js_1.setKey)(p.clips.find(c => c.id === currentClip().id), bone.id, time, (0, model_js_1.restPose)()));
+                edit(p => (0, model_js_2.setKey)(p.clips.find(c => c.id === currentClip().id), bone.id, time, (0, model_js_2.restPose)()));
             break;
         case 'clear-animations':
             if (confirm('会清空全部动作关键帧，但保留骨架和零件。建议先下载工程备份；也可以撤销。继续？'))
-                edit(p => p.clips.forEach(c => c.tracks = {}));
+                edit(p => p.clips.forEach(c => { c.tracks = {}; c.attachments = {}; }));
             break;
         case 'spread-parts':
-            if ((0, model_js_1.hasKeys)(project)) {
+            if ((0, model_js_2.hasKeys)(project)) {
                 toast('已有动画。请新建工程导入零件后使用排开功能。');
                 break;
             }
             edit(p => {
                 p.parts.forEach((a, i) => {
-                    (0, model_js_1.bindPart)(p, a.id, 'root');
+                    (0, model_js_2.bindPart)(p, a.id, 'root');
                     const root = p.bones.find(b => b.id === 'root');
                     if (root.rotation !== 0 || root.scale !== 1)
                         throw new Error('请先把根关节转动归零、缩放归 1。');
@@ -1765,7 +3101,7 @@ $('properties').addEventListener('click', e => {
     }
 });
 async function replaceProject(p) {
-    const checked = (0, model_js_1.parseProject)(p);
+    const checked = (0, model_js_2.parseProject)(p);
     await Promise.all(checked.assets.map(images_js_1.loadAsset));
     remember();
     project = checked;
@@ -1801,9 +3137,9 @@ async function importImages(files) {
         const assets = [];
         for (const b of blobs)
             assets.push(await (0, images_js_1.readImage)(b.file, b.name));
-        const next = (0, model_js_1.cloneProject)(project);
+        const next = (0, model_js_2.cloneProject)(project);
         assets.forEach((a, i) => (0, images_js_1.addPart)(next, a, { x: project.canvas.width / 2 + i * 8, y: project.canvas.height / 2 + i * 8 }));
-        (0, model_js_1.parseProject)(next);
+        (0, model_js_2.parseProject)(next);
         remember();
         project = next;
         mode = 'assemble';
@@ -1843,7 +3179,7 @@ $('save').onclick = () => {
 $('new').onclick = () => {
     if (project.parts.length && !confirm('新建空工程？当前内容可撤销恢复，建议先保存。'))
         return;
-    void job(async () => { await replaceProject((0, model_js_1.newProject)()); mode = 'assemble'; });
+    void job(async () => { await replaceProject((0, model_js_2.newProject)()); mode = 'assemble'; });
 };
 $('go-export').onclick = () => switchMode('export');
 $('image-input').onchange = e => {
@@ -1870,7 +3206,7 @@ $('project-input').onchange = e => {
         }
         else
             text = await file.text();
-        const p = (0, model_js_1.parseProject)(JSON.parse(text));
+        const p = (0, model_js_2.parseProject)(JSON.parse(text));
         if (project.parts.length && !confirm('打开工程会替换当前画板。可撤销恢复。继续？'))
             return;
         await replaceProject(p);
@@ -1939,7 +3275,7 @@ function historyMove(back) {
     const previous = source.pop();
     if (!previous)
         return;
-    target.push((0, model_js_1.cloneProject)(project));
+    target.push((0, model_js_2.cloneProject)(project));
     project = previous;
     playing = false;
     selection = null;
@@ -1975,7 +3311,7 @@ $('clip').onchange = e => { clipId = e.target.value; time = 0; playing = false; 
 $('duration').onchange = e => edit(p => {
     const c = p.clips.find(c => c.id === currentClip().id);
     const n = Number(e.target.value);
-    const last = Math.max(0, ...Object.values(c.tracks).flat().map(k => k.time));
+    const last = Math.max(0, ...Object.values(c.tracks).flat().map(k => k.time), ...Object.values(c.attachments ?? {}).flat().map(k => k.time));
     if (!Number.isFinite(n) || n < Math.max(0.1, last) || n > 60)
         throw new Error(`时长不能短于最后的关键帧（${last} 秒），且最多 60 秒。`);
     c.duration = n;
@@ -1988,7 +3324,7 @@ $('add-clip').onclick = () => {
     edit(p => {
         if (p.clips.some(c => c.name === name.trim()))
             throw new Error('动作名字不能重复。');
-        const id = (0, model_js_1.uid)('clip');
+        const id = (0, model_js_2.uid)('clip');
         p.clips.push({ id, name: name.trim().slice(0, 80), duration: 2, tracks: {} });
         clipId = id;
         time = 0;
@@ -2009,7 +3345,7 @@ $('delete-clip').onclick = () => {
 $('add-key').onclick = () => {
     const b = activeBone(), c = currentClip();
     if (b && c)
-        edit(p => (0, model_js_1.setKey)(p.clips.find(v => v.id === c.id), b.id, time, pose(b.id)));
+        edit(p => (0, model_js_2.setKey)(p.clips.find(v => v.id === c.id), b.id, time, pose(b.id)));
 };
 $('delete-key').onclick = () => {
     const b = activeBone(), c = currentClip();
@@ -2022,7 +3358,7 @@ $('restore').onclick = () => {
 };
 $('dismiss-resume').onclick = () => $('resume').hidden = true;
 window.addEventListener('keydown', e => {
-    if (busy)
+    if (busy || document.querySelector('dialog[open]'))
         return;
     const input = e.target;
     if (['INPUT', 'SELECT', 'TEXTAREA'].includes(input.tagName))
@@ -2062,7 +3398,7 @@ window.addEventListener('keydown', e => {
                 if (part.locked)
                     return;
                 const a = p.parts.find(v => v.id === part.id);
-                const parent = (0, model_js_1.worldBones)(p).get(a.boneId), zero = (0, model_js_1.point)((0, model_js_1.inverse)(parent), 0, 0), step = (0, model_js_1.point)((0, model_js_1.inverse)(parent), delta.x * amount, delta.y * amount);
+                const parent = (0, model_js_2.worldBones)(p).get(a.boneId), zero = (0, model_js_2.point)((0, model_js_2.inverse)(parent), 0, 0), step = (0, model_js_2.point)((0, model_js_2.inverse)(parent), delta.x * amount, delta.y * amount);
                 a.x += step.x - zero.x;
                 a.y += step.y - zero.y;
             }
@@ -2074,7 +3410,7 @@ window.addEventListener('keydown', e => {
                     const k = pose(b.id);
                     k.x += delta.x * amount;
                     k.y += delta.y * amount;
-                    (0, model_js_1.setKey)(p.clips.find(c => c.id === currentClip().id), b.id, time, k);
+                    (0, model_js_2.setKey)(p.clips.find(c => c.id === currentClip().id), b.id, time, k);
                 }
                 else {
                     const a = p.bones.find(v => v.id === b.id);
@@ -2105,6 +3441,166 @@ void (0, io_js_1.restoreAutosave)().then(p => {
         $('resume').hidden = false;
     }
 }).catch(() => { $('save-state').textContent = '本地存储不可用，请下载工程'; });
+// V0.3 preparation remains optional and stores its own source revisions.
+const preparation = (0, preparation_ui_js_1.initPreparation)({ notice: toast, importAssets: async (assets) => {
+        if (busy)
+            throw new Error('画板正在处理，请稍后再导入。');
+        const next = (0, model_js_2.cloneProject)(project);
+        for (const [i, a] of assets.entries()) {
+            await (0, images_js_1.loadAsset)(a);
+            const id = (0, images_js_1.addPart)(next, a, { x: 140 + (i % 3) * 240, y: 130 + Math.floor(i / 3) * 180 });
+            const part = next.parts.find(p => p.id === id);
+            part.scaleX = part.scaleY = Math.min(1, 160 / Math.max(a.width, a.height));
+        }
+        (0, model_js_2.parseProject)(next);
+        remember();
+        project = next;
+        mode = 'assemble';
+        selection = null;
+        changed();
+        setPane('canvas');
+        requestAnimationFrame(fit);
+        toast('已导入确认的透明零件。先拼装；闭眼等替换图可以在“表情换图”里归入同一个部件。');
+    } });
+$('prepare').onclick = preparation.open;
+$('empty-prepare').onclick = preparation.open;
+function expressionPart() {
+    if (activePart())
+        expressionPartId = activePart().id;
+    if (!project.parts.some(p => p.id === expressionPartId))
+        expressionPartId = project.parts.find(p => /eye|眼/.test(p.name))?.id ?? project.parts[0]?.id ?? '';
+    return project.parts.find(p => p.id === expressionPartId);
+}
+function previewClip() {
+    if (mode === 'animate')
+        return currentClip();
+    const part = project.parts.find(p => p.id === expressionPartId);
+    if (mode === 'assemble' && alignVariantId !== 'base' && part?.variants?.some(v => v.id === alignVariantId))
+        return { id: 'preview', name: 'preview', duration: 60, tracks: {}, attachments: { [part.id]: [{ time: 0, variantId: alignVariantId }] } };
+    return undefined;
+}
+function renderExpressions() {
+    const holder = $('expressions');
+    if (!holder)
+        return;
+    holder.hidden = !project.parts.length || !['assemble', 'animate'].includes(mode);
+    if (holder.hidden)
+        return;
+    const part = expressionPart();
+    if (alignVariantId !== 'base' && !part.variants?.some(v => v.id === alignVariantId))
+        alignVariantId = 'base';
+    const state = mode === 'animate' ? (0, model_js_1.sampleAttachment)(currentClip(), part.id, time) : alignVariantId;
+    const variant = part.variants?.find(v => v.id === state);
+    holder.innerHTML = `<h3>表情换图 <small>V0.3</small></h3><label class="property"><span>眼睛 / 嘴巴等部件</span><select id="expr-part">${project.parts.map(p => `<option value="${p.id}" ${p.id === part.id ? 'selected' : ''}>${esc(p.name)}</option>`).join('')}</select></label><label class="property"><span>${mode === 'animate' ? '此刻显示（改变即记帧）' : '对齐预览（不改变初始图）'}</span><select id="expr-state"><option value="base" ${state === 'base' ? 'selected' : ''}>初始图片</option>${(part.variants ?? []).map(v => `<option value="${v.id}" ${state === v.id ? 'selected' : ''}>${esc(v.name)}</option>`).join('')}${mode === 'animate' ? `<option value="hidden" ${state === null ? 'selected' : ''}>隐藏此部件</option>` : ''}</select></label>${variant ? `<div class="property-row">${field('expr-x', '替换图对齐 X', variant.x)}${field('expr-y', '替换图对齐 Y', variant.y)}</div>${field('expr-scale', '替换图等比缩放', variant.scaleX, 'min="0.01" max="10" step="0.01"')}<button id="expr-remove-variant" class="danger full">删除此替换图（关联帧一同删除）</button>` : ''}<details><summary>加入闭眼 / 嘴型替换图片</summary><select id="expr-source"><option value="">选择画板里已导入的另一零件</option>${project.parts.filter(p => p.id !== part.id).map(p => `<option value="${p.id}">${esc(p.name)}</option>`).join('')}</select><button id="expr-add-existing" class="full">将这个零件收为替换图片</button><button id="expr-add-file" class="full">或上传替换 PNG / WebP</button></details>${mode === 'animate' ? `<div class="button-row"><button id="expr-blink" ${part.variants?.length ? '' : 'disabled'}>生成眨眼</button><button id="expr-delete-key">删除此刻换图帧</button></div><div class="expression-keys">${(currentClip()?.attachments?.[part.id] ?? []).map(k => `<button data-expr-time="${k.time}">${num(k.time)}s · ${k.variantId === 'base' ? '初始' : k.variantId === null ? '隐藏' : esc(part.variants?.find(v => v.id === k.variantId)?.name)}</button>`).join('')}</div>` : ''}<p class="micro">同一个部件在不同时间换图片，位置和骨骼保持不变。先对齐睁眼 / 闭眼；透明画布尺寸不同也能微调。换图轨道会写入 Spine 导出。</p>`;
+}
+$('expressions').addEventListener('change', e => {
+    const input = e.target, part = expressionPart();
+    if (!part)
+        return;
+    if (input.id === 'expr-part') {
+        expressionPartId = input.value;
+        selection = null;
+        alignVariantId = 'base';
+        renderExpressions();
+        draw();
+        return;
+    }
+    if (input.id === 'expr-state') {
+        if (mode === 'animate') {
+            playing = false;
+            edit(p => (0, model_js_1.setAttachmentKey)(p.clips.find(c => c.id === currentClip().id), p.parts.find(a => a.id === part.id), time, input.value === 'hidden' ? null : input.value));
+        }
+        else {
+            alignVariantId = input.value;
+            renderExpressions();
+            draw();
+        }
+        return;
+    }
+    if (['expr-x', 'expr-y', 'expr-scale'].includes(input.id)) {
+        const id = mode === 'animate' ? (0, model_js_1.sampleAttachment)(currentClip(), part.id, time) : alignVariantId;
+        edit(p => {
+            const v = p.parts.find(a => a.id === part.id).variants?.find(v => v.id === id);
+            if (!v)
+                return;
+            const n = Number(input.value);
+            if (!Number.isFinite(n))
+                throw new Error('数值无效。');
+            if (input.id === 'expr-x')
+                v.x = (0, model_js_2.clamp)(n, -10000, 10000);
+            else if (input.id === 'expr-y')
+                v.y = (0, model_js_2.clamp)(n, -10000, 10000);
+            else
+                v.scaleX = v.scaleY = (0, model_js_2.clamp)(n, .01, 10);
+        });
+    }
+});
+$('expressions').addEventListener('click', e => {
+    const button = e.target.closest('button'), part = expressionPart();
+    if (!button || !part)
+        return;
+    if (button.dataset.exprTime) {
+        time = Number(button.dataset.exprTime);
+        playing = false;
+        render();
+        return;
+    }
+    if (button.id === 'expr-add-file') {
+        $('variant-input').click();
+        return;
+    }
+    if (button.id === 'expr-add-existing') {
+        const source = project.parts.find(p => p.id === $('expr-source').value);
+        if (!source)
+            return;
+        if (!confirm('将该零件的图片加入替换列表，并从画板移走独立零件？旧工程可撤销恢复，源图片仍保留。'))
+            return;
+        edit(p => {
+            alignVariantId = (0, model_js_1.addVariant)(p, part.id, source.assetId, source.name);
+            p.parts = p.parts.filter(a => a.id !== source.id);
+            for (const c of p.clips)
+                if (c.attachments)
+                    delete c.attachments[source.id];
+        }, '已加入替换图，请先调整对齐；制作动作时改变显示状态。');
+        return;
+    }
+    if (button.id === 'expr-remove-variant') {
+        const id = mode === 'animate' ? (0, model_js_1.sampleAttachment)(currentClip(), part.id, time) : alignVariantId;
+        if (!id || id === 'base' || !confirm('删除替换图及引用它的换图帧？可撤销。'))
+            return;
+        edit(p => {
+            p.parts.find(a => a.id === part.id).variants = p.parts.find(a => a.id === part.id).variants.filter(v => v.id !== id);
+            for (const c of p.clips)
+                if (c.attachments?.[part.id])
+                    c.attachments[part.id] = c.attachments[part.id].filter(k => k.variantId !== id);
+            alignVariantId = 'base';
+        });
+        return;
+    }
+    if (button.id === 'expr-blink') {
+        const id = (0, model_js_1.sampleAttachment)(currentClip(), part.id, time);
+        const variant = part.variants?.find(v => v.id === id) ?? part.variants?.find(v => /closed|闭/.test(v.name)) ?? part.variants?.[0];
+        if (!variant || !currentClip())
+            return;
+        if (!confirm(`使用「${variant.name}」作为闭眼图片，替换该部件当前动作的换图帧？`))
+            return;
+        edit(p => (0, model_js_1.blink)(p, p.clips.find(c => c.id === currentClip().id), part.id, variant.id), '眨眼轨道已生成，点击播放。');
+        return;
+    }
+    if (button.id === 'expr-delete-key' && currentClip())
+        edit(p => {
+            const c = p.clips.find(c => c.id === currentClip().id);
+            if (c.attachments?.[part.id])
+                c.attachments[part.id] = c.attachments[part.id].filter(k => Math.abs(k.time - time) > .02);
+        });
+});
+$('variant-input').onchange = e => {
+    const input = e.target, file = input.files?.[0], part = expressionPart();
+    input.value = '';
+    if (!file || !part)
+        return;
+    void job(async () => { const asset = await (0, images_js_1.readImage)(file, file.name), next = (0, model_js_2.cloneProject)(project); next.assets.push(asset); alignVariantId = (0, model_js_1.addVariant)(next, part.id, asset.id, asset.name); (0, model_js_2.parseProject)(next); remember(); project = next; changed(); toast('已加入替换图。在拼装模式预览对齐；在动作模式记住显示状态。'); });
+};
 
 };
 function require(id){if(cache[id])return cache[id].exports;if(!factories[id])throw new Error('Unknown module: '+id);const m={exports:{}};cache[id]=m;factories[id](m,m.exports,require);return m.exports;}require('./app.js');})();</script>
