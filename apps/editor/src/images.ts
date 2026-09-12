@@ -1,4 +1,4 @@
-import { type Asset, type Project, type Clip, type Part, type Point, newProject, uid, addBone, bindPart, setKey, restPose, worldBones, partMatrix } from './model.js';
+import { type Asset, type Project, type Clip, type Part, type Point, newProject, uid, addBone, bindPart, setKey, restPose, worldBones, partMatrix, sampleAttachment, variantPart } from './model.js';
 export interface CachedImage { image: HTMLImageElement; pixels: Uint8ClampedArray }
 const cache = new Map<string, Promise<CachedImage>>();
 export const decoded = new Map<string, CachedImage>();
@@ -46,9 +46,10 @@ export function drawCharacter(ctx: CanvasRenderingContext2D, p: Project, clip?: 
   const bones = worldBones(p, clip, time);
   for (const part of [...p.parts].sort((a, b) => a.z - b.z)) {
     if (!part.visible || part.opacity <= 0) continue;
-    const asset = p.assets.find(a => a.id === part.assetId)!, ready = decoded.get(asset.id);
+    const state = sampleAttachment(clip, part.id, time); if (state === null) continue;
+    const resolved = variantPart(p, part, state), asset = resolved.asset, ready = decoded.get(asset.id);
     if (!ready) continue;
-    ctx.save(); ctx.transform(...partMatrix(part, asset, bones)); ctx.globalAlpha = part.opacity;
+    ctx.save(); ctx.transform(...partMatrix(resolved.part, asset, bones)); ctx.globalAlpha = part.opacity;
     ctx.drawImage(ready.image, 0, 0); ctx.restore();
   }
 }

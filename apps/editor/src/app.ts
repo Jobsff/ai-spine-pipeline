@@ -1,3 +1,5 @@
+import { initPreparation } from './preparation-ui.js';
+import { addVariant, blink, setAttachmentKey, sampleAttachment, variantPart, type Clip } from './model.js';
 import { type Project, type Part, type Bone, type Pose, type Point, type Matrix, newProject, cloneProject, parseProject, worldBones, partMatrix, partCorners, point, inverse, degrees, clamp, addBone, bindPart, movePivot, reparentBone, deleteBone, hasKeys, setKey, sampleTrack, restPose, uid, sortedBones } from './model.js';
 import { addPart, readImage, loadAsset, decoded, pruneCache, demoProject, drawCharacter } from './images.js';
 import { preflight, fileStem } from './spine.js';
@@ -18,6 +20,7 @@ let clipId = project.clips[0].id, time = 0, zoom = 0.75, playing = false, busy =
 let drag: Drag | null = null, chainStart: Point | null = null, chainParent = 'root', hover: Point | null = null;
 let sliderBefore: Project | null = null, savedCandidate: Project | null = null, revision = 0;
 let saveTimer = 0, toastTimer = 0;
+let expressionPartId = '', alignVariantId = 'base';
 const undo: Project[] = [], redo: Project[] = [], canvas = $<HTMLCanvasElement>('board');
 const currentClip = () => project.clips.find(c => c.id === clipId) ?? project.clips[0];
 const activePart = () => selection?.kind === 'part' ? project.parts.find(p => p.id === selection!.id) : undefined;
@@ -85,7 +88,7 @@ function rotationHandle(corners: Point[]): Point {
 }
 function draw(): void {
   const ctx = canvas.getContext('2d')!; ctx.setTransform(canvas.width / project.canvas.width, 0, 0, canvas.height / project.canvas.height, 0, 0); ctx.clearRect(0, 0, project.canvas.width, project.canvas.height);
-  const clip = mode === 'animate' ? currentClip() : undefined, worlds = worldBones(project, clip, time);
+  const clip = previewClip(), worlds = worldBones(project, clip, time);
   ctx.save(); ctx.strokeStyle = '#80849b55'; ctx.lineWidth = 1 / zoom;
   ctx.beginPath(); ctx.moveTo(project.canvas.originX - 12 / zoom, project.canvas.originY); ctx.lineTo(project.canvas.originX + 12 / zoom, project.canvas.originY); ctx.moveTo(project.canvas.originX, project.canvas.originY - 12 / zoom); ctx.lineTo(project.canvas.originX, project.canvas.originY + 12 / zoom); ctx.stroke(); ctx.restore();
   drawCharacter(ctx, project, clip, time);
@@ -118,7 +121,8 @@ function draw(): void {
 function hitPart(at: Point, worlds: Map<string, Matrix>): Part | undefined {
   for (const part of [...project.parts].sort((a, b) => b.z - a.z)) {
     if (!part.visible || part.opacity <= 0) continue;
-    const a = project.assets.find(v => v.id === part.assetId)!, pos = point(inverse(partMatrix(part, a, worlds)), at.x, at.y);
+    const state = sampleAttachment(previewClip(), part.id, time); if (state === null) continue;
+    const resolved = variantPart(project, part, state), a = resolved.asset, pos = point(inverse(partMatrix(resolved.part, a, worlds)), at.x, at.y);
     const x = Math.floor(pos.x), y = Math.floor(pos.y), ready = decoded.get(a.id);
     if (x >= 0 && y >= 0 && x < a.width && y < a.height && ready && ready.pixels[(y * a.width + x) * 4 + 3] > 16) return part;
   }
@@ -220,6 +224,7 @@ function range(id: string, label: string, value: number, min: number, max: numbe
   return `<label class="property"><span>${label}<b id="${id}-value">${num(value)}${unit}</b></span><input id="${id}" type="range" min="${min}" max="${max}" step="${step}" value="${value}"></label>`;
 }
 function renderProperties(): void {
+  renderExpressions();
   const holder = $('properties'), part = activePart(), bone = activeBone();
   if (mode === 'export') {
     $('inspector-title').textContent = '导出检查'; const issues = preflight(project), errors = issues.filter(i => i.level === 'error');
@@ -317,7 +322,7 @@ function deleteSelection(): void {
   const chosen = selection;
   edit(p => {
     if (chosen.kind === 'bone') { if (p.bones.find(b => b.id === chosen.id)!.locked) throw new Error('请先解锁关节。'); deleteBone(p, chosen.id); }
-    else { if (p.parts.find(a => a.id === chosen.id)!.locked) throw new Error('请先解锁零件。'); p.parts = p.parts.filter(a => a.id !== chosen.id); }
+    else { if (p.parts.find(a => a.id === chosen.id)!.locked) throw new Error('请先解锁零件。'); p.parts = p.parts.filter(a => a.id !== chosen.id); for(const c of p.clips) if(c.attachments) delete c.attachments[chosen.id]; }
   });
 }
 function reorder(direction: number): void {
@@ -349,7 +354,7 @@ $('properties').addEventListener('click', e => {
       edit(p => { const c = p.clips.find(v => v.id === currentClip()!.id)!; c.tracks[bone.id] = []; for (const [fraction, value] of (breathe ? [[0, 0], [0.5, 1], [1, 0]] : [[0, 0], [0.25, -1], [0.75, 1], [1, 0]])) setKey(c, bone.id, c.duration * fraction, { x: 0, y: breathe ? -4 * value : 0, rotation: breathe ? 0 : 12 * value, scale: breathe ? 1 + 0.02 * value : 1 }); }, '模板已生成，点击播放看看。'); break;
     } break;
     case 'pose-reset': if (bone && currentClip()) edit(p => setKey(p.clips.find(c => c.id === currentClip()!.id)!, bone.id, time, restPose())); break;
-    case 'clear-animations': if (confirm('会清空全部动作关键帧，但保留骨架和零件。建议先下载工程备份；也可以撤销。继续？')) edit(p => p.clips.forEach(c => c.tracks = {})); break;
+    case 'clear-animations': if (confirm('会清空全部动作关键帧，但保留骨架和零件。建议先下载工程备份；也可以撤销。继续？')) edit(p => p.clips.forEach(c => { c.tracks = {}; c.attachments = {}; })); break;
     case 'spread-parts': if (hasKeys(project)) { toast('已有动画。请新建工程导入零件后使用排开功能。'); break; }
       edit(p => { p.parts.forEach((a, i) => { bindPart(p, a.id, 'root'); const root = p.bones.find(b => b.id === 'root')!; if (root.rotation !== 0 || root.scale !== 1) throw new Error('请先把根关节转动归零、缩放归 1。'); const asset = p.assets.find(v => v.id === a.assetId)!; a.x = 140 + (i % 3) * 250 - root.x; a.y = 130 + Math.floor(i / 3) * 190 - root.y; a.rotation = 0; a.scaleX = a.scaleY = Math.min(1, 160 / Math.max(asset.width, asset.height)); }); }, '已按三列排开；大图仅缩放显示，未改动源图片。'); break;
   }
@@ -427,7 +432,7 @@ $('play').onclick = () => { if (!currentClip()) return; if (time >= currentClip(
 $<HTMLInputElement>('time').oninput = e => { time = Number((e.target as HTMLInputElement).value); playing = false; updateTimeUI(); renderProperties(); draw(); };
 $('keys').addEventListener('click', e => { const button = (e.target as HTMLElement).closest<HTMLElement>('[data-time]'); if (button) { time = Number(button.dataset.time); playing = false; updateTimeUI(); renderProperties(); draw(); } });
 $<HTMLSelectElement>('clip').onchange = e => { clipId = (e.target as HTMLSelectElement).value; time = 0; playing = false; render(); };
-$('duration').onchange = e => edit(p => { const c = p.clips.find(c => c.id === currentClip()!.id)!; const n = Number((e.target as HTMLInputElement).value); const last = Math.max(0, ...Object.values(c.tracks).flat().map(k => k.time)); if (!Number.isFinite(n) || n < Math.max(0.1, last) || n > 60) throw new Error(`时长不能短于最后的关键帧（${last} 秒），且最多 60 秒。`); c.duration = n; time = Math.min(time, n); });
+$('duration').onchange = e => edit(p => { const c = p.clips.find(c => c.id === currentClip()!.id)!; const n = Number((e.target as HTMLInputElement).value); const last = Math.max(0, ...Object.values(c.tracks).flat().map(k => k.time), ...Object.values(c.attachments ?? {}).flat().map(k => k.time)); if (!Number.isFinite(n) || n < Math.max(0.1, last) || n > 60) throw new Error(`时长不能短于最后的关键帧（${last} 秒），且最多 60 秒。`); c.duration = n; time = Math.min(time, n); });
 $('add-clip').onclick = () => { const name = prompt('给新动作起个名字（游戏里会用到）', 'wave'); if (!name?.trim()) return; edit(p => { if (p.clips.some(c => c.name === name.trim())) throw new Error('动作名字不能重复。'); const id = uid('clip'); p.clips.push({ id, name: name.trim().slice(0, 80), duration: 2, tracks: {} }); clipId = id; time = 0; }); };
 $('delete-clip').onclick = () => { if (!currentClip() || !confirm('删除当前动作？可以撤销。')) return; const id = currentClip()!.id; edit(p => { p.clips = p.clips.filter(c => c.id !== id); if (!p.clips.length) p.clips.push({ id: 'idle', name: 'idle', duration: 2, tracks: {} }); clipId = p.clips[0].id; time = 0; }); };
 $('add-key').onclick = () => { const b = activeBone(), c = currentClip(); if (b && c) edit(p => setKey(p.clips.find(v => v.id === c.id)!, b.id, time, pose(b.id))); };
@@ -435,7 +440,7 @@ $('delete-key').onclick = () => { const b = activeBone(), c = currentClip(); if 
 $('restore').onclick = () => { if (savedCandidate) void job(async () => { await replaceProject(savedCandidate!); toast('上次工程已恢复。'); }); };
 $('dismiss-resume').onclick = () => $('resume').hidden = true;
 window.addEventListener('keydown', e => {
-  if (busy) return;
+  if (busy || document.querySelector('dialog[open]')) return;
   const input = e.target as HTMLElement; if (['INPUT', 'SELECT', 'TEXTAREA'].includes(input.tagName)) return;
   if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 's') { e.preventDefault(); $('save').click(); }
   if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'z') { e.preventDefault(); historyMove(!e.shiftKey); }
@@ -459,3 +464,73 @@ function frame(now: number): void {
 }
 render(); requestAnimationFrame(() => { fit(); requestAnimationFrame(frame); });
 void restoreAutosave().then(p => { if (p && revision === 0) { savedCandidate = p; $('resume').hidden = false; } }).catch(() => { $('save-state').textContent = '本地存储不可用，请下载工程'; });
+
+// V0.3 preparation remains optional and stores its own source revisions.
+const preparation = initPreparation({ notice: toast, importAssets: async assets => {
+  if(busy) throw new Error('画板正在处理，请稍后再导入。');
+  const next = cloneProject(project);
+  for(const [i,a] of assets.entries()) {
+    await loadAsset(a); const id = addPart(next, a, {x:140+(i%3)*240,y:130+Math.floor(i/3)*180});
+    const part = next.parts.find(p=>p.id===id)!; part.scaleX = part.scaleY = Math.min(1,160/Math.max(a.width,a.height));
+  }
+  parseProject(next); remember(); project=next;mode='assemble';selection=null;changed();setPane('canvas');requestAnimationFrame(fit);
+  toast('已导入确认的透明零件。先拼装；闭眼等替换图可以在“表情换图”里归入同一个部件。');
+} });
+$('prepare').onclick = preparation.open;
+$('empty-prepare').onclick = preparation.open;
+function expressionPart(): Part | undefined {
+  if(activePart()) expressionPartId=activePart()!.id;
+  if(!project.parts.some(p=>p.id===expressionPartId)) expressionPartId=project.parts.find(p=>/eye|眼/.test(p.name))?.id??project.parts[0]?.id??'';
+  return project.parts.find(p=>p.id===expressionPartId);
+}
+function previewClip(): Clip | undefined {
+  if(mode==='animate')return currentClip();
+  const part=project.parts.find(p=>p.id===expressionPartId);
+  if(mode==='assemble' && alignVariantId!=='base' && part?.variants?.some(v=>v.id===alignVariantId))return {id:'preview',name:'preview',duration:60,tracks:{},attachments:{[part.id]:[{time:0,variantId:alignVariantId}]}};
+  return undefined;
+}
+function renderExpressions(): void {
+  const holder=$('expressions'); if(!holder)return;
+  holder.hidden=!project.parts.length||!['assemble','animate'].includes(mode); if(holder.hidden)return;
+  const part=expressionPart()!;
+  if(alignVariantId!=='base'&&!part.variants?.some(v=>v.id===alignVariantId))alignVariantId='base';
+  const state=mode==='animate'?sampleAttachment(currentClip(),part.id,time):alignVariantId;
+  const variant=part.variants?.find(v=>v.id===state);
+  holder.innerHTML=`<h3>表情换图 <small>V0.3</small></h3><label class="property"><span>眼睛 / 嘴巴等部件</span><select id="expr-part">${project.parts.map(p=>`<option value="${p.id}" ${p.id===part.id?'selected':''}>${esc(p.name)}</option>`).join('')}</select></label><label class="property"><span>${mode==='animate'?'此刻显示（改变即记帧）':'对齐预览（不改变初始图）'}</span><select id="expr-state"><option value="base" ${state==='base'?'selected':''}>初始图片</option>${(part.variants??[]).map(v=>`<option value="${v.id}" ${state===v.id?'selected':''}>${esc(v.name)}</option>`).join('')}${mode==='animate'?`<option value="hidden" ${state===null?'selected':''}>隐藏此部件</option>`:''}</select></label>${variant?`<div class="property-row">${field('expr-x','替换图对齐 X',variant.x)}${field('expr-y','替换图对齐 Y',variant.y)}</div>${field('expr-scale','替换图等比缩放',variant.scaleX,'min="0.01" max="10" step="0.01"')}<button id="expr-remove-variant" class="danger full">删除此替换图（关联帧一同删除）</button>`:''}<details><summary>加入闭眼 / 嘴型替换图片</summary><select id="expr-source"><option value="">选择画板里已导入的另一零件</option>${project.parts.filter(p=>p.id!==part.id).map(p=>`<option value="${p.id}">${esc(p.name)}</option>`).join('')}</select><button id="expr-add-existing" class="full">将这个零件收为替换图片</button><button id="expr-add-file" class="full">或上传替换 PNG / WebP</button></details>${mode==='animate'?`<div class="button-row"><button id="expr-blink" ${part.variants?.length?'':'disabled'}>生成眨眼</button><button id="expr-delete-key">删除此刻换图帧</button></div><div class="expression-keys">${(currentClip()?.attachments?.[part.id]??[]).map(k=>`<button data-expr-time="${k.time}">${num(k.time)}s · ${k.variantId==='base'?'初始':k.variantId===null?'隐藏':esc(part.variants?.find(v=>v.id===k.variantId)?.name)}</button>`).join('')}</div>`:''}<p class="micro">同一个部件在不同时间换图片，位置和骨骼保持不变。先对齐睁眼 / 闭眼；透明画布尺寸不同也能微调。换图轨道会写入 Spine 导出。</p>`;
+}
+$('expressions').addEventListener('change',e=>{
+  const input=e.target as HTMLInputElement,part=expressionPart();if(!part)return;
+  if(input.id==='expr-part'){expressionPartId=input.value;selection=null;alignVariantId='base';renderExpressions();draw();return;}
+  if(input.id==='expr-state'){
+    if(mode==='animate'){playing=false;edit(p=>setAttachmentKey(p.clips.find(c=>c.id===currentClip()!.id)!,p.parts.find(a=>a.id===part.id)!,time,input.value==='hidden'?null:input.value));}
+    else{alignVariantId=input.value;renderExpressions();draw();}return;
+  }
+  if(['expr-x','expr-y','expr-scale'].includes(input.id)){
+    const id=mode==='animate'?sampleAttachment(currentClip(),part.id,time):alignVariantId;
+    edit(p=>{const v=p.parts.find(a=>a.id===part.id)!.variants?.find(v=>v.id===id);if(!v)return;const n=Number(input.value);if(!Number.isFinite(n))throw new Error('数值无效。');if(input.id==='expr-x')v.x=clamp(n,-10000,10000);else if(input.id==='expr-y')v.y=clamp(n,-10000,10000);else v.scaleX=v.scaleY=clamp(n,.01,10);});
+  }
+});
+$('expressions').addEventListener('click',e=>{
+  const button=(e.target as HTMLElement).closest<HTMLButtonElement>('button'),part=expressionPart();if(!button||!part)return;
+  if(button.dataset.exprTime){time=Number(button.dataset.exprTime);playing=false;render();return;}
+  if(button.id==='expr-add-file'){$<HTMLInputElement>('variant-input').click();return;}
+  if(button.id==='expr-add-existing'){
+    const source=project.parts.find(p=>p.id===$<HTMLSelectElement>('expr-source').value);if(!source)return;
+    if(!confirm('将该零件的图片加入替换列表，并从画板移走独立零件？旧工程可撤销恢复，源图片仍保留。'))return;
+    edit(p=>{alignVariantId=addVariant(p,part.id,source.assetId,source.name);p.parts=p.parts.filter(a=>a.id!==source.id);for(const c of p.clips)if(c.attachments)delete c.attachments[source.id];},'已加入替换图，请先调整对齐；制作动作时改变显示状态。');return;
+  }
+  if(button.id==='expr-remove-variant'){
+    const id=mode==='animate'?sampleAttachment(currentClip(),part.id,time):alignVariantId;if(!id||id==='base'||!confirm('删除替换图及引用它的换图帧？可撤销。'))return;
+    edit(p=>{p.parts.find(a=>a.id===part.id)!.variants=p.parts.find(a=>a.id===part.id)!.variants!.filter(v=>v.id!==id);for(const c of p.clips)if(c.attachments?.[part.id])c.attachments[part.id]=c.attachments[part.id].filter(k=>k.variantId!==id);alignVariantId='base';});return;
+  }
+  if(button.id==='expr-blink'){
+    const id=sampleAttachment(currentClip(),part.id,time);const variant=part.variants?.find(v=>v.id===id)??part.variants?.find(v=>/closed|闭/.test(v.name))??part.variants?.[0];if(!variant||!currentClip())return;
+    if(!confirm(`使用「${variant.name}」作为闭眼图片，替换该部件当前动作的换图帧？`))return;
+    edit(p=>blink(p,p.clips.find(c=>c.id===currentClip()!.id)!,part.id,variant.id),'眨眼轨道已生成，点击播放。');return;
+  }
+  if(button.id==='expr-delete-key'&&currentClip())edit(p=>{const c=p.clips.find(c=>c.id===currentClip()!.id)!;if(c.attachments?.[part.id])c.attachments[part.id]=c.attachments[part.id].filter(k=>Math.abs(k.time-time)>.02);});
+});
+$<HTMLInputElement>('variant-input').onchange=e=>{
+ const input=e.target as HTMLInputElement,file=input.files?.[0],part=expressionPart();input.value='';if(!file||!part)return;
+ void job(async()=>{const asset=await readImage(file,file.name),next=cloneProject(project);next.assets.push(asset);alignVariantId=addVariant(next,part.id,asset.id,asset.name);parseProject(next);remember();project=next;changed();toast('已加入替换图。在拼装模式预览对齐；在动作模式记住显示状态。');});
+};

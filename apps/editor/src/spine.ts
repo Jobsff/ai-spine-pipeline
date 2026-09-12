@@ -1,4 +1,4 @@
-import { type Asset, type Project, type Keyframe, parseProject, sortedBones, worldBones, partCorners, point, transform, restPose } from './model.js';
+import { type Asset, type Project, type Keyframe, parseProject, sortedBones, worldBones, partCorners, point, transform, restPose, variantPart } from './model.js';
 export interface Region { assetId: string; name: string; x: number; y: number; width: number; height: number }
 export interface AtlasPage { name: string; width: number; height: number; regions: Region[] }
 export interface ExportIssue { level: 'error' | 'warning'; message: string }
@@ -7,7 +7,7 @@ export const fileStem = (name: string): string => name.replace(/[^a-zA-Z0-9_-]+/
 export const regionName = (asset: Asset): string => `image_${asset.id}`;
 export const slotName = (id: string): string => `slot_${id}`;
 export function usedAssets(p: Project): Asset[] {
-  const ids = new Set(p.parts.map(a => a.assetId)); return p.assets.filter(a => ids.has(a.id));
+  const ids = new Set(p.parts.flatMap(a => [a.assetId, ...(a.variants ?? []).map(v => v.assetId)])); return p.assets.filter(a => ids.has(a.id));
 }
 export function preflight(p: Project): ExportIssue[] {
   const issues: ExportIssue[] = [];
@@ -20,7 +20,7 @@ export function preflight(p: Project): ExportIssue[] {
   }
   const fixed = p.parts.filter(a => a.boneId === 'root').length;
   if (fixed) issues.push({ level: 'warning', message: `${fixed} 个部件跟随整体根关节；它们不会跟随其他关节单独活动。` });
-  if (!p.clips.some(c => Object.values(c.tracks).some(t => t.length))) issues.push({ level: 'warning', message: '还没有动作关键帧；导出的是可加载的静态骨架。' });
+  if (!p.clips.some(c => Object.values(c.tracks).some(t => t.length) || Object.values(c.attachments ?? {}).some(t => t.length))) issues.push({ level: 'warning', message: '还没有动作关键帧；导出的是可加载的静态骨架。' });
   issues.push({ level: 'warning', message: '目标是 Spine 3.8 的区域贴图 / FK 子集。Laya、Cocos 工程须选择 3.8 运行库；实际引擎验收仍需执行随包测试。' });
   return issues;
 }
@@ -59,7 +59,7 @@ export interface SpineDocument {
   bones: { name: string; parent?: string; x: number; y: number; rotation: number; scaleX: number; scaleY: number; length: number }[];
   slots: { name: string; bone: string; attachment?: string; color: string; blend: string }[];
   skins: { name: string; attachments: Record<string, Record<string, { type: string; path: string; x: number; y: number; rotation: number; scaleX: number; scaleY: number; width: number; height: number }>> }[];
-  animations: Record<string, { bones: Record<string, { translate: Frame[]; rotate: Frame[]; scale: Frame[] }> }>;
+  animations: Record<string, { bones: Record<string, { translate: Frame[]; rotate: Frame[]; scale: Frame[] }>; slots?: Record<string, { attachment: { time: number; name: string | null }[] }> }>;
 }
 export function exportSpine(p: Project): SpineDocument {
   const errors = preflight(p).filter(v => v.level === 'error');
@@ -77,10 +77,15 @@ export function exportSpine(p: Project): SpineDocument {
   };
   for (const part of [...p.parts].sort((a, b) => a.z - b.z)) {
     const asset = p.assets.find(a => a.id === part.assetId)!;
-    const centre = point(transform(part.x, part.y, part.rotation, part.scaleX, part.scaleY), (0.5 - part.pivotX) * asset.width, (0.5 - part.pivotY) * asset.height);
     const key = regionName(asset), slot = slotName(part.id);
     doc.slots.push({ name: slot, bone: part.boneId, ...(part.visible ? { attachment: key } : {}), color: `ffffff${Math.round(part.opacity * 255).toString(16).padStart(2, '0')}`, blend: 'normal' });
-    doc.skins[0].attachments[slot] = { [key]: { type: 'region', path: key, x: r(centre.x), y: r(-centre.y), rotation: r(-part.rotation), scaleX: r(part.scaleX), scaleY: r(part.scaleY), width: asset.width, height: asset.height } };
+    doc.skins[0].attachments[slot] = {};
+    for (const id of ['base', ...(part.variants ?? []).map(v => v.id)]) {
+      const { part: a, asset: image } = variantPart(p, part, id);
+      const centre = point(transform(a.x, a.y, a.rotation, a.scaleX, a.scaleY), (0.5 - a.pivotX) * image.width, (0.5 - a.pivotY) * image.height);
+      const name = id === 'base' ? key : `variant_${id}`;
+      doc.skins[0].attachments[slot][name] = { type: 'region', path: regionName(image), x: r(centre.x), y: r(-centre.y), rotation: r(-a.rotation), scaleX: r(a.scaleX), scaleY: r(a.scaleY), width: image.width, height: image.height };
+    }
   }
   for (const clip of p.clips) {
     const tracks: SpineDocument['animations'][string]['bones'] = {};
@@ -99,7 +104,12 @@ export function exportSpine(p: Project): SpineDocument {
         scale: keys.map(k => ({ ...common(k), x: r(k.scale), y: r(k.scale) })),
       };
     }
-    doc.animations[clip.name] = { bones: tracks };
+    const slots: NonNullable<SpineDocument['animations'][string]['slots']> = {};
+    for (const [partId, keys] of Object.entries(clip.attachments ?? {})) {
+      const part = p.parts.find(v => v.id === partId)!;
+      slots[slotName(partId)] = { attachment: keys.map(k => ({ time: r(k.time), name: k.variantId === null || !part.visible ? null : k.variantId === 'base' ? regionName(p.assets.find(v => v.id === part.assetId)!) : `variant_${k.variantId}` })) };
+    }
+    doc.animations[clip.name] = { bones: tracks, ...(Object.keys(slots).length ? { slots } : {}) };
   }
   return doc;
 }

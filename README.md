@@ -1,56 +1,52 @@
 # AI Spine Pipeline / AI Bone Studio
 
-面向新手的 2D 角色资产流程：AI 设计与补绘 → 透明零件 → 网页拼装 → 骨骼绑定 → 动作 → 游戏资源。
+面向新手的 2D 角色流程：准备角色 → 纯色拆件与检查 → 拼装 → 骨骼 → 表情与动作 → 游戏资源。
 
-## 在线体验
+## V0.3 Beta / 第一阶段
 
-**打开：https://jobsff.github.io/ai-spine-pipeline/**
+在线入口：**https://jobsff.github.io/ai-spine-pipeline/**
 
-手机或电脑浏览器均可访问，无需下载、解压、安装 Node 或登录编辑器。首次体验点击“先试一试练习角色”，进入“做动作”后点击播放。手机可在部件库、画板、属性之间切换。
+页面顶部“角色与拆件 · V0.3”打开新流程。试用不需要 API：拆件检查台 → 试用练习拆件图 → 3列4行网格切分 → 逐件确认 → 送入拼装画板。已有透明 PNG 仍可直接导入旧画板。
 
-当前在线版为 **V0.2 Beta**。V0.3 的角色生成、图片 API、统一纯色抠图和表情换图流程仍是已批准方案，尚未上线。当前编辑功能在浏览器本地处理素材；工程请主动保存，浏览器存储不是跨设备云同步。
+### 本版新增
 
-2026-09-12：GitHub Pages 首次发布成功。网站文件在 `gh-pages` 分支；源码保留在 `main`。`Build web preview` 工作流先运行构建与核心测试，再将静态产物提交到 `site-build`；发布时需将经过检查的产物提交推进到 `gh-pages`，不能把构建成功当成线上已更新。`Check live web preview` 可检查线上 HTTPS 首页及 Chromium 手机视口交互；具体通过情况以对应 Actions 运行记录为准。
+- 角色需求整理、原画上传、采用版本、裁选视图；`.prep.json` 保存独立准备工程。
+- 头像 / 待机拆件清单、语义编号、局部/分组生成提示词。
+- **AI 部件强制纯色背景，不使用模型原生透明。** 浏览器抠图、边缘去色、框选/网格/连通候选、擦除/恢复、归组、逐件确认、透明 PNG ZIP 和画板导入。
+- 真实表情换图：睁闭眼 / 嘴型替换图、对齐、离散关键帧、眨眼模板；预览、保存和 Spine 3.8 导出一致。
+- `apps/gateway`：OpenAI Images / Gemini 原生 / 可配置兼容服务的后端适配，鉴权、持久化任务、去重、限额、未知状态不重试。提供单进程 Node 与 Cloudflare Worker+DO+私有R2 实现。
 
-本次未绑定 Cloudflare 或自定义域名，没有修改 `jyounet.com` 的 DNS。
+**在线能力边界：** GitHub Pages 只托管前端，上传、抠图、拼装、骨骼、表情和导出可本地运行。真实AI生图需要另行部署网关并配置合法可用的供应商密钥；本次没有开通收费服务、没有真实付费调用，也没有把密钥放进网页。角色“生成”入口未配置服务时会明确提示，而不是返回模拟图片。
 
-## 当前版本：编辑器 V0.2 Beta
+### 兼容与未完成项
 
-已实现四步式网页编辑器，以及 Spine 3.8.99 区域贴图 / FK 子集导出。**格式检查与浏览器测试通过，不等于已经通过 Laya / Cocos 项目及真机验收。**
+V0.2工程可迁移打开；V0.3工程包含图片与换图轨道。游戏导出为 Spine 3.8.99 区域贴图 / FK / Attachment子集。Laya/Cocos对应版本的资源加载、真机与平台验收仍需执行，不把格式或浏览器测试叫做引擎认证。
+
+全身七动作只是后续规划，本版没有七套完整动作模板、AI自动拼装、IK、网格权重和动态层级。不把 source_bbox 当成角色初始坐标。半透明、发光与主体撞色仍可能需要手工修复。
+
+## 开发
 
 ```bash
 cd apps/editor
-npm install
+npm install --ignore-scripts
+npm test
 npm run dev
 ```
 
-打开终端显示的本地地址，点“先试一试练习角色”，可直接播放、拖动关节、保存并导出。无需准备人物素材。图片处理与编辑在浏览器本地进行，不上传服务器。
+`npm run build` 输出 `dist/AI-Bone-Studio.html` 单文件。服务端单独运行见 [网关说明](apps/gateway/README.md)。不配置服务端不影响本地编辑。
 
-`npm run build` 还会生成 `apps/editor/dist/AI-Bone-Studio.html` 单文件版本：可复制到电脑，用现代浏览器打开；不依赖外部 CDN。手机推荐访问上方在线地址，不依赖文件预览器执行 HTML。
+## 文档
 
-## 能力与边界
+- [V0.3编辑器使用说明](apps/editor/README.md)
+- [网关部署、密钥与计费边界](apps/gateway/README.md)
+- [V0.3交付与QA](docs/v0.3-release.md)
+- [已批准的范围和不可变生产决策](docs/v0.3-approved-plan.md)
+- [Spine/Laya/Cocos兼容边界](docs/v0.2-compatibility.md)
+- [原有V0.2 QA](docs/v0.2-qa.md)
+- [素材规范](docs/asset-spec.md)
 
-- 拼装：PNG/WebP/部件 ZIP、移动、旋转、缩放、镜像、层级、锁定、旋转点、40 步撤销。
-- 骨骼：点击创建关节链、父子层级、保持位置绑定、调整骨长、父骨带动子骨；一张零件绑定一个骨骼。
-- 动作：多个动作、平移/旋转/等比骨骼缩放、自动关键帧、循环播放、摆动/呼吸模板。
-- 输出：包含图片的 `.project.json`；Spine `.json + .atlas + .png` ZIP；透明 PNG；15fps PNG 序列帧。
-- 未实现：IK、网格与多骨权重、变形、动态换图、曲线编辑器、动态层级、Spine 工程/二进制导出、AI 自动组装。
+`Build web preview` 在 main 更新后测试并生成 site-build 分支；发布时将经过检查的构建推进 gh-pages，再由 GitHub Pages 部署。构建成功不等于线上已更新，发布后需验证 version.json 与线上浏览器。
 
-目标引擎：LayaAir 3.x / Cocos Creator 3.8.x，均使用 Spine 3.8 运行库。不能通过改版本字符串获得 4.x 兼容。PNG 序列帧为备用输出，不是骨骼资源，也不会自动生成引擎动画 clip。
+## 授权与隐私
 
-## 文档与测试
-
-- [编辑器使用说明](apps/editor/README.md)
-- [格式、引擎接入与验收边界](docs/v0.2-compatibility.md)
-- [本次测试记录](docs/v0.2-qa.md)
-- [V0.3 已批准方案](docs/v0.3-approved-plan.md)
-- [早期 AI 拆件流程](docs/workflow.md)
-- [早期素材规范](docs/asset-spec.md)
-
-`npm test` 在编辑器目录执行类型编译与 33 项核心测试。浏览器测试为可选 Python Playwright 脚本，详见编辑器说明。
-
-原有 `scripts/extract_chroma_parts.py` 是早期抠图原型，本次没有把它的结果自动判断为合格动画素材。部件连接、去绿边、命名与隐藏区域仍需复核；源图集中的 `source_bbox` 不是拼好人物的坐标。
-
-## 授权
-
-本工具自己实现二维 FK 编辑与格式输出，没有分发 Spine Runtime。游戏使用 Spine Runtime 时仍须遵守 Esoteric Software 相应授权条款。自行开发编辑器不豁免运行库授权。项目未擅自添加开源许可证；代码及角色素材的对外授权由仓库所有者决定。
+不分发 Spine Runtime，使用游戏运行库仍须遵守相应授权。本仓库未擅自添加开源授权；代码和角色的授权由仓库所有者决定。API Key、网关口令不写入工程；纯本地导入不上传图片。只有明确确认的AI请求才发送对应原画和提示词。公开站点不意味着用户编辑内容自动公开。

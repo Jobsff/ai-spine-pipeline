@@ -1,0 +1,14 @@
+{
+ "name": "ai-bone-studio-gateway",
+ "main": "src/worker.mjs",
+ "compatibility_date": "2026-09-01",
+ "durable_objects": { "bindings": [{ "name": "GENERATION_QUEUE", "class_name": "GenerationQueue" }] },
+ "migrations": [{ "tag": "v1", "new_sqlite_classes": ["GenerationQueue"] }],
+ "r2_buckets": [{ "binding": "JOB_IMAGES", "bucket_name": "ai-bone-studio-private-jobs" }],
+ "vars": {
+  "ALLOWED_ORIGINS": "https://jobsff.github.io",
+  "MAX_JOBS_PER_DAY": "30",
+  "RETENTION_DAYS": "7",
+  "UPSTREAM_TIMEOUT_MS": "180000"
+ }
+}

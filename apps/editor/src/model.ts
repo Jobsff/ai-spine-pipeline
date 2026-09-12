@@ -7,17 +7,23 @@ export interface Bone {
   id: string; name: string; parentId: string | null;
   x: number; y: number; rotation: number; scale: number; length: number; locked: boolean;
 }
+export interface AttachmentVariant {
+  id: string; name: string; assetId: string; x: number; y: number;
+  scaleX: number; scaleY: number; pivotX: number; pivotY: number;
+}
+export interface AttachmentKey { time: number; variantId: string | null }
 export interface Part {
   id: string; name: string; assetId: string; boneId: string;
   x: number; y: number; rotation: number; scaleX: number; scaleY: number;
   pivotX: number; pivotY: number; z: number; opacity: number; visible: boolean; locked: boolean;
+  variants?: AttachmentVariant[];
 }
 /** Animation values are offsets from setup, except scale which is a multiplier. */
 export interface Pose { x: number; y: number; rotation: number; scale: number }
 export interface Keyframe extends Pose { time: number; easing: 'linear' | 'step' }
-export interface Clip { id: string; name: string; duration: number; tracks: Record<string, Keyframe[]> }
+export interface Clip { id: string; name: string; duration: number; tracks: Record<string, Keyframe[]>; attachments?: Record<string, AttachmentKey[]> }
 export interface Project {
-  format: 'ai-bone-studio'; version: '0.2'; name: string;
+  format: 'ai-bone-studio'; version: '0.3'; name: string;
   canvas: { width: number; height: number; originX: number; originY: number };
   assets: Asset[]; parts: Part[]; bones: Bone[]; clips: Clip[];
 }
@@ -33,7 +39,7 @@ export const clamp = (n: number, lo: number, hi: number): number => Math.min(hi,
 
 export function newProject(): Project {
   return {
-    format: 'ai-bone-studio', version: '0.2', name: 'my-character',
+    format: 'ai-bone-studio', version: '0.3', name: 'my-character',
     canvas: { width: 800, height: 720, originX: 400, originY: 570 },
     assets: [], parts: [],
     bones: [{ id: 'root', name: '整体 / 根关节', parentId: null, x: 400, y: 570, rotation: 0, scale: 1, length: 0, locked: false }],
@@ -44,8 +50,8 @@ export function newProject(): Project {
 /** Keep immutable image strings shared between undo snapshots. */
 export function cloneProject(p: Project): Project {
   return { ...p, canvas: { ...p.canvas }, assets: p.assets.map(a => ({ ...a })),
-    parts: p.parts.map(a => ({ ...a })), bones: p.bones.map(b => ({ ...b })),
-    clips: p.clips.map(c => ({ ...c, tracks: Object.fromEntries(Object.entries(c.tracks).map(([id, keys]) => [id, keys.map(k => ({ ...k }))])) })) };
+    parts: p.parts.map(a => ({ ...a, ...(a.variants ? { variants: a.variants.map(v => ({ ...v })) } : {}) })), bones: p.bones.map(b => ({ ...b })),
+    clips: p.clips.map(c => ({ ...c, ...(c.attachments ? { attachments: Object.fromEntries(Object.entries(c.attachments).map(([id, keys]) => [id, keys.map(k => ({ ...k }))])) } : {}), tracks: Object.fromEntries(Object.entries(c.tracks).map(([id, keys]) => [id, keys.map(k => ({ ...k }))])) })) };
 }
 
 export function multiply(a: Matrix, b: Matrix): Matrix {
@@ -132,6 +138,7 @@ export function movePivot(p: Project, partId: string, px: number, py: number): v
   const asset = p.assets.find(a => a.id === part.assetId)!;
   const delta = point(transform(0, 0, part.rotation, part.scaleX, part.scaleY),
     (px - part.pivotX) * asset.width, (py - part.pivotY) * asset.height);
+  for(const v of part.variants ?? []) { v.x -= (px-part.pivotX)*asset.width; v.y -= (py-part.pivotY)*asset.height; }
   part.x += delta.x; part.y += delta.y; part.pivotX = px; part.pivotY = py;
 }
 export function hasKeys(p: Project): boolean { return p.clips.some(c => Object.values(c.tracks).some(k => k.length > 0)); }
@@ -187,7 +194,7 @@ function unique(items: { id: string }[], name: string): void { requireValue(new 
 export function parseProject(data: unknown): Project {
   requireValue(object(data), '这不是工程文件。');
   if (data.version === '0.1') throw new Error('V0.1 工程没有保存图片，不能完整还原。请重新导入原 PNG，在本版本重新保存。');
-  requireValue(data.format === 'ai-bone-studio' && data.version === '0.2', '仅支持 AI Bone Studio V0.2 工程；Spine JSON 是游戏资源，不是编辑工程。');
+  requireValue(data.format === 'ai-bone-studio' && (data.version === '0.2' || data.version === '0.3'), '仅支持 AI Bone Studio V0.2 / V0.3 工程；Spine JSON 是游戏资源，不是编辑工程。');
   requireValue(string(data.name) && object(data.canvas), '工程名称或画板信息缺失。');
   const c = data.canvas;
   requireValue(finite(c.width) && finite(c.height) && Number.isInteger(c.width) && Number.isInteger(c.height) && c.width >= 64 && c.height >= 64 && c.width <= 4096 && c.height <= 4096 && finite(c.originX) && finite(c.originY), '画板尺寸必须为 64～4096 像素。');
@@ -222,7 +229,32 @@ export function parseProject(data: unknown): Project {
       }
     }
   }
-  const p = data as unknown as Project;
+  const p = { ...data, version: '0.3' } as unknown as Project;
+  for (const part of p.parts) {
+    if (part.variants !== undefined) {
+      requireValue(list(part.variants) && part.variants.length <= 32, '替换图最多 32 项。');
+      unique(part.variants, '替换图');
+      for (const v of part.variants) {
+        requireValue(object(v), '替换图格式无效。'); checkId(v.id); checkId(v.assetId);
+        requireValue(v.id !== 'base' && string(v.name) && p.assets.some(a => a.id === v.assetId), '替换图名称或图片引用无效。');
+        requireValue(['x','y','scaleX','scaleY','pivotX','pivotY'].every(k => finite(v[k])), '替换图对齐数值无效。');
+        requireValue(Math.abs(v.scaleX) >= .001 && Math.abs(v.scaleY) >= .001 && Math.abs(v.scaleX) <= 100 && Math.abs(v.scaleY) <= 100 && Math.abs(v.x) < 100000 && Math.abs(v.y) < 100000 && v.pivotX >= 0 && v.pivotX <= 1 && v.pivotY >= 0 && v.pivotY <= 1, '替换图对齐范围无效。');
+      }
+    }
+  }
+  for (const clip of p.clips) {
+    if (clip.attachments === undefined) continue;
+    requireValue(object(clip.attachments) && Object.keys(clip.attachments).length <= 512, '换图轨道格式无效。');
+    for (const [partId, keys] of Object.entries(clip.attachments)) {
+      checkId(partId); const part = p.parts.find(a => a.id === partId);
+      requireValue(part && Array.isArray(keys) && keys.length <= 3600, '换图轨道引用丢失的部件或过长。');
+      let last = -1;
+      for (const k of keys) {
+        requireValue(object(k) && finite(k.time) && k.time > last && k.time >= 0 && k.time <= clip.duration, '换图帧必须按时间排列、在动作内且无重复。');
+        requireValue(k.variantId === null || k.variantId === 'base' || part.variants?.some(v => v.id === k.variantId), '换图帧引用不存在的替换图。'); last = k.time;
+      }
+    }
+  }
   unique(p.assets, '素材'); unique(p.parts, '部件'); unique(p.bones, '关节'); unique(p.clips, '动作');
   requireValue(p.bones.length > 0 && p.bones.filter(b => b.parentId === null).length === 1 && p.bones.some(b => b.id === 'root' && b.parentId === null), '工程必须恰好有一个 root 根关节。');
   sortedBones(p);
@@ -232,5 +264,56 @@ export function parseProject(data: unknown): Project {
   const worlds = worldBones(p);
   for (const m of worlds.values()) requireValue(m.every(v => Number.isFinite(v) && Math.abs(v) <= 1e9), '骨架世界变换超出安全范围。');
   for (const a of p.parts) requireValue(partCorners(a, p.assets.find(v => v.id === a.assetId)!, worlds).every(v => Number.isFinite(v.x) && Number.isFinite(v.y) && Math.abs(v.x) <= 1e9 && Math.abs(v.y) <= 1e9), '部件世界变换超出安全范围。');
-  return cloneProject(p);
+  for (const a of p.parts) for (const v of a.variants ?? []) {const q=variantPart(p,a,v.id);requireValue(partCorners(q.part,q.asset,worlds).every(v=>Number.isFinite(v.x)&&Number.isFinite(v.y)&&Math.abs(v.x)<=1e9&&Math.abs(v.y)<=1e9),'替换图世界变换超出安全范围。');}
+  // Only editor fields leave the importer. Unexpected credentials/provider config
+  // in a hand-edited document must not be copied into project exports.
+  const clean: Project = {
+    format: 'ai-bone-studio', version: '0.3', name: p.name,
+    canvas: { width:p.canvas.width,height:p.canvas.height,originX:p.canvas.originX,originY:p.canvas.originY },
+    assets: p.assets.map(({id,name,width,height,dataUrl,hasAlpha})=>({id,name,width,height,dataUrl,hasAlpha})),
+    bones: p.bones.map(({id,name,parentId,x,y,rotation,scale,length,locked})=>({id,name,parentId,x,y,rotation,scale,length,locked})),
+    parts: p.parts.map(({id,name,assetId,boneId,x,y,rotation,scaleX,scaleY,pivotX,pivotY,z,opacity,visible,locked,variants})=>({
+      id,name,assetId,boneId,x,y,rotation,scaleX,scaleY,pivotX,pivotY,z,opacity,visible,locked,
+      ...(variants?{variants:variants.map(({id,name,assetId,x,y,scaleX,scaleY,pivotX,pivotY})=>({id,name,assetId,x,y,scaleX,scaleY,pivotX,pivotY}))}:{})
+    })),
+    clips: p.clips.map(({id,name,duration,tracks,attachments})=>({id,name,duration,
+      tracks:Object.fromEntries(Object.entries(tracks).map(([id,keys])=>[id,keys.map(({time,x,y,rotation,scale,easing})=>({time,x,y,rotation,scale,easing}))])),
+      ...(attachments?{attachments:Object.fromEntries(Object.entries(attachments).map(([id,keys])=>[id,keys.map(({time,variantId})=>({time,variantId}))]))}:{})
+    }))
+  };
+  return clean;
+}
+
+/** Discrete attachment state. 'base' is the setup image; null hides the slot. */
+export function sampleAttachment(clip: Clip | undefined, partId: string, time: number): string | null {
+  let state: string | null = 'base';
+  for (const key of clip?.attachments?.[partId] ?? []) { if (key.time > time) break; state = key.variantId; }
+  return state;
+}
+export function setAttachmentKey(clip: Clip, part: Part, time: number, variantId: string | null): void {
+  if (!Number.isFinite(time) || time < 0 || time > clip.duration) throw new Error('换图时间超出动作时长。');
+  if (variantId !== null && variantId !== 'base' && !part.variants?.some(v => v.id === variantId)) throw new Error('替换图片不存在。');
+  clip.attachments ??= {};
+  const keys = (clip.attachments[part.id] ?? []).filter(k => Math.abs(k.time - time) > .00001);
+  keys.push({ time, variantId }); keys.sort((a,b) => a.time - b.time); clip.attachments[part.id] = keys;
+}
+export function variantPart(p: Project, part: Part, variantId: string): { part: Part; asset: Asset } {
+  if (variantId === 'base') return { part, asset: p.assets.find(a => a.id === part.assetId)! };
+  const v = part.variants?.find(v => v.id === variantId);
+  if (!v) throw new Error('替换图片不存在。');
+  const delta = point(transform(0, 0, part.rotation, part.scaleX, part.scaleY), v.x, v.y);
+  return { part: { ...part, assetId: v.assetId, x: part.x + delta.x, y: part.y + delta.y,
+    scaleX: part.scaleX * v.scaleX, scaleY: part.scaleY * v.scaleY, pivotX: v.pivotX, pivotY: v.pivotY }, asset: p.assets.find(a => a.id === v.assetId)! };
+}
+export function addVariant(p: Project, partId: string, assetId: string, name: string): string {
+  const part = p.parts.find(a => a.id === partId);
+  if (!part || !p.assets.some(a => a.id === assetId)) throw new Error('请选择部件与图片。');
+  const id = uid('variant'); part.variants ??= [];
+  if (part.variants.length >= 32) throw new Error('一个部件最多 32 个替换图。');
+  part.variants.push({ id, name: name.slice(0,120) || '替换图', assetId, x: 0, y: 0, scaleX: 1, scaleY: 1, pivotX: .5, pivotY: .5 }); return id;
+}
+export function blink(p: Project, clip: Clip, partId: string, closedId: string): void {
+  const part = p.parts.find(a => a.id === partId); if (!part) throw new Error('请先选择眼睛部件。');
+  clip.attachments ??= {}; clip.attachments[partId] = [];
+  for (const [f, id] of [[0,'base'],[.42,closedId],[.5,'base'],[1,'base']] as [number,string][]) setAttachmentKey(clip, part, clip.duration * f, id);
 }

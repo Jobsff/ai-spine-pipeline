@@ -11,7 +11,7 @@ await copyFile('index.html', 'dist/index.html');
 await copyFile('src/styles.css', 'dist/styles.css');
 // Use the TypeScript parser rather than regex so code examples inside strings
 // are preserved. Only local modules from this explicit allowlist are bundled.
-const names = ['model', 'zip', 'spine', 'images', 'io', 'app'];
+const names = ['model', 'zip', 'spine', 'images', 'io', 'chroma', 'production', 'preparation-ui', 'app'];
 const chunks = ['(()=>{const factories=Object.create(null), cache=Object.create(null);'];
 for (const name of names) {
   const source = await readFile(`dist/${name}.js`, 'utf8');
