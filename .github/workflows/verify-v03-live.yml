@@ -1,0 +1,58 @@
+name: Verify live V0.3 editor
+on:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/verify-v03-live.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22.16.0
+      - name: Verify live version and HTTPS homepage
+        run: |
+          set -euo pipefail
+          curl --fail --silent --show-error --retry 3 "https://jobsff.github.io/ai-spine-pipeline/version.json?check=$GITHUB_RUN_ID" > "$RUNNER_TEMP/live-version.json"
+          node --input-type=module <<'JS'
+          import {readFileSync} from 'node:fs';
+          const expected=JSON.parse(readFileSync('apps/editor/package.json')).version;
+          const live=JSON.parse(readFileSync(`${process.env.RUNNER_TEMP}/live-version.json`));
+          if(live.editorVersion!==expected || !/^[0-9a-f]{40}$/.test(live.sourceCommit))throw Error(`Unexpected live version: ${JSON.stringify(live)}`);
+          console.log('Live version verified:',JSON.stringify(live));
+          JS
+          curl --fail --silent --show-error --retry 3 "https://jobsff.github.io/ai-spine-pipeline/?check=$GITHUB_RUN_ID" > "$RUNNER_TEMP/live-home.html"
+          grep -q 'id="prepare"' "$RUNNER_TEMP/live-home.html"
+          grep -q 'V0.3' "$RUNNER_TEMP/live-home.html"
+      - name: Build local reference for test fixtures
+        working-directory: apps/editor
+        run: |
+          npm install --ignore-scripts --no-package-lock --no-audit --no-fund
+          npm run build
+      - name: Install browser tooling
+        run: |
+          python -m pip install --disable-pip-version-check playwright==1.55.0 pillow
+          python -m playwright install --with-deps chromium
+          python - <<'PY' >> "$GITHUB_ENV"
+          from playwright.sync_api import sync_playwright
+          with sync_playwright() as p: print('CHROMIUM='+p.chromium.executable_path)
+          PY
+      - name: Test live preparation, chroma, expression export and mobile persistence
+        env:
+          LIVE_URL: https://jobsff.github.io/ai-spine-pipeline/
+          QA_OUT: ${{ runner.temp }}/v03-live-qa
+        run: python apps/editor/tests/v03_browser.py
+      - name: Preserve evidence (mock generation, no paid provider calls)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: v03-live-browser-qa
+          path: |
+            ${{ runner.temp }}/v03-live-qa/
+            ${{ runner.temp }}/live-version.json
+          retention-days: 7
