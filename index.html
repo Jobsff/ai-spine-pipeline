@@ -1,0 +1,2111 @@
+<!doctype html>
+<html lang="zh-CN">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><meta name="theme-color" content="#141725"><title>AI Bone Studio · 新手角色动画工坊</title><style>:root{font-family:Inter,"PingFang SC","Microsoft YaHei",system-ui,sans-serif;color:#e9eaf4;background:#10131e;font-synthesis:none;font-size:13px;--border:#2b2f43;--muted:#999eb9;--accent:#b9a3ff;--panel:#181c2b;--teal:#70e4c5}*{box-sizing:border-box}body{margin:0;min-width:320px}button,input,select{font:inherit}button,select{cursor:pointer}button{border:1px solid var(--border);border-radius:8px;background:#24293b;color:#e9eaf4;padding:8px 12px;min-height:34px;transition:background .13s,border-color .13s}button:hover{background:#343a52;border-color:#5b5378}button:focus-visible,input:focus-visible,select:focus-visible,canvas:focus-visible{outline:2px solid var(--accent);outline-offset:2px}button:disabled{opacity:.36;cursor:not-allowed}button.primary,.primary{background:var(--accent);color:#21143f;border-color:var(--accent);font-weight:700}button.primary:hover{background:#cbbbff}input,select{color:inherit;background:#101521;border:1px solid var(--border);border-radius:7px;padding:7px 9px;min-width:0;min-height:34px}input[type=range]{padding:0;accent-color:var(--accent);border:0;background:transparent;min-height:30px;width:100%}input[type=checkbox]{min-height:0;accent-color:var(--accent)}.topbar{min-height:78px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:24px;padding:16px 22px;background:#141725}.brand{text-decoration:none;display:flex;gap:11px;align-items:center;color:inherit;white-space:nowrap}.brand-mark{background:#b69cf6;color:#26184c;width:42px;height:42px;border-radius:13px;display:grid;place-items:center;font-size:29px}.brand strong{font-size:17px;letter-spacing:-.4px}.brand small{display:block;color:var(--muted);font-size:11px;margin-top:4px}.brand em{font-style:normal;font-size:10px;background:#34304b;border-radius:4px;padding:1px 5px;color:#c5b2fc}.name-label{display:flex;flex-direction:column;gap:3px;color:var(--muted);font-size:10px}.name-label input{width:170px;background:none;border-color:transparent;font-size:13px;padding:2px 0;min-height:24px}.header-actions{display:flex;gap:8px;margin-left:auto}.steps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;padding:13px 22px;background:#171a29;border-bottom:1px solid var(--border)}.steps button{display:flex;text-align:left;gap:11px;align-items:center;background:transparent;border:1px solid transparent;padding:8px 12px}.steps button b{border:1px solid #41455f;width:28px;height:28px;border-radius:50%;display:grid;place-items:center;font-size:12px;color:var(--muted);flex-shrink:0}.steps button span{font-weight:600}.steps small{display:block;font-size:10px;color:var(--muted);margin-top:4px;font-weight:400}.steps button.active{background:#2c2640;border-color:#5b4979}.steps button.active b{background:var(--accent);border-color:var(--accent);color:#241840}.studio{height:calc(100dvh - 189px);min-height:560px;display:grid;grid-template-columns:232px minmax(360px,1fr) 274px;overflow:hidden}.panel{padding:17px 14px;background:var(--panel);overflow:auto}.library{border-right:1px solid var(--border);display:flex;flex-direction:column}.inspector{border-left:1px solid var(--border)}.panel-heading{display:flex;align-items:center;justify-content:space-between;margin:0 0 14px}.panel-heading h2{font-size:12px;letter-spacing:.3px;margin:0}.badge{color:var(--muted);background:#292e41;padding:3px 7px;border-radius:6px;font-size:10px}.import-button{width:100%;border-style:dashed;color:#d4c4ff;background:#25213a;min-height:44px}.micro{font-size:10px;color:var(--muted);line-height:1.7;margin:9px 0 14px}.parts-list{max-height:37vh;overflow:auto;flex-shrink:0}.part-row{display:flex;align-items:center;gap:8px;border:1px solid transparent;border-radius:8px;padding:6px;margin-bottom:4px;cursor:pointer;min-height:43px}.part-row:hover,.bone-row:hover{background:#242b3d}.part-row.selected,.bone-row.selected{background:#332b4b;border-color:#8b71b7}.part-row .thumb{height:34px;width:34px;flex-shrink:0;background:repeating-conic-gradient(#444653 0 25%,#373b47 0 50%) 0 / 8px 8px;border-radius:6px;display:grid;place-items:center;overflow:hidden}.thumb img{max-width:100%;max-height:100%;object-fit:contain}.part-name{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:11px;flex:1}.row-tools{display:flex;gap:1px}.row-tools button{border:0;background:none;padding:4px;min-height:26px;color:var(--muted);font-size:12px}.bone-heading{border-top:1px solid var(--border);padding-top:18px;margin-top:18px}.bone-heading button{padding:3px 7px;min-height:24px;font-size:10px}.bones-list{flex:1;overflow:auto;min-height:60px}.bone-row{width:100%;border:1px solid transparent;border-radius:6px;min-height:33px;text-align:left;background:none;display:flex;align-items:center;gap:6px;padding:7px;font-size:11px;white-space:nowrap}.bone-row i{color:var(--teal);font-style:normal}.bone-row span{overflow:hidden;text-overflow:ellipsis}.demo-button{margin-top:18px;text-align:left;display:flex;align-items:center;gap:10px;background:#232940;border-color:#343e59;line-height:1.8;flex-shrink:0}.demo-button>span:first-child{font-size:27px;color:var(--accent)}.demo-button strong{display:block;font-size:10px;color:#d2c5fb}.workspace{display:flex;flex-direction:column;overflow:hidden;background:#101521;position:relative}.canvas-toolbar{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:10px 12px;border-bottom:1px solid var(--border);background:#191e2d;flex-shrink:0;flex-wrap:wrap}.tools{display:flex;gap:5px}.tools button{font-size:11px;min-height:30px;padding:6px 8px}.tools select{font-size:10px;width:62px;min-height:30px;padding:3px}.tools button.selected{background:#403458;border-color:#776094;color:#e4d4ff}.mode-hint{background:#192635;color:#a4c7d9;padding:10px 16px;font-size:11px;line-height:1.7;min-height:39px;flex-shrink:0}.canvas-scroll{overflow:auto;flex:1;min-height:200px;position:relative;display:flex}.canvas-wrap{padding:24px;margin:auto;flex-shrink:0}canvas#board{display:block;touch-action:none;background:repeating-conic-gradient(#e6e8ef 0 25%,#f3f4f8 0 50%) 0 / 20px 20px;box-shadow:0 5px 30px #0006;border-radius:3px}.empty-state{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;background:#111624eF;padding:25px;color:#e7e2fa;z-index:1}.empty-state[hidden]{display:none}.empty-star{font-size:62px;color:#bbaaeb;line-height:1.1}.empty-state h1{font-size:24px;letter-spacing:-.5px;margin:20px 0 2px}.empty-state p{color:var(--muted);font-size:12px;line-height:1.9;margin-bottom:20px}.empty-state button{min-width:190px;margin-bottom:10px;min-height:40px}.inspector h3{font-size:14px;margin:5px 0 14px}.help-card{padding:16px 12px;border:1px solid #3b3453;background:#272139;border-radius:10px;line-height:1.9;color:#c9bddf;margin:8px 0 17px;font-size:12px}.help-card strong{color:#e8dfff;display:block;margin-bottom:6px}.step-card{padding:12px 0;border-bottom:1px solid var(--border);line-height:1.8;font-size:12px;color:var(--muted)}.step-card b{display:block;color:#d9def0;font-size:12px}.property{display:flex;flex-direction:column;gap:7px;margin-bottom:15px;font-size:11px;color:var(--muted)}.property>span{display:flex;justify-content:space-between}.property b{color:#e7e7f5;font-weight:500}.property input:not([type=range]),.property select{width:100%;font-size:12px}.property-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}.property-row .property{min-width:0}.property-group{border-top:1px solid var(--border);padding-top:16px;margin-top:18px}.button-row{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0}.button-row button{flex:1;font-size:11px;padding:8px 9px}.danger{color:#ffa7b5;border-color:#653748;background:#32232f}.warning{color:#e7ca93;background:#302a24;border:1px solid #524531;border-radius:8px;padding:11px;font-size:11px;line-height:1.8;margin:11px 0}.error{color:#ffc2c7;border-color:#794655;background:#34202c}.success{color:#83e2c5;border-color:#326656;background:#1e342f}.full{width:100%;margin-bottom:9px;min-height:40px}.metric{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin:12px 0}.metric div{background:#111522;border:1px solid var(--border);border-radius:8px;padding:10px 4px;text-align:center}.metric b{display:block;color:#e2d4ff;font-size:20px}.metric span{font-size:10px;color:var(--muted)}.timeline{background:#1b2030;border-top:1px solid var(--border);padding:12px 14px;flex-shrink:0}.timeline[hidden]{display:none}.timeline-top{display:flex;align-items:center;gap:8px;flex-wrap:wrap}.timeline-top label{display:flex;align-items:center;gap:5px;color:var(--muted);font-size:11px}.timeline-top button{padding:6px 8px;font-size:11px}.timeline .play{background:#bba6f2;color:#271a44;border-color:#bba6f2;font-weight:700;min-width:66px}.timeline select{max-width:110px;padding:5px;min-height:30px}.timeline input[type=number]{width:53px;min-height:30px;padding:5px}.auto-key{font-size:10px;color:#e8aebd;margin-left:auto}.time-row{display:flex;gap:10px;align-items:center;margin-top:7px;color:var(--muted);font-variant-numeric:tabular-nums;font-size:10px}.time-row>span{min-width:44px}.keys{height:32px;position:relative;margin:0 51px;border-top:1px solid #42475d;background:linear-gradient(90deg,#30364b 1px,transparent 1px) 0 / 25% 100%}.key{position:absolute;top:2px;transform:translateX(-50%);min-height:24px;width:22px;padding:0;background:none;border:0;color:#c7acf9}.key.on{color:#72f2c9;font-size:17px}.timeline-bottom{display:flex;justify-content:flex-end;gap:6px;align-items:center}.timeline-bottom span{margin-right:auto;color:var(--muted);font-size:10px;max-width:55%;white-space:nowrap;text-overflow:ellipsis;overflow:hidden}.timeline-bottom button{font-size:10px;min-height:27px;padding:5px 7px}footer{display:flex;justify-content:space-between;padding:10px 16px;background:#141825;border-top:1px solid var(--border);gap:10px;min-height:36px;font-size:10px;color:var(--muted)}footer b{font-weight:400;color:var(--teal);margin-left:8px}.toast{position:fixed;bottom:48px;left:50%;transform:translateX(-50%);background:#34304d;border:1px solid #87759f;border-radius:10px;padding:13px 20px;max-width:min(700px,90vw);z-index:30;box-shadow:0 7px 40px #0008;color:#f5eeff;line-height:1.8;font-size:13px}.toast[hidden]{display:none}.resume{padding:10px 22px;background:#2b2640;display:flex;align-items:center;gap:12px;border-bottom:1px solid #5a4a75}.resume[hidden]{display:none}.resume button{font-size:11px}.mobile-tabs{display:none}.loading .studio,.loading .header-actions,.loading .steps{pointer-events:none;opacity:.7}.checklist{font-size:11px;line-height:1.8;padding:0;margin:12px 0}.check-item{padding:8px 0;border-bottom:1px solid var(--border);color:#b1b8d3}.check-item strong{color:var(--teal)}[hidden]{display:none!important}
+@media(min-width:1650px){.studio{grid-template-columns:255px minmax(480px,1fr) 294px}.panel{padding:20px}}
+@media(max-width:1100px){.studio{grid-template-columns:195px minmax(270px,1fr) 235px}.topbar{gap:15px;padding:14px}.name-label{display:none}.steps{padding:10px}.steps small{font-size:9px}.tools button{padding:6px}.panel{padding:14px 10px}.footer-right{display:none}.auto-key{display:none}}
+@media(max-width:780px){.topbar{flex-wrap:wrap;gap:10px;padding:12px}.brand strong{font-size:15px}.brand-mark{width:34px;height:34px;border-radius:9px;font-size:24px}.brand small{font-size:9px}.header-actions{gap:5px}.header-actions button{padding:8px;font-size:11px;min-height:38px}.header-actions #new{display:none}.steps{gap:3px;padding:8px 6px}.steps button{gap:5px;padding:8px 3px;justify-content:center}.steps button b{width:21px;height:21px;font-size:10px}.steps span{font-size:11px}.steps small{display:none}.mobile-tabs{display:flex;padding:6px 10px;background:#151a28;gap:8px}.mobile-tabs button{flex:1;min-height:38px;font-size:11px}.mobile-tabs button.active{color:#d8c3ff;background:#332941;border-color:#66517d}.studio{display:block;height:calc(100dvh - 210px);min-height:450px}.panel,.workspace{height:100%}.studio[data-pane=canvas]>.panel{display:none}.studio[data-pane=library]>.workspace,.studio[data-pane=library]>.inspector{display:none}.studio[data-pane=inspector]>.workspace,.studio[data-pane=inspector]>.library{display:none}.canvas-toolbar{padding:6px 8px;gap:5px}.tools{gap:4px}.tools button{min-height:34px;padding:7px;font-size:10px}.tools #zoom{display:none}.mode-hint{padding:8px 12px;font-size:10px}.canvas-wrap{padding:12px}.panel{padding:18px}.parts-list{max-height:42vh}.part-row{min-height:51px}.part-name{font-size:13px}.bone-row{min-height:42px;font-size:12px}.timeline{padding:9px}.timeline-top{gap:5px}.timeline-top button{min-height:34px}.timeline .duration-label{margin-left:auto}.timeline-top label{font-size:10px}.timeline-top #delete-clip{font-size:9px}.timeline-bottom span{max-width:40%}.timeline-bottom button{min-height:34px}.empty-state h1{font-size:21px}.empty-state p{font-size:11px}.empty-star{font-size:46px}.resume{padding:10px;flex-wrap:wrap;font-size:11px}footer{font-size:9px;padding:9px}.property input,.property select,.button-row button{min-height:40px}.toast{bottom:40px;font-size:12px}.panel-heading h2{font-size:14px}}
+@media(max-width:410px){.topbar{gap:7px}.brand strong{font-size:13px}.brand-mark{display:none}.header-actions{gap:4px}.header-actions button{font-size:10px;padding:7px}.canvas-toolbar .tools{gap:3px}.tools button{padding:6px}.steps button{gap:3px}.steps button b{width:18px;height:18px}.steps span{font-size:10px}.timeline-top #delete-clip{display:none}}
+</style></head>
+<body>
+<header class="topbar">
+  <a class="brand" href="#" aria-label="AI Bone Studio 首页"><span class="brand-mark">✦</span><span><strong>AI Bone Studio</strong><small>角色动画工坊 <em>0.2</em></small></span></a>
+  <label class="name-label"><span>当前工程</span><input id="project-name" maxlength="80" aria-label="工程名称" value="my-character"></label>
+  <div class="header-actions"><button id="new">新建</button><button id="open">打开工程</button><button id="save">保存工程</button><button id="go-export" class="primary">导出资源 ↗</button></div>
+</header>
+<nav class="steps" aria-label="制作流程">
+  <button data-mode="assemble" class="active"><b>1</b><span>拼装角色<small>把零件放到合适的位置</small></span></button>
+  <button data-mode="rig"><b>2</b><span>连接关节<small>让零件跟着骨骼走</small></span></button>
+  <button data-mode="animate"><b>3</b><span>制作动作<small>摆姿势，自动记住</small></span></button>
+  <button data-mode="export"><b>4</b><span>导出到游戏<small>Laya / Cocos · Spine 3.8</small></span></button>
+</nav>
+<div id="resume" class="resume" hidden><span>发现上次保存在此浏览器的工程。</span><button id="restore">恢复上次工程</button><button id="dismiss-resume">忽略</button></div>
+<nav class="mobile-tabs" aria-label="切换面板"><button data-pane="library">部件 / 关节</button><button data-pane="canvas" class="active">画板</button><button data-pane="inspector">属性 / 导出</button></nav>
+<div id="studio" class="studio" data-pane="canvas">
+  <aside class="library panel">
+    <div class="panel-heading"><h2>我的零件</h2><span id="part-count" class="badge">0</span></div>
+    <button id="import" class="import-button">＋ 导入 PNG / 部件 ZIP</button><p class="micro">支持多选、拖入；图片只在本机处理。</p>
+    <div id="parts-list" class="parts-list"></div>
+    <div class="panel-heading bone-heading"><h2>关节树</h2><button id="clear-selection" title="选择整体根关节">选根</button></div>
+    <div id="bones-list" class="bones-list"></div>
+    <button id="demo" class="demo-button"><span>✧</span><span>还没有素材？<strong>打开会挥手的练习角色 →</strong></span></button>
+  </aside>
+  <main class="workspace">
+    <div class="canvas-toolbar"><div class="tools"><button id="select-tool" class="selected" title="选择和拖动">↖ 选择</button><button id="draw-tool" title="依次点击肩、肘、腕；Esc 结束">⌁ 画关节链</button><button id="bind-tool">⊕ 绑定零件</button></div><div class="tools"><button id="undo" title="撤销 Ctrl/Cmd+Z">↶</button><button id="redo" title="重做 Ctrl/Cmd+Shift+Z">↷</button><button id="fit">适合画板</button><select id="zoom" aria-label="画板缩放"><option value="0.35">35%</option><option value="0.5">50%</option><option value="0.75">75%</option><option value="1">100%</option><option value="1.5">150%</option></select></div></div>
+    <div id="mode-hint" class="mode-hint"></div>
+    <div id="canvas-scroll" class="canvas-scroll"><div class="canvas-wrap"><canvas id="board" width="800" height="720" tabindex="0" role="img" aria-label="角色拼装与骨骼编辑画板。也可通过右侧数字属性精确调整。"></canvas></div><div id="empty-state" class="empty-state"><span class="empty-star">✦</span><h1>让你的角色，动起来。</h1><p>先导入拆好的透明 PNG，或打开练习角色。<br>不用认识复杂术语，跟着上面四步走。</p><button id="empty-import" class="primary">导入我的零件</button><button id="empty-demo">先试一试练习角色</button></div></div>
+    <section id="timeline" class="timeline" hidden>
+      <div class="timeline-top"><button id="play" class="play">▶ 播放</button><label>动作 <select id="clip" aria-label="选择动作"></select></label><button id="add-clip" title="新建动作">＋</button><button id="delete-clip" title="删除当前动作">删除动作</button><label class="duration-label">时长 <input id="duration" type="number" min="0.1" max="60" step="0.1" value="2"> 秒</label><span class="auto-key">● 自动记帧</span></div>
+      <div class="time-row"><span id="time-label">0.00 s</span><input id="time" type="range" min="0" max="2" step="0.0333333333" value="0" aria-label="动画时间"><span id="time-end">2.00 s</span></div>
+      <div id="keys" class="keys" aria-label="当前关节关键帧"></div>
+      <div class="timeline-bottom"><span id="track-label">选择关节后，转动它就会记住姿势。</span><button id="add-key">记住此刻姿势</button><button id="delete-key">删除此帧</button></div>
+    </section>
+  </main>
+  <aside class="inspector panel"><div class="panel-heading"><h2 id="inspector-title">操作向导</h2><span class="badge">✦</span></div><div id="properties"></div></aside>
+</div>
+<footer><span id="status" role="status" aria-live="polite">准备就绪 · 支持鼠标与单指拖动</span><span class="footer-right">本地自动保存 ≠ 下载备份 <b id="save-state">尚未修改</b></span></footer>
+<div id="toast" class="toast" role="alert" hidden></div>
+<input id="image-input" type="file" accept="image/png,image/webp,.zip" multiple hidden><input id="project-input" type="file" accept=".json,.zip" hidden>
+<script>(()=>{const factories=Object.create(null), cache=Object.create(null);
+factories['./model.js']=(module,exports,require)=>{
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.clamp = exports.normalizeAngle = exports.degrees = exports.radians = exports.uid = exports.restPose = exports.identity = void 0;
+exports.newProject = newProject;
+exports.cloneProject = cloneProject;
+exports.multiply = multiply;
+exports.transform = transform;
+exports.point = point;
+exports.inverse = inverse;
+exports.sortedBones = sortedBones;
+exports.sampleTrack = sampleTrack;
+exports.worldBones = worldBones;
+exports.partMatrix = partMatrix;
+exports.partCorners = partCorners;
+exports.bindPart = bindPart;
+exports.movePivot = movePivot;
+exports.hasKeys = hasKeys;
+exports.reparentBone = reparentBone;
+exports.deleteBone = deleteBone;
+exports.addBone = addBone;
+exports.setKey = setKey;
+exports.parseProject = parseProject;
+exports.identity = [1, 0, 0, 1, 0, 0];
+const restPose = () => ({ x: 0, y: 0, rotation: 0, scale: 1 });
+exports.restPose = restPose;
+const uid = (prefix) => `${prefix}_${Array.from(crypto.getRandomValues(new Uint8Array(12)), v => v.toString(16).padStart(2, '0')).join('')}`;
+exports.uid = uid;
+const radians = (n) => n * Math.PI / 180;
+exports.radians = radians;
+const degrees = (n) => n * 180 / Math.PI;
+exports.degrees = degrees;
+const normalizeAngle = (n) => ((n + 180) % 360 + 360) % 360 - 180;
+exports.normalizeAngle = normalizeAngle;
+const clamp = (n, lo, hi) => Math.min(hi, Math.max(lo, n));
+exports.clamp = clamp;
+function newProject() {
+    return {
+        format: 'ai-bone-studio', version: '0.2', name: 'my-character',
+        canvas: { width: 800, height: 720, originX: 400, originY: 570 },
+        assets: [], parts: [],
+        bones: [{ id: 'root', name: '整体 / 根关节', parentId: null, x: 400, y: 570, rotation: 0, scale: 1, length: 0, locked: false }],
+        clips: [{ id: 'idle', name: 'idle', duration: 2, tracks: {} }],
+    };
+}
+/** Keep immutable image strings shared between undo snapshots. */
+function cloneProject(p) {
+    return { ...p, canvas: { ...p.canvas }, assets: p.assets.map(a => ({ ...a })),
+        parts: p.parts.map(a => ({ ...a })), bones: p.bones.map(b => ({ ...b })),
+        clips: p.clips.map(c => ({ ...c, tracks: Object.fromEntries(Object.entries(c.tracks).map(([id, keys]) => [id, keys.map(k => ({ ...k }))])) })) };
+}
+function multiply(a, b) {
+    return [a[0] * b[0] + a[2] * b[1], a[1] * b[0] + a[3] * b[1],
+        a[0] * b[2] + a[2] * b[3], a[1] * b[2] + a[3] * b[3],
+        a[0] * b[4] + a[2] * b[5] + a[4], a[1] * b[4] + a[3] * b[5] + a[5]];
+}
+function transform(x, y, rotation = 0, sx = 1, sy = sx) {
+    const c = Math.cos((0, exports.radians)(rotation)), s = Math.sin((0, exports.radians)(rotation));
+    return [c * sx, s * sx, -s * sy, c * sy, x, y];
+}
+function point(m, x, y) {
+    return { x: m[0] * x + m[2] * y + m[4], y: m[1] * x + m[3] * y + m[5] };
+}
+function inverse(m) {
+    const d = m[0] * m[3] - m[1] * m[2];
+    if (!Number.isFinite(d) || Math.abs(d) < 1e-10)
+        throw new Error('变换不可逆：缩放不能为 0。');
+    return [m[3] / d, -m[1] / d, -m[2] / d, m[0] / d,
+        (m[2] * m[5] - m[3] * m[4]) / d, (m[1] * m[4] - m[0] * m[5]) / d];
+}
+function sortedBones(p) {
+    const all = new Map(p.bones.map(b => [b.id, b]));
+    const result = [], visiting = new Set(), done = new Set();
+    function visit(b) {
+        if (done.has(b.id))
+            return;
+        if (visiting.has(b.id))
+            throw new Error('骨骼父子关系出现循环。');
+        visiting.add(b.id);
+        if (b.parentId !== null) {
+            const parent = all.get(b.parentId);
+            if (!parent)
+                throw new Error(`关节「${b.name}」缺少父关节。`);
+            visit(parent);
+        }
+        visiting.delete(b.id);
+        done.add(b.id);
+        result.push(b);
+    }
+    p.bones.forEach(visit);
+    return result;
+}
+function sampleTrack(keys, time) {
+    if (!keys?.length || time < keys[0].time)
+        return (0, exports.restPose)();
+    let i = 0;
+    while (i + 1 < keys.length && keys[i + 1].time <= time)
+        i++;
+    const a = keys[i], b = keys[i + 1];
+    if (!b || a.easing === 'step')
+        return { x: a.x, y: a.y, rotation: a.rotation, scale: a.scale };
+    const t = (0, exports.clamp)((time - a.time) / (b.time - a.time), 0, 1);
+    return { x: a.x + (b.x - a.x) * t, y: a.y + (b.y - a.y) * t,
+        rotation: a.rotation + (0, exports.normalizeAngle)(b.rotation - a.rotation) * t,
+        scale: a.scale + (b.scale - a.scale) * t };
+}
+function worldBones(p, clip, time = 0) {
+    const result = new Map();
+    for (const b of sortedBones(p)) {
+        const k = clip ? sampleTrack(clip.tracks[b.id], time) : (0, exports.restPose)();
+        const local = transform(b.x + k.x, b.y + k.y, b.rotation + k.rotation, b.scale * k.scale);
+        result.set(b.id, multiply(b.parentId ? result.get(b.parentId) : exports.identity, local));
+    }
+    return result;
+}
+function partMatrix(part, asset, bones) {
+    const b = bones.get(part.boneId);
+    if (!b)
+        throw new Error(`部件「${part.name}」未找到关节。`);
+    return multiply(multiply(b, transform(part.x, part.y, part.rotation, part.scaleX, part.scaleY)), transform(-part.pivotX * asset.width, -part.pivotY * asset.height));
+}
+function partCorners(part, asset, bones) {
+    const m = partMatrix(part, asset, bones);
+    return [point(m, 0, 0), point(m, asset.width, 0), point(m, asset.width, asset.height), point(m, 0, asset.height)];
+}
+/** Single-bone rigid binding; preserve exact setup world transform, including mirrored parts. */
+function bindPart(p, partId, boneId) {
+    const part = p.parts.find(a => a.id === partId);
+    if (!part || !p.bones.some(b => b.id === boneId))
+        throw new Error('请选择有效的部件和关节。');
+    const worlds = worldBones(p), old = worlds.get(part.boneId), next = worlds.get(boneId);
+    const worldPivot = point(old, part.x, part.y);
+    const local = point(inverse(next), worldPivot.x, worldPivot.y);
+    part.x = local.x;
+    part.y = local.y;
+    part.rotation += (0, exports.degrees)(Math.atan2(old[1], old[0]) - Math.atan2(next[1], next[0]));
+    const ratio = Math.hypot(old[0], old[1]) / Math.hypot(next[0], next[1]);
+    part.scaleX *= ratio;
+    part.scaleY *= ratio;
+    part.boneId = boneId;
+}
+function movePivot(p, partId, px, py) {
+    const part = p.parts.find(a => a.id === partId);
+    const asset = p.assets.find(a => a.id === part.assetId);
+    const delta = point(transform(0, 0, part.rotation, part.scaleX, part.scaleY), (px - part.pivotX) * asset.width, (py - part.pivotY) * asset.height);
+    part.x += delta.x;
+    part.y += delta.y;
+    part.pivotX = px;
+    part.pivotY = py;
+}
+function hasKeys(p) { return p.clips.some(c => Object.values(c.tracks).some(k => k.length > 0)); }
+function reparentBone(p, id, parentId) {
+    if (id === 'root' || id === parentId)
+        throw new Error('根关节不能改父级，也不能把自己设为父级。');
+    if (hasKeys(p))
+        throw new Error('已有动作关键帧。请先保存备份并清空动作，再修改骨骼层级，避免动画变形。');
+    const b = p.bones.find(v => v.id === id), parent = p.bones.find(v => v.id === parentId);
+    if (!b || !parent)
+        throw new Error('关节不存在。');
+    let current = parent;
+    while (current) {
+        if (current.id === id)
+            throw new Error('不能把子关节设为父关节。');
+        current = p.bones.find(v => v.id === current.parentId);
+    }
+    const worlds = worldBones(p), local = multiply(inverse(worlds.get(parentId)), worlds.get(id));
+    b.x = local[4];
+    b.y = local[5];
+    b.rotation = (0, exports.degrees)(Math.atan2(local[1], local[0]));
+    b.scale = Math.hypot(local[0], local[1]);
+    b.parentId = parentId;
+}
+function deleteBone(p, id) {
+    if (id === 'root')
+        throw new Error('不能删除整体根关节。');
+    if (hasKeys(p))
+        throw new Error('请先保存备份并清空动作，再删除关节。');
+    const b = p.bones.find(v => v.id === id);
+    if (!b)
+        return;
+    for (const part of p.parts.filter(v => v.boneId === id))
+        bindPart(p, part.id, b.parentId);
+    for (const child of p.bones.filter(v => v.parentId === id))
+        reparentBone(p, child.id, b.parentId);
+    p.bones = p.bones.filter(v => v.id !== id);
+}
+function addBone(p, start, end, parentId = 'root') {
+    const parent = worldBones(p).get(parentId);
+    if (!parent)
+        throw new Error('父关节不存在。');
+    const a = point(inverse(parent), start.x, start.y), z = point(inverse(parent), end.x, end.y);
+    if (Math.hypot(z.x - a.x, z.y - a.y) < 2)
+        throw new Error('两个关节点太近，请拉开一点。');
+    const id = (0, exports.uid)('bone');
+    p.bones.push({ id, name: `关节 ${p.bones.length}`, parentId, x: a.x, y: a.y,
+        rotation: (0, exports.degrees)(Math.atan2(z.y - a.y, z.x - a.x)), scale: 1,
+        length: Math.hypot(z.x - a.x, z.y - a.y), locked: false });
+    return id;
+}
+function setKey(clip, boneId, time, pose, easing = 'linear') {
+    const t = Math.round((0, exports.clamp)(time, 0, clip.duration) * 10000) / 10000;
+    const keys = clip.tracks[boneId] ?? [];
+    const next = keys.filter(k => Math.abs(k.time - t) > 0.0001);
+    if (t > 0 && !next.some(k => k.time === 0))
+        next.push({ ...(0, exports.restPose)(), time: 0, easing: 'linear' });
+    next.push({ ...pose, time: t, easing });
+    next.sort((a, b) => a.time - b.time);
+    clip.tracks[boneId] = next;
+}
+function object(v) { return !!v && typeof v === 'object' && !Array.isArray(v); }
+function finite(v) { return typeof v === 'number' && Number.isFinite(v); }
+function string(v) { return typeof v === 'string' && v.length > 0 && v.length < 200; }
+function list(v) { return Array.isArray(v) && v.length <= 512; }
+function requireValue(ok, message) {
+    if (!ok)
+        throw new Error(message);
+}
+function checkId(v) { requireValue(typeof v === 'string' && /^[A-Za-z0-9_-]{1,80}$/.test(v) && !['__proto__', 'constructor', 'prototype'].includes(v), '工程 ID 不合法。'); }
+function unique(items, name) { requireValue(new Set(items.map(v => v.id)).size === items.length, `${name}有重复 ID。`); }
+/** Reject broken or external-resource projects before loading pixels or evaluating transforms. */
+function parseProject(data) {
+    requireValue(object(data), '这不是工程文件。');
+    if (data.version === '0.1')
+        throw new Error('V0.1 工程没有保存图片，不能完整还原。请重新导入原 PNG，在本版本重新保存。');
+    requireValue(data.format === 'ai-bone-studio' && data.version === '0.2', '仅支持 AI Bone Studio V0.2 工程；Spine JSON 是游戏资源，不是编辑工程。');
+    requireValue(string(data.name) && object(data.canvas), '工程名称或画板信息缺失。');
+    const c = data.canvas;
+    requireValue(finite(c.width) && finite(c.height) && Number.isInteger(c.width) && Number.isInteger(c.height) && c.width >= 64 && c.height >= 64 && c.width <= 4096 && c.height <= 4096 && finite(c.originX) && finite(c.originY), '画板尺寸必须为 64～4096 像素。');
+    requireValue(list(data.assets) && list(data.parts) && list(data.bones) && list(data.clips), '工程集合无效或超过 512 项。');
+    let encodedSize = 0;
+    for (const a of data.assets) {
+        requireValue(object(a), '素材信息无效。');
+        checkId(a.id);
+        requireValue(string(a.name) && finite(a.width) && finite(a.height) && Number.isInteger(a.width) && Number.isInteger(a.height) && a.width > 0 && a.height > 0 && a.width <= 8192 && a.height <= 8192 && a.width * a.height <= 16777216, '素材尺寸无效或过大。');
+        requireValue(typeof a.dataUrl === 'string' && /^data:image\/(png|webp);base64,[A-Za-z0-9+/=\s]+$/.test(a.dataUrl), '工程只能包含内嵌 PNG/WebP 图片，不能包含脚本、SVG 或外链。');
+        encodedSize += a.dataUrl.length;
+        requireValue(encodedSize <= 100 * 1024 * 1024, '工程图片超过 100MB，请拆成多个角色。');
+        requireValue(typeof a.hasAlpha === 'boolean', '素材透明度标记无效。');
+    }
+    for (const b of data.bones) {
+        requireValue(object(b), '关节数据无效。');
+        checkId(b.id);
+        if (b.parentId !== null)
+            checkId(b.parentId);
+        requireValue(string(b.name) && ['x', 'y', 'rotation', 'scale', 'length'].every(k => finite(b[k])) && b.scale >= 0.001 && b.scale <= 1000 && b.length >= 0 && typeof b.locked === 'boolean', '关节数值无效。');
+    }
+    for (const a of data.parts) {
+        requireValue(object(a), '部件数据无效。');
+        checkId(a.id);
+        checkId(a.assetId);
+        checkId(a.boneId);
+        requireValue(string(a.name) && ['x', 'y', 'rotation', 'scaleX', 'scaleY', 'pivotX', 'pivotY', 'z', 'opacity'].every(k => finite(a[k])) && Math.abs(a.scaleX) >= 0.001 && Math.abs(a.scaleY) >= 0.001 && Math.abs(a.scaleX) <= 1000 && Math.abs(a.scaleY) <= 1000 && a.pivotX >= 0 && a.pivotX <= 1 && a.pivotY >= 0 && a.pivotY <= 1 && a.opacity >= 0 && a.opacity <= 1 && typeof a.visible === 'boolean' && typeof a.locked === 'boolean', '部件变换数值无效。');
+    }
+    const names = new Set();
+    for (const clip of data.clips) {
+        requireValue(object(clip), '动作信息无效。');
+        checkId(clip.id);
+        requireValue(string(clip.name) && !['__proto__', 'constructor', 'prototype'].includes(clip.name) && !names.has(clip.name) && finite(clip.duration) && clip.duration >= 0.1 && clip.duration <= 60 && object(clip.tracks), '动作名必须唯一，时长为 0.1～60 秒。');
+        names.add(clip.name);
+        requireValue(Object.keys(clip.tracks).length <= 512, '动作轨道过多。');
+        for (const [id, keys] of Object.entries(clip.tracks)) {
+            checkId(id);
+            requireValue(Array.isArray(keys) && keys.length <= 3600, '关键帧过多或格式错误。');
+            let last = -1;
+            for (const k of keys) {
+                requireValue(object(k) && ['time', 'x', 'y', 'rotation', 'scale'].every(v => finite(k[v])) && k.time > last && k.time >= 0 && k.time <= clip.duration && k.scale >= 0.001 && (k.easing === 'linear' || k.easing === 'step'), '关键帧必须按时间排列、无重复且在动作时长内。');
+                last = k.time;
+            }
+        }
+    }
+    const p = data;
+    unique(p.assets, '素材');
+    unique(p.parts, '部件');
+    unique(p.bones, '关节');
+    unique(p.clips, '动作');
+    requireValue(p.bones.length > 0 && p.bones.filter(b => b.parentId === null).length === 1 && p.bones.some(b => b.id === 'root' && b.parentId === null), '工程必须恰好有一个 root 根关节。');
+    sortedBones(p);
+    for (const a of p.parts)
+        requireValue(p.assets.some(v => v.id === a.assetId) && p.bones.some(v => v.id === a.boneId), '部件引用了丢失的图片或关节。');
+    for (const clip of p.clips)
+        for (const id of Object.keys(clip.tracks))
+            requireValue(p.bones.some(b => b.id === id), '动作引用了丢失的关节。');
+    // Catch overflow from extreme transforms before they reach Canvas or a game engine.
+    const worlds = worldBones(p);
+    for (const m of worlds.values())
+        requireValue(m.every(v => Number.isFinite(v) && Math.abs(v) <= 1e9), '骨架世界变换超出安全范围。');
+    for (const a of p.parts)
+        requireValue(partCorners(a, p.assets.find(v => v.id === a.assetId), worlds).every(v => Number.isFinite(v.x) && Number.isFinite(v.y) && Math.abs(v.x) <= 1e9 && Math.abs(v.y) <= 1e9), '部件世界变换超出安全范围。');
+    return cloneProject(p);
+}
+
+};
+factories['./zip.js']=(module,exports,require)=>{
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.textEntry = void 0;
+exports.crc32 = crc32;
+exports.safePath = safePath;
+exports.writeZip = writeZip;
+exports.readZip = readZip;
+const encoder = new TextEncoder(), decoder = new TextDecoder();
+const table = new Uint32Array(256);
+for (let n = 0; n < 256; n++) {
+    let c = n;
+    for (let k = 0; k < 8; k++)
+        c = c & 1 ? 0xedb88320 ^ (c >>> 1) : c >>> 1;
+    table[n] = c >>> 0;
+}
+function crc32(bytes) {
+    let c = 0xffffffff;
+    for (const b of bytes)
+        c = table[(c ^ b) & 255] ^ (c >>> 8);
+    return (c ^ 0xffffffff) >>> 0;
+}
+const u16 = (d, o, n) => d.setUint16(o, n, true);
+const u32 = (d, o, n) => d.setUint32(o, n, true);
+function safePath(name) {
+    return name.length > 0 && name.length < 500 && !name.startsWith('/') && !name.includes('\\') && !name.includes('\0') && !name.includes(':') && !name.split('/').some(p => p === '..' || p === '.');
+}
+function writeZip(entries) {
+    if (entries.length > 10000)
+        throw new Error('ZIP 文件数量过多。');
+    const names = entries.map(e => encoder.encode(e.name));
+    if (entries.some(e => !safePath(e.name)) || new Set(entries.map(e => e.name)).size !== entries.length)
+        throw new Error('ZIP 路径非法或重复。');
+    const localSize = entries.reduce((s, e, i) => s + 30 + names[i].length + e.bytes.length, 0);
+    const dirSize = entries.reduce((s, _, i) => s + 46 + names[i].length, 0);
+    if (localSize + dirSize > 256 * 1024 * 1024)
+        throw new Error('导出包超过 256MB，请减少图片或动画帧数。');
+    const out = new Uint8Array(localSize + dirSize + 22), d = new DataView(out.buffer);
+    let pos = 0, dir = localSize;
+    entries.forEach((e, i) => {
+        const n = names[i], crc = crc32(e.bytes);
+        u32(d, pos, 0x04034b50);
+        u16(d, pos + 4, 20);
+        u16(d, pos + 6, 0x800);
+        u16(d, pos + 12, 33);
+        u32(d, pos + 14, crc);
+        u32(d, pos + 18, e.bytes.length);
+        u32(d, pos + 22, e.bytes.length);
+        u16(d, pos + 26, n.length);
+        out.set(n, pos + 30);
+        out.set(e.bytes, pos + 30 + n.length);
+        u32(d, dir, 0x02014b50);
+        u16(d, dir + 4, 20);
+        u16(d, dir + 6, 20);
+        u16(d, dir + 8, 0x800);
+        u16(d, dir + 14, 33);
+        u32(d, dir + 16, crc);
+        u32(d, dir + 20, e.bytes.length);
+        u32(d, dir + 24, e.bytes.length);
+        u16(d, dir + 28, n.length);
+        u32(d, dir + 42, pos);
+        out.set(n, dir + 46);
+        pos += 30 + n.length + e.bytes.length;
+        dir += 46 + n.length;
+    });
+    u32(d, dir, 0x06054b50);
+    u16(d, dir + 8, entries.length);
+    u16(d, dir + 10, entries.length);
+    u32(d, dir + 12, dirSize);
+    u32(d, dir + 16, localSize);
+    return out;
+}
+async function readZip(bytes) {
+    if (bytes.length > 100 * 1024 * 1024)
+        throw new Error('导入 ZIP 不能超过 100MB。');
+    const d = new DataView(bytes.buffer, bytes.byteOffset, bytes.byteLength);
+    let end = -1;
+    for (let i = bytes.length - 22; i >= Math.max(0, bytes.length - 65557); i--)
+        if (d.getUint32(i, true) === 0x06054b50 && i + 22 + d.getUint16(i + 20, true) === bytes.length) {
+            end = i;
+            break;
+        }
+    if (end < 0 || d.getUint16(end + 4, true) !== 0 || d.getUint16(end + 6, true) !== 0)
+        throw new Error('ZIP 损坏或属于不支持的分卷格式。');
+    const count = d.getUint16(end + 10, true), entries = [], names = new Set();
+    let pos = d.getUint32(end + 16, true), total = 0;
+    if (count > 1024 || count === 0xffff)
+        throw new Error('ZIP 文件过多或使用了不支持的 ZIP64。');
+    for (let i = 0; i < count; i++) {
+        if (pos + 46 > end || d.getUint32(pos, true) !== 0x02014b50)
+            throw new Error('ZIP 目录损坏。');
+        const flag = d.getUint16(pos + 8, true), method = d.getUint16(pos + 10, true), crc = d.getUint32(pos + 16, true);
+        const packed = d.getUint32(pos + 20, true), size = d.getUint32(pos + 24, true);
+        const nl = d.getUint16(pos + 28, true), el = d.getUint16(pos + 30, true), cl = d.getUint16(pos + 32, true), offset = d.getUint32(pos + 42, true);
+        const name = decoder.decode(bytes.subarray(pos + 46, pos + 46 + nl));
+        pos += 46 + nl + el + cl;
+        if (!safePath(name) || names.has(name) || flag & 1 || ![0, 8].includes(method))
+            throw new Error('ZIP 含非法路径、重复文件、加密内容或不支持的压缩方式。');
+        names.add(name);
+        total += size;
+        if (size > 64 * 1024 * 1024 || total > 150 * 1024 * 1024)
+            throw new Error('ZIP 解压数据过大。');
+        if (offset + 30 > bytes.length || d.getUint32(offset, true) !== 0x04034b50)
+            throw new Error('ZIP 文件头损坏。');
+        const start = offset + 30 + d.getUint16(offset + 26, true) + d.getUint16(offset + 28, true);
+        if (start + packed > bytes.length)
+            throw new Error('ZIP 数据越界。');
+        if (name.endsWith('/'))
+            continue;
+        const raw = bytes.slice(start, start + packed);
+        let content;
+        if (method === 0)
+            content = raw;
+        else {
+            let stream;
+            try {
+                stream = new DecompressionStream('deflate-raw');
+            }
+            catch {
+                throw new Error('当前浏览器不支持解压此 ZIP，请先解压后多选 PNG 导入。');
+            }
+            const reader = new Blob([raw]).stream().pipeThrough(stream).getReader(), chunks = [];
+            let actual = 0;
+            while (true) {
+                const next = await reader.read();
+                if (next.done)
+                    break;
+                actual += next.value.length;
+                if (actual > size) {
+                    await reader.cancel();
+                    throw new Error('ZIP 解压尺寸与声明不符。');
+                }
+                chunks.push(next.value);
+            }
+            content = new Uint8Array(actual);
+            let at = 0;
+            for (const c of chunks) {
+                content.set(c, at);
+                at += c.length;
+            }
+        }
+        if (content.length !== size || crc32(content) !== crc)
+            throw new Error(`ZIP 校验失败：${name}`);
+        entries.push({ name, bytes: content });
+    }
+    return entries;
+}
+const textEntry = (name, text) => ({ name, bytes: encoder.encode(text) });
+exports.textEntry = textEntry;
+
+};
+factories['./spine.js']=(module,exports,require)=>{
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.slotName = exports.regionName = exports.fileStem = void 0;
+exports.usedAssets = usedAssets;
+exports.preflight = preflight;
+exports.packAtlas = packAtlas;
+exports.atlasText = atlasText;
+exports.exportSpine = exportSpine;
+const model_js_1 = require("./model.js");
+const r = (n) => Math.round(n * 1e9) / 1e9;
+const fileStem = (name) => name.replace(/[^a-zA-Z0-9_-]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 60) || 'character';
+exports.fileStem = fileStem;
+const regionName = (asset) => `image_${asset.id}`;
+exports.regionName = regionName;
+const slotName = (id) => `slot_${id}`;
+exports.slotName = slotName;
+function usedAssets(p) {
+    const ids = new Set(p.parts.map(a => a.assetId));
+    return p.assets.filter(a => ids.has(a.id));
+}
+function preflight(p) {
+    const issues = [];
+    try {
+        (0, model_js_1.parseProject)(p);
+    }
+    catch (err) {
+        return [{ level: 'error', message: err.message }];
+    }
+    if (!p.parts.length)
+        issues.push({ level: 'error', message: '画板没有部件，请先导入 PNG。' });
+    if (!p.parts.some(a => a.visible && a.opacity > 0))
+        issues.push({ level: 'error', message: '所有部件都被隐藏了，导出后角色不可见。' });
+    for (const a of usedAssets(p)) {
+        if (a.width + 8 > 2048 || a.height + 8 > 2048)
+            issues.push({ level: 'error', message: `「${a.name}」超过单页 2048 限制，请先缩小源图片。` });
+        if (!a.hasAlpha)
+            issues.push({ level: 'warning', message: `「${a.name}」没有透明区域，请检查是否仍有绿幕或背景。` });
+    }
+    const fixed = p.parts.filter(a => a.boneId === 'root').length;
+    if (fixed)
+        issues.push({ level: 'warning', message: `${fixed} 个部件跟随整体根关节；它们不会跟随其他关节单独活动。` });
+    if (!p.clips.some(c => Object.values(c.tracks).some(t => t.length)))
+        issues.push({ level: 'warning', message: '还没有动作关键帧；导出的是可加载的静态骨架。' });
+    issues.push({ level: 'warning', message: '目标是 Spine 3.8 的区域贴图 / FK 子集。Laya、Cocos 工程须选择 3.8 运行库；实际引擎验收仍需执行随包测试。' });
+    return issues;
+}
+const powerOfTwo = (v) => 2 ** Math.ceil(Math.log2(Math.max(64, v)));
+/** Deterministic shelf packing, no rotation or trimming. Padding includes 2px extrusion. */
+function packAtlas(assets, stem, maxSize = 2048) {
+    if (!assets.length)
+        throw new Error('没有可打包的贴图。');
+    const margin = 4, pages = [];
+    const sorted = [...assets].sort((a, b) => b.height - a.height || b.width - a.width || a.id.localeCompare(b.id));
+    let x = margin, y = margin, rowHeight = 0;
+    function newPage() {
+        const page = { name: `${(0, exports.fileStem)(stem)}_${pages.length}.png`, width: 64, height: 64, regions: [] };
+        pages.push(page);
+        x = margin;
+        y = margin;
+        rowHeight = 0;
+        return page;
+    }
+    let page = newPage();
+    for (const a of sorted) {
+        if (a.width + margin * 2 > maxSize || a.height + margin * 2 > maxSize)
+            throw new Error(`贴图过大：${a.name}`);
+        if (x + a.width + margin > maxSize) {
+            x = margin;
+            y += rowHeight + margin * 2;
+            rowHeight = 0;
+        }
+        if (y + a.height + margin > maxSize)
+            page = newPage();
+        if (pages.length > 8)
+            throw new Error('图集超过 8 页，请缩小或减少贴图。');
+        page.regions.push({ assetId: a.id, name: (0, exports.regionName)(a), x, y, width: a.width, height: a.height });
+        page.width = Math.max(page.width, powerOfTwo(x + a.width + margin));
+        page.height = Math.max(page.height, powerOfTwo(y + a.height + margin));
+        x += a.width + margin * 2;
+        rowHeight = Math.max(rowHeight, a.height);
+    }
+    return pages;
+}
+/** Spine 3.8 atlas syntax. Do not add the newer `pma:` header to this legacy format. */
+function atlasText(pages) {
+    return pages.map(page => [page.name, `size: ${page.width},${page.height}`, 'format: RGBA8888', 'filter: Linear,Linear', 'repeat: none',
+        ...page.regions.flatMap(a => [a.name, '  rotate: false', `  xy: ${a.x}, ${a.y}`, `  size: ${a.width}, ${a.height}`, `  orig: ${a.width}, ${a.height}`, '  offset: 0, 0', '  index: -1'])].join('\n')).join('\n\n') + '\n';
+}
+function exportSpine(p) {
+    const errors = preflight(p).filter(v => v.level === 'error');
+    if (errors.length)
+        throw new Error(errors.map(v => v.message).join('\n'));
+    const worlds = (0, model_js_1.worldBones)(p), visible = p.parts.filter(a => a.visible && a.opacity > 0);
+    const allPoints = visible.flatMap(a => (0, model_js_1.partCorners)(a, p.assets.find(v => v.id === a.assetId), worlds));
+    const minX = Math.min(...allPoints.map(v => v.x)), maxX = Math.max(...allPoints.map(v => v.x));
+    const minY = Math.min(...allPoints.map(v => v.y)), maxY = Math.max(...allPoints.map(v => v.y));
+    const doc = {
+        skeleton: { spine: '3.8.99', x: r(minX - p.canvas.originX), y: r(p.canvas.originY - maxY), width: r(maxX - minX), height: r(maxY - minY), images: './images/' },
+        bones: (0, model_js_1.sortedBones)(p).map(b => ({ name: b.id, ...(b.parentId ? { parent: b.parentId } : {}),
+            x: r(b.parentId ? b.x : b.x - p.canvas.originX), y: r(b.parentId ? -b.y : p.canvas.originY - b.y),
+            rotation: r(-b.rotation), scaleX: r(b.scale), scaleY: r(b.scale), length: r(b.length) })),
+        slots: [], skins: [{ name: 'default', attachments: {} }], animations: {},
+    };
+    for (const part of [...p.parts].sort((a, b) => a.z - b.z)) {
+        const asset = p.assets.find(a => a.id === part.assetId);
+        const centre = (0, model_js_1.point)((0, model_js_1.transform)(part.x, part.y, part.rotation, part.scaleX, part.scaleY), (0.5 - part.pivotX) * asset.width, (0.5 - part.pivotY) * asset.height);
+        const key = (0, exports.regionName)(asset), slot = (0, exports.slotName)(part.id);
+        doc.slots.push({ name: slot, bone: part.boneId, ...(part.visible ? { attachment: key } : {}), color: `ffffff${Math.round(part.opacity * 255).toString(16).padStart(2, '0')}`, blend: 'normal' });
+        doc.skins[0].attachments[slot] = { [key]: { type: 'region', path: key, x: r(centre.x), y: r(-centre.y), rotation: r(-part.rotation), scaleX: r(part.scaleX), scaleY: r(part.scaleY), width: asset.width, height: asset.height } };
+    }
+    for (const clip of p.clips) {
+        const tracks = {};
+        const source = { ...clip.tracks };
+        // A terminal root frame preserves clip duration, even for an otherwise empty clip.
+        if (!source.root?.length)
+            source.root = [{ ...(0, model_js_1.restPose)(), time: 0, easing: 'linear' }];
+        for (const [id, input] of Object.entries(source)) {
+            if (!input.length)
+                continue;
+            const keys = input.map(k => ({ ...k }));
+            if (keys[0].time > 0)
+                keys.unshift({ ...(0, model_js_1.restPose)(), time: 0, easing: 'step' });
+            if (id === 'root' && keys[keys.length - 1].time < clip.duration)
+                keys.push({ ...keys[keys.length - 1], time: clip.duration });
+            const common = (k) => ({ time: r(k.time), ...(k.easing === 'step' ? { curve: 'stepped' } : {}) });
+            tracks[id] = {
+                translate: keys.map(k => ({ ...common(k), x: r(k.x), y: r(-k.y) })),
+                rotate: keys.map(k => ({ ...common(k), angle: r(-k.rotation) })),
+                scale: keys.map(k => ({ ...common(k), x: r(k.scale), y: r(k.scale) })),
+            };
+        }
+        doc.animations[clip.name] = { bones: tracks };
+    }
+    return doc;
+}
+
+};
+factories['./images.js']=(module,exports,require)=>{
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.decoded = void 0;
+exports.loadAsset = loadAsset;
+exports.pruneCache = pruneCache;
+exports.readImage = readImage;
+exports.drawCharacter = drawCharacter;
+exports.addPart = addPart;
+exports.demoProject = demoProject;
+const model_js_1 = require("./model.js");
+const cache = new Map();
+exports.decoded = new Map();
+function loadAsset(asset) {
+    let pending = cache.get(asset.dataUrl);
+    if (!pending) {
+        pending = new Promise((resolve, reject) => {
+            const image = new Image();
+            image.onload = () => {
+                try {
+                    if (image.naturalWidth !== asset.width || image.naturalHeight !== asset.height)
+                        throw new Error(`「${asset.name}」记录尺寸与实际图片不符。`);
+                    const canvas = document.createElement('canvas');
+                    canvas.width = asset.width;
+                    canvas.height = asset.height;
+                    const ctx = canvas.getContext('2d', { willReadFrequently: true });
+                    ctx.drawImage(image, 0, 0);
+                    resolve({ image, pixels: ctx.getImageData(0, 0, asset.width, asset.height).data });
+                }
+                catch (e) {
+                    reject(e);
+                }
+            };
+            image.onerror = () => reject(new Error(`图片不能解码：${asset.name}`));
+            image.src = asset.dataUrl;
+        });
+        cache.set(asset.dataUrl, pending);
+    }
+    return pending.then(value => {
+        if (value.image.naturalWidth !== asset.width || value.image.naturalHeight !== asset.height)
+            throw new Error(`「${asset.name}」尺寸不一致。`);
+        exports.decoded.set(asset.id, value);
+        return value;
+    });
+}
+function pruneCache(p) {
+    const ids = new Set(p.assets.map(a => a.id)), urls = new Set(p.assets.map(a => a.dataUrl));
+    for (const id of exports.decoded.keys())
+        if (!ids.has(id))
+            exports.decoded.delete(id);
+    for (const key of cache.keys())
+        if (!urls.has(key))
+            cache.delete(key);
+}
+async function readImage(file, name) {
+    if (file.size > 20 * 1024 * 1024)
+        throw new Error(`「${name}」超过 20MB，请先缩小图片。`);
+    const dataUrl = await new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => resolve(String(reader.result));
+        reader.onerror = () => reject(new Error('读取图片失败。'));
+        reader.readAsDataURL(file);
+    });
+    if (!/^data:image\/(png|webp);base64,/.test(dataUrl))
+        throw new Error('请使用 PNG 或 WebP，不支持 SVG / JPEG。');
+    const image = new Image();
+    image.src = dataUrl;
+    await image.decode();
+    if (image.width > 8192 || image.height > 8192 || image.width * image.height > 16777216)
+        throw new Error('图片像素过大，请使用 4096×4096 以下素材。');
+    const asset = { id: (0, model_js_1.uid)('asset'), name: name.replace(/\.[^.]+$/, '').slice(0, 180) || '部件', dataUrl, width: image.width, height: image.height, hasAlpha: false };
+    const c = await loadAsset(asset);
+    for (let i = 3; i < c.pixels.length; i += 4)
+        if (c.pixels[i] < 255) {
+            asset.hasAlpha = true;
+            break;
+        }
+    return asset;
+}
+function drawCharacter(ctx, p, clip, time = 0) {
+    const bones = (0, model_js_1.worldBones)(p, clip, time);
+    for (const part of [...p.parts].sort((a, b) => a.z - b.z)) {
+        if (!part.visible || part.opacity <= 0)
+            continue;
+        const asset = p.assets.find(a => a.id === part.assetId), ready = exports.decoded.get(asset.id);
+        if (!ready)
+            continue;
+        ctx.save();
+        ctx.transform(...(0, model_js_1.partMatrix)(part, asset, bones));
+        ctx.globalAlpha = part.opacity;
+        ctx.drawImage(ready.image, 0, 0);
+        ctx.restore();
+    }
+}
+function addPart(p, asset, position) {
+    if (!p.assets.some(a => a.id === asset.id))
+        p.assets.push(asset);
+    const root = p.bones.find(b => b.id === 'root');
+    const id = (0, model_js_1.uid)('part');
+    const part = { id, name: asset.name, assetId: asset.id, boneId: 'root',
+        x: 0, y: 0, rotation: 0, scaleX: 1, scaleY: 1,
+        pivotX: 0.5, pivotY: 0.5, z: p.parts.length ? Math.max(...p.parts.map(a => a.z)) + 1 : 0,
+        opacity: 1, visible: true, locked: false };
+    // Root is allowed to rotate/scale; compute inverse rather than assuming origin-only.
+    const angle = -root.rotation * Math.PI / 180, dx = (position?.x ?? p.canvas.width / 2) - root.x, dy = (position?.y ?? p.canvas.height / 2) - root.y;
+    part.x = (dx * Math.cos(angle) - dy * Math.sin(angle)) / root.scale;
+    part.y = (dx * Math.sin(angle) + dy * Math.cos(angle)) / root.scale;
+    part.rotation = -root.rotation;
+    part.scaleX = part.scaleY = 1 / root.scale;
+    p.parts.push(part);
+    return id;
+}
+function demoAsset(name, w, h, paint) {
+    const canvas = document.createElement('canvas');
+    canvas.width = w;
+    canvas.height = h;
+    const ctx = canvas.getContext('2d');
+    paint(ctx);
+    return { id: (0, model_js_1.uid)('asset'), name, width: w, height: h, dataUrl: canvas.toDataURL('image/png'), hasAlpha: true };
+}
+function pill(ctx, w, h, fill, stroke = '#2b335d') {
+    ctx.fillStyle = fill;
+    ctx.strokeStyle = stroke;
+    ctx.lineWidth = 4;
+    ctx.beginPath();
+    ctx.roundRect(3, 3, w - 6, h - 6, Math.min(w, h) / 2 - 4);
+    ctx.fill();
+    ctx.stroke();
+}
+/** Original geometric practice puppet, generated locally; not derived from Spine examples. */
+async function demoProject() {
+    const p = (0, model_js_1.newProject)();
+    p.name = 'hello-puppet';
+    const makeBone = (id, name, a, b, parent = 'root') => {
+        const generated = (0, model_js_1.addBone)(p, a, b, parent), bone = p.bones.find(x => x.id === generated);
+        bone.id = id;
+        bone.name = name;
+    };
+    makeBone('body', '身体', { x: 400, y: 480 }, { x: 400, y: 350 });
+    makeBone('head', '头部', { x: 400, y: 350 }, { x: 400, y: 235 }, 'body');
+    makeBone('upper_left', '左上臂（画面左）', { x: 342, y: 386 }, { x: 296, y: 440 }, 'body');
+    makeBone('lower_left', '左前臂', { x: 296, y: 440 }, { x: 286, y: 502 }, 'upper_left');
+    makeBone('upper_right', '右上臂（画面右）', { x: 458, y: 386 }, { x: 504, y: 440 }, 'body');
+    makeBone('lower_right', '右前臂 · 试试挥手', { x: 504, y: 440 }, { x: 557, y: 410 }, 'upper_right');
+    makeBone('leg_left', '左腿', { x: 372, y: 475 }, { x: 370, y: 557 });
+    makeBone('leg_right', '右腿', { x: 428, y: 475 }, { x: 430, y: 557 });
+    const put = (asset, at, bone, rotation = 0) => {
+        const id = addPart(p, asset, at);
+        p.parts.find(a => a.id === id).rotation = rotation;
+        (0, model_js_1.bindPart)(p, id, bone);
+    };
+    for (const [bone, start, end] of [
+        ['leg_left', { x: 372, y: 475 }, { x: 370, y: 557 }], ['leg_right', { x: 428, y: 475 }, { x: 430, y: 557 }],
+        ['upper_left', { x: 342, y: 386 }, { x: 296, y: 440 }], ['lower_left', { x: 296, y: 440 }, { x: 286, y: 502 }],
+        ['upper_right', { x: 458, y: 386 }, { x: 504, y: 440 }], ['lower_right', { x: 504, y: 440 }, { x: 557, y: 410 }],
+    ]) {
+        const w = Math.round(Math.hypot(end.x - start.x, end.y - start.y)) + 24;
+        put(demoAsset(p.bones.find(b => b.id === bone).name, w, 40, c => pill(c, w, 40, bone.startsWith('leg') ? '#7774ce' : '#a99af2')), { x: (start.x + end.x) / 2, y: (start.y + end.y) / 2 }, bone, Math.atan2(end.y - start.y, end.x - start.x) * 180 / Math.PI);
+    }
+    put(demoAsset('身体外衣', 136, 145, c => { pill(c, 136, 145, '#8077dc'); c.fillStyle = '#ffd788'; c.beginPath(); c.arc(68, 65, 15, 0, Math.PI * 2); c.fill(); }), { x: 400, y: 422 }, 'body');
+    put(demoAsset('脸底 · 不含五官', 186, 164, c => pill(c, 186, 164, '#ffe2d2')), { x: 400, y: 274 }, 'head');
+    put(demoAsset('眼睛', 104, 40, c => {
+        c.fillStyle = '#493f73';
+        for (const x of [22, 82]) {
+            c.beginPath();
+            c.ellipse(x, 22, 9, 14, 0, 0, Math.PI * 2);
+            c.fill();
+        }
+    }), { x: 400, y: 277 }, 'head');
+    put(demoAsset('微笑', 50, 24, c => { c.strokeStyle = '#754560'; c.lineWidth = 4; c.lineCap = 'round'; c.beginPath(); c.arc(25, 4, 14, 0.15, Math.PI - 0.15); c.stroke(); }), { x: 400, y: 315 }, 'head');
+    put(demoAsset('练习帽子', 220, 120, c => { c.fillStyle = '#6e61b2'; c.strokeStyle = '#363254'; c.lineWidth = 4; c.beginPath(); c.moveTo(28, 89); c.lineTo(130, 9); c.quadraticCurveTo(139, 1, 152, 16); c.lineTo(184, 93); c.closePath(); c.fill(); c.stroke(); c.fillStyle = '#8d7bd2'; c.beginPath(); c.ellipse(110, 95, 103, 18, -0.08, 0, Math.PI * 2); c.fill(); c.stroke(); c.fillStyle = '#ffdd8e'; c.beginPath(); c.arc(136, 60, 11, 0, Math.PI * 2); c.fill(); }), { x: 400, y: 185 }, 'head');
+    for (const [position, bone] of [[{ x: 286, y: 504 }, 'lower_left'], [{ x: 560, y: 408 }, 'lower_right']])
+        put(demoAsset('手掌', 44, 48, c => pill(c, 44, 48, '#ffe2d2')), position, bone);
+    const clip = p.clips[0];
+    for (const [time, rotation] of [[0, 0], [0.5, -40], [1, 12], [1.5, -40], [2, 0]])
+        (0, model_js_1.setKey)(clip, 'lower_right', time, { ...(0, model_js_1.restPose)(), rotation });
+    (0, model_js_1.setKey)(clip, 'body', 0, (0, model_js_1.restPose)());
+    (0, model_js_1.setKey)(clip, 'body', 1, { ...(0, model_js_1.restPose)(), y: -5 });
+    (0, model_js_1.setKey)(clip, 'body', 2, (0, model_js_1.restPose)());
+    await Promise.all(p.assets.map(loadAsset));
+    return p;
+}
+
+};
+factories['./io.js']=(module,exports,require)=>{
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.cocosExample = exports.layaExample = void 0;
+exports.download = download;
+exports.saveProject = saveProject;
+exports.pngBytes = pngBytes;
+exports.exportPNG = exportPNG;
+exports.importGuide = importGuide;
+exports.exportBundle = exportBundle;
+exports.exportFrames = exportFrames;
+exports.autosave = autosave;
+exports.restoreAutosave = restoreAutosave;
+const model_js_1 = require("./model.js");
+const images_js_1 = require("./images.js");
+const spine_js_1 = require("./spine.js");
+const zip_js_1 = require("./zip.js");
+function download(name, data, type = 'application/octet-stream') {
+    const blob = data instanceof Blob ? data : new Blob([data], { type });
+    const a = document.createElement('a'), url = URL.createObjectURL(blob);
+    a.href = url;
+    a.download = name;
+    document.body.append(a);
+    a.click();
+    a.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 30000);
+}
+function saveProject(p) {
+    (0, model_js_1.parseProject)(p);
+    download(`${(0, spine_js_1.fileStem)(p.name)}.project.json`, JSON.stringify(p), 'application/json');
+}
+async function pngBytes(canvas) {
+    const blob = await new Promise((resolve, reject) => canvas.toBlob(b => b ? resolve(b) : reject(new Error('浏览器无法生成 PNG。')), 'image/png'));
+    return new Uint8Array(await blob.arrayBuffer());
+}
+async function exportPNG(p, clip, time = 0) {
+    await Promise.all((0, spine_js_1.usedAssets)(p).map(images_js_1.loadAsset));
+    const canvas = document.createElement('canvas');
+    canvas.width = p.canvas.width;
+    canvas.height = p.canvas.height;
+    (0, images_js_1.drawCharacter)(canvas.getContext('2d'), p, clip, time);
+    return pngBytes(canvas);
+}
+exports.layaExample = `// LayaAir 3.x: select Spine 3.8 in Project Settings -> Engine Modules first.
+// Resource .json, .atlas and .png must remain together. See IMPORT.md for alpha settings.
+export async function mountBoneStudio(parent: Laya.Sprite, jsonUrl: string, clip = 'idle'): Promise<Laya.Sprite> {
+  await Laya.loader.load(jsonUrl, Laya.Loader.SPINE);
+  const node = new Laya.Sprite(); parent.addChild(node);
+  const renderer = node.addComponent(Laya.Spine2DRenderNode);
+  renderer.source = jsonUrl;
+  renderer.skinName = 'default';
+  renderer.play(clip, true);
+  return node;
+}
+`;
+exports.cocosExample = `// Cocos Creator 3.8.x / Spine 3.8. Drag the exported JSON asset onto this component.
+import { _decorator, Component, sp } from 'cc';
+const { ccclass, property } = _decorator;
+@ccclass('BoneStudioPlayer')
+export class BoneStudioPlayer extends Component {
+  @property(sp.SkeletonData) data: sp.SkeletonData | null = null;
+  @property clip = 'idle';
+  start(): void {
+    if (!this.data) { console.error('Assign exported Spine SkeletonData first.'); return; }
+    const skeleton = this.getComponent(sp.Skeleton) || this.addComponent(sp.Skeleton);
+    skeleton.skeletonData = this.data;
+    skeleton.premultipliedAlpha = false;
+    skeleton.setAnimation(0, this.clip, true);
+  }
+}
+`;
+function importGuide(stem) {
+    return `# AI Bone Studio 游戏资源包\n\n目标格式：Spine 3.8.99 JSON，区域贴图 / FK / 平移 / 旋转 / 等比骨骼缩放 / 固定层级。\n\n## 必须一起复制\n${stem}.json、${stem}.atlas 和所有 ${stem}_*.png。这些是运行时资源，不是 .spine 编辑器工程。\n.project.json 才是本工具可再次打开的源工程。\n\n## LayaAir 3.x（以 3.3 文档接口为基线）\n1. 项目设置 → 引擎模块 → 2D → Spine 动画：选择 3.8，不要选择 4.x。\n2. 复制资源到 assets 子目录，把 JSON 拖入层级面板，使用 Spine2DRenderNode。\n3. 动态加载 JSON 时必须指定 Laya.Loader.SPINE。不要把 Spine .atlas 当成 Laya 原生 .atlas 单独加载。\n4. 图集 PNG 为 straight alpha。按引擎要求将纹理类型设为 Default，启用 sRGB，不勾选 Premultiply Alpha。\n5. 选择导出动作名循环播放。代码例子见 examples/LayaPlayer.ts。\n\n## Cocos Creator 3.8.x\n1. 将同目录的 JSON / ATLAS / PNG 一起放入 assets 子目录。\n2. 节点添加 sp.Skeleton，把导入的 SkeletonData 拖入组件。\n3. 关闭 premultipliedAlpha；选择动作名播放。代码例子见 examples/CocosPlayer.ts。\n\n## 验收清单（本次未在你的引擎项目里自动执行）\n- 控制台无版本、骨骼、贴图缺失错误。\n- 初始姿势的位置、镜像、旋转与本工具一致。\n- 两个动作循环后无跳变，父关节带动子关节。\n- 白底和深色底均无黑边；手机目标平台再验证一次。\n- 正常释放角色后没有纹理 / 实例泄漏。\n\n## 边界与授权\n没有 IK、网格 / 权重、变形、动态换图和 draw-order 时间轴；不要把版本字段改成 4.x 冒充兼容。\n本工具不包含 Spine Runtime；使用 Laya / Cocos 的 Spine Runtime 仍须满足 Esoteric Software 的授权条款。导出格式本身不授予 Runtime 使用权。\n\n## 参考资料\n- https://layaair.com/3.3/doc-en/IDE/Component/2D/2DRender/Spine2DRenderNode/readme.html\n- https://docs.cocos.com/creator/3.8/manual/en/asset/spine.html\n- https://esotericsoftware.com/spine-json-format\n- https://esotericsoftware.com/spine-runtimes-license\n`;
+}
+async function exportBundle(p) {
+    const skeleton = (0, spine_js_1.exportSpine)(p), assets = (0, spine_js_1.usedAssets)(p), stem = (0, spine_js_1.fileStem)(p.name), pages = (0, spine_js_1.packAtlas)(assets, stem);
+    await Promise.all(assets.map(images_js_1.loadAsset));
+    const entries = [(0, zip_js_1.textEntry)(`${stem}.json`, JSON.stringify(skeleton, null, 2)), (0, zip_js_1.textEntry)(`${stem}.atlas`, (0, spine_js_1.atlasText)(pages))];
+    for (const page of pages) {
+        const canvas = document.createElement('canvas');
+        canvas.width = page.width;
+        canvas.height = page.height;
+        const ctx = canvas.getContext('2d');
+        ctx.imageSmoothingEnabled = false;
+        for (const a of page.regions) {
+            const { image } = await (0, images_js_1.loadAsset)(assets.find(v => v.id === a.assetId));
+            const { x, y, width: w, height: h } = a, e = 2;
+            ctx.drawImage(image, x, y);
+            ctx.drawImage(image, 0, 0, 1, h, x - e, y, e, h);
+            ctx.drawImage(image, w - 1, 0, 1, h, x + w, y, e, h);
+            ctx.drawImage(image, 0, 0, w, 1, x, y - e, w, e);
+            ctx.drawImage(image, 0, h - 1, w, 1, x, y + h, w, e);
+            for (const [sx, dx] of [[0, x - e], [w - 1, x + w]])
+                for (const [sy, dy] of [[0, y - e], [h - 1, y + h]])
+                    ctx.drawImage(image, sx, sy, 1, 1, dx, dy, e, e);
+        }
+        entries.push({ name: page.name, bytes: await pngBytes(canvas) });
+    }
+    // Include individual PNGs so skeleton.images is also valid for editor-side import.
+    for (const asset of assets) {
+        const source = document.createElement('canvas');
+        source.width = asset.width;
+        source.height = asset.height;
+        source.getContext('2d').drawImage((await (0, images_js_1.loadAsset)(asset)).image, 0, 0);
+        entries.push({ name: `images/${(0, spine_js_1.regionName)(asset)}.png`, bytes: await pngBytes(source) });
+    }
+    const memoryMB = pages.reduce((s, p) => s + p.width * p.height * 4, 0) / 1048576;
+    entries.push((0, zip_js_1.textEntry)(`${stem}.project.json`, JSON.stringify(p)), (0, zip_js_1.textEntry)('IMPORT.md', importGuide(stem)), (0, zip_js_1.textEntry)('examples/LayaPlayer.ts', exports.layaExample), (0, zip_js_1.textEntry)('examples/CocosPlayer.ts', exports.cocosExample), (0, zip_js_1.textEntry)('asset-map.json', JSON.stringify({ bones: p.bones.map(b => ({ id: b.id, label: b.name })), parts: p.parts.map(a => ({ slot: `slot_${a.id}`, label: a.name, assetId: a.assetId })), pages }, null, 2)), (0, zip_js_1.textEntry)('compatibility.json', JSON.stringify({ exporter: 'ai-bone-studio/0.2.0', format: 'spine-3.8.99-region-fk', alpha: 'straight', schemaPreflight: 'passed', engineIntegrationTest: 'not-run-in-user-project', targetRuntime: '3.8', estimatedTextureMemoryMB: memoryMB, issues: (0, spine_js_1.preflight)(p) }, null, 2)));
+    return { bytes: (0, zip_js_1.writeZip)(entries), pages: pages.length, memoryMB };
+}
+async function exportFrames(p, clip, fps = 15) {
+    const count = Math.max(1, Math.ceil(clip.duration * fps));
+    if (count > 120 || p.canvas.width * p.canvas.height * count > 100000000)
+        throw new Error('序列帧测试限 120 帧 / 1 亿像素，请缩短动作或缩小画板。');
+    await Promise.all((0, spine_js_1.usedAssets)(p).map(images_js_1.loadAsset));
+    const canvas = document.createElement('canvas');
+    canvas.width = p.canvas.width;
+    canvas.height = p.canvas.height;
+    const ctx = canvas.getContext('2d'), entries = [];
+    for (let i = 0; i < count; i++) {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        (0, images_js_1.drawCharacter)(ctx, p, clip, i / fps);
+        entries.push({ name: `frames/frame_${String(i).padStart(4, '0')}.png`, bytes: await pngBytes(canvas) });
+    }
+    entries.push((0, zip_js_1.textEntry)('frames.json', JSON.stringify({ type: 'png-sequence', fps, frameCount: count, duration: clip.duration, width: canvas.width, height: canvas.height, originX: p.canvas.originX, originY: p.canvas.originY, files: entries.map(e => e.name) }, null, 2)), (0, zip_js_1.textEntry)('README.txt', 'PNG 序列帧不是骨骼文件。可在任意引擎内按顺序建立帧动画；不需要 Spine Runtime。本包未生成引擎专有动画 clip。'));
+    return (0, zip_js_1.writeZip)(entries);
+}
+async function database() {
+    return new Promise((resolve, reject) => {
+        const request = indexedDB.open('ai-bone-studio', 1);
+        request.onupgradeneeded = () => request.result.createObjectStore('projects');
+        request.onsuccess = () => resolve(request.result);
+        request.onerror = () => reject(request.error);
+    });
+}
+async function autosave(p) {
+    const db = await database();
+    try {
+        await new Promise((resolve, reject) => { const tx = db.transaction('projects', 'readwrite'); tx.objectStore('projects').put(p, 'latest'); tx.oncomplete = () => resolve(); tx.onerror = () => reject(tx.error); tx.onabort = () => reject(tx.error || new Error('保存被中断')); });
+    }
+    finally {
+        db.close();
+    }
+}
+async function restoreAutosave() {
+    const db = await database();
+    try {
+        return await new Promise((resolve, reject) => {
+            const req = db.transaction('projects').objectStore('projects').get('latest');
+            req.onsuccess = () => {
+                try {
+                    resolve(req.result ? (0, model_js_1.parseProject)(req.result) : null);
+                }
+                catch (e) {
+                    reject(e);
+                }
+            };
+            req.onerror = () => reject(req.error);
+        });
+    }
+    finally {
+        db.close();
+    }
+}
+
+};
+factories['./app.js']=(module,exports,require)=>{
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const model_js_1 = require("./model.js");
+const images_js_1 = require("./images.js");
+const spine_js_1 = require("./spine.js");
+const zip_js_1 = require("./zip.js");
+const io_js_1 = require("./io.js");
+const $ = (id) => {
+    const e = document.getElementById(id);
+    if (!e)
+        throw new Error(`Missing UI element ${id}`);
+    return e;
+};
+const esc = (v) => String(v).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+const num = (v) => String(Math.round(v * 1000) / 1000);
+let project = (0, model_js_1.newProject)(), selection = null, mode = 'assemble', tool = 'select';
+let clipId = project.clips[0].id, time = 0, zoom = 0.75, playing = false, busy = false;
+let drag = null, chainStart = null, chainParent = 'root', hover = null;
+let sliderBefore = null, savedCandidate = null, revision = 0;
+let saveTimer = 0, toastTimer = 0;
+const undo = [], redo = [], canvas = $('board');
+const currentClip = () => project.clips.find(c => c.id === clipId) ?? project.clips[0];
+const activePart = () => selection?.kind === 'part' ? project.parts.find(p => p.id === selection.id) : undefined;
+const activeBone = () => selection?.kind === 'bone' ? project.bones.find(b => b.id === selection.id) : activePart() ? project.bones.find(b => b.id === activePart().boneId) : undefined;
+const pose = (id, p = project) => (0, model_js_1.sampleTrack)((p.clips.find(c => c.id === clipId) ?? p.clips[0])?.tracks[id], time);
+function toast(message, error = false) {
+    $('status').textContent = message;
+    const box = $('toast');
+    box.textContent = message;
+    box.classList.toggle('error', error);
+    box.hidden = false;
+    window.clearTimeout(toastTimer);
+    toastTimer = window.setTimeout(() => box.hidden = true, error ? 8000 : 4500);
+}
+function remember(before = project) {
+    undo.push((0, model_js_1.cloneProject)(before));
+    if (undo.length > 40)
+        undo.shift();
+    redo.length = 0;
+}
+function scheduleSave() {
+    revision++;
+    const v = revision;
+    $('save-state').textContent = '正在保存本地副本…';
+    window.clearTimeout(saveTimer);
+    saveTimer = window.setTimeout(() => {
+        void (0, io_js_1.autosave)(project).then(() => {
+            if (v === revision)
+                $('save-state').textContent = '本地副本已保存';
+        }).catch(() => { $('save-state').textContent = '本地保存失败，请下载工程'; });
+    }, 500);
+}
+function changed(full = true) {
+    scheduleSave();
+    if (full)
+        render();
+    else
+        draw();
+}
+function edit(mutator, message) {
+    if (busy)
+        return;
+    try {
+        const next = (0, model_js_1.cloneProject)(project);
+        mutator(next);
+        remember();
+        project = next;
+        changed();
+        if (message)
+            toast(message);
+    }
+    catch (e) {
+        toast(e.message, true);
+        render();
+    }
+}
+async function job(action) {
+    if (busy)
+        return;
+    busy = true;
+    playing = false;
+    document.body.classList.add('loading');
+    $('status').textContent = '正在处理，请勿关闭页面…';
+    try {
+        await action();
+    }
+    catch (e) {
+        toast(e.message, true);
+    }
+    finally {
+        busy = false;
+        document.body.classList.remove('loading');
+        render();
+    }
+}
+function choosePart(id) {
+    selection = { kind: 'part', id };
+    if (mode === 'animate')
+        selection = { kind: 'bone', id: project.parts.find(p => p.id === id).boneId };
+    render();
+}
+function chooseBone(id) { selection = { kind: 'bone', id }; render(); }
+function switchMode(next) {
+    playing = false;
+    mode = next;
+    tool = 'select';
+    chainStart = null;
+    if (next === 'animate') {
+        if (!currentClip()) {
+            edit(p => p.clips.push({ id: 'idle', name: 'idle', duration: 2, tracks: {} }));
+            clipId = 'idle';
+        }
+        if (selection?.kind === 'part')
+            selection = { kind: 'bone', id: activePart().boneId };
+    }
+    if (next === 'export' && window.innerWidth <= 780)
+        setPane('inspector');
+    render();
+    requestAnimationFrame(fit);
+}
+function setPane(pane) {
+    $('studio').dataset.pane = pane;
+    document.querySelectorAll('[data-pane]').forEach(b => {
+        if (b.tagName === 'BUTTON')
+            b.classList.toggle('active', b.dataset.pane === pane);
+    });
+    if (pane === 'canvas')
+        requestAnimationFrame(fit);
+}
+function fit() {
+    const box = $('canvas-scroll');
+    if (!box.clientWidth || !box.clientHeight)
+        return;
+    zoom = (0, model_js_1.clamp)(Math.min((box.clientWidth - 40) / project.canvas.width, (box.clientHeight - 40) / project.canvas.height), 0.12, 1.25);
+    resizeBoard();
+    draw();
+}
+function resizeBoard() {
+    const dpr = Math.min(window.devicePixelRatio || 1, project.canvas.width * project.canvas.height > 4000000 ? 1 : 2);
+    if (canvas.width !== Math.round(project.canvas.width * dpr))
+        canvas.width = Math.round(project.canvas.width * dpr);
+    if (canvas.height !== Math.round(project.canvas.height * dpr))
+        canvas.height = Math.round(project.canvas.height * dpr);
+    canvas.style.width = `${project.canvas.width * zoom}px`;
+    canvas.style.height = `${project.canvas.height * zoom}px`;
+    const sel = $('zoom');
+    sel.querySelector('option[data-fit]')?.remove();
+    if (![...sel.options].some(o => Number(o.value) === zoom)) {
+        const option = new Option(`${Math.round(zoom * 100)}% · 适合`, String(zoom));
+        option.dataset.fit = 'true';
+        sel.add(option);
+    }
+    sel.value = String(zoom);
+}
+function pointer(e) {
+    const rect = canvas.getBoundingClientRect();
+    return { x: (e.clientX - rect.left) * project.canvas.width / rect.width, y: (e.clientY - rect.top) * project.canvas.height / rect.height };
+}
+const distance = (a, b) => Math.hypot(a.x - b.x, a.y - b.y);
+function rotationHandle(corners) {
+    const top = { x: (corners[0].x + corners[1].x) / 2, y: (corners[0].y + corners[1].y) / 2 };
+    const centre = { x: (corners[0].x + corners[2].x) / 2, y: (corners[0].y + corners[2].y) / 2 };
+    const l = Math.max(0.0001, distance(top, centre));
+    return { x: top.x + (top.x - centre.x) / l * 27 / zoom, y: top.y + (top.y - centre.y) / l * 27 / zoom };
+}
+function draw() {
+    const ctx = canvas.getContext('2d');
+    ctx.setTransform(canvas.width / project.canvas.width, 0, 0, canvas.height / project.canvas.height, 0, 0);
+    ctx.clearRect(0, 0, project.canvas.width, project.canvas.height);
+    const clip = mode === 'animate' ? currentClip() : undefined, worlds = (0, model_js_1.worldBones)(project, clip, time);
+    ctx.save();
+    ctx.strokeStyle = '#80849b55';
+    ctx.lineWidth = 1 / zoom;
+    ctx.beginPath();
+    ctx.moveTo(project.canvas.originX - 12 / zoom, project.canvas.originY);
+    ctx.lineTo(project.canvas.originX + 12 / zoom, project.canvas.originY);
+    ctx.moveTo(project.canvas.originX, project.canvas.originY - 12 / zoom);
+    ctx.lineTo(project.canvas.originX, project.canvas.originY + 12 / zoom);
+    ctx.stroke();
+    ctx.restore();
+    (0, images_js_1.drawCharacter)(ctx, project, clip, time);
+    if (mode === 'rig' || mode === 'animate') {
+        for (const b of (0, model_js_1.sortedBones)(project)) {
+            const m = worlds.get(b.id), a = (0, model_js_1.point)(m, 0, 0), end = (0, model_js_1.point)(m, b.length, 0), selected = selection?.kind === 'bone' && selection.id === b.id;
+            ctx.save();
+            ctx.strokeStyle = selected ? '#f09b29' : '#238d79';
+            ctx.fillStyle = selected ? '#ffba4980' : '#64d8b466';
+            ctx.lineWidth = (selected ? 2.4 : 1.7) / zoom;
+            const len = Math.max(1, distance(a, end)), nx = -(end.y - a.y) / len * 5 / zoom, ny = (end.x - a.x) / len * 5 / zoom;
+            if (b.length > 0) {
+                ctx.beginPath();
+                ctx.moveTo(a.x, a.y);
+                ctx.lineTo(a.x + (end.x - a.x) * 0.22 + nx, a.y + (end.y - a.y) * 0.22 + ny);
+                ctx.lineTo(end.x, end.y);
+                ctx.lineTo(a.x + (end.x - a.x) * 0.22 - nx, a.y + (end.y - a.y) * 0.22 - ny);
+                ctx.closePath();
+                ctx.fill();
+                ctx.stroke();
+            }
+            for (const p of [a, end]) {
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, (selected ? 5 : 3.8) / zoom, 0, Math.PI * 2);
+                ctx.fillStyle = '#fbfff1';
+                ctx.fill();
+                ctx.stroke();
+            }
+            if (selected) {
+                ctx.font = `${11 / zoom}px system-ui`;
+                ctx.fillStyle = '#563c15';
+                ctx.fillText(b.name, a.x + 10 / zoom, a.y - 10 / zoom);
+            }
+            ctx.restore();
+        }
+    }
+    const selected = activePart();
+    if (selected && selected.visible && mode !== 'export') {
+        const asset = project.assets.find(a => a.id === selected.assetId), corners = (0, model_js_1.partCorners)(selected, asset, worlds), handle = rotationHandle(corners);
+        ctx.save();
+        ctx.strokeStyle = '#8061cf';
+        ctx.fillStyle = '#fff';
+        ctx.lineWidth = 1.7 / zoom;
+        ctx.beginPath();
+        corners.forEach((p, i) => i ? ctx.lineTo(p.x, p.y) : ctx.moveTo(p.x, p.y));
+        ctx.closePath();
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.moveTo((corners[0].x + corners[1].x) / 2, (corners[0].y + corners[1].y) / 2);
+        ctx.lineTo(handle.x, handle.y);
+        ctx.stroke();
+        for (const p of [...corners, handle]) {
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, 4.5 / zoom, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.stroke();
+        }
+        const pivot = (0, model_js_1.point)(worlds.get(selected.boneId), selected.x, selected.y);
+        ctx.strokeStyle = '#dc596f';
+        ctx.beginPath();
+        ctx.arc(pivot.x, pivot.y, 5 / zoom, 0, Math.PI * 2);
+        ctx.stroke();
+        ctx.restore();
+    }
+    if (tool === 'draw' && chainStart) {
+        ctx.save();
+        ctx.strokeStyle = '#c06c23';
+        ctx.lineWidth = 2 / zoom;
+        ctx.setLineDash([5 / zoom, 4 / zoom]);
+        ctx.beginPath();
+        ctx.moveTo(chainStart.x, chainStart.y);
+        ctx.lineTo(hover?.x ?? chainStart.x, hover?.y ?? chainStart.y);
+        ctx.stroke();
+        ctx.restore();
+    }
+}
+function hitPart(at, worlds) {
+    for (const part of [...project.parts].sort((a, b) => b.z - a.z)) {
+        if (!part.visible || part.opacity <= 0)
+            continue;
+        const a = project.assets.find(v => v.id === part.assetId), pos = (0, model_js_1.point)((0, model_js_1.inverse)((0, model_js_1.partMatrix)(part, a, worlds)), at.x, at.y);
+        const x = Math.floor(pos.x), y = Math.floor(pos.y), ready = images_js_1.decoded.get(a.id);
+        if (x >= 0 && y >= 0 && x < a.width && y < a.height && ready && ready.pixels[(y * a.width + x) * 4 + 3] > 16)
+            return part;
+    }
+    return undefined;
+}
+function hitBone(at, worlds) {
+    const order = [...project.bones].reverse();
+    const active = activeBone();
+    if (active) {
+        order.splice(order.findIndex(b => b.id === active.id), 1);
+        order.unshift(active);
+    }
+    for (const b of order) {
+        const m = worlds.get(b.id), a = (0, model_js_1.point)(m, 0, 0), z = (0, model_js_1.point)(m, b.length, 0), threshold = 11 / zoom;
+        if (b.length > 0 && distance(at, z) < threshold)
+            return { bone: b, tip: true };
+        if (distance(at, a) < threshold)
+            return { bone: b, tip: false };
+        const dx = z.x - a.x, dy = z.y - a.y, t = (0, model_js_1.clamp)(((at.x - a.x) * dx + (at.y - a.y) * dy) / Math.max(1, dx * dx + dy * dy), 0, 1);
+        if (distance(at, { x: a.x + t * dx, y: a.y + t * dy }) < 7 / zoom)
+            return { bone: b, tip: false };
+    }
+    return undefined;
+}
+function beginDrag(kind, id, at, e) {
+    drag = { kind, id, start: at, before: (0, model_js_1.cloneProject)(project), moved: false };
+    canvas.setPointerCapture(e.pointerId);
+}
+canvas.addEventListener('pointerdown', e => {
+    if (busy || mode === 'export' || e.button > 0)
+        return;
+    e.preventDefault();
+    playing = false;
+    canvas.focus();
+    const at = pointer(e), worlds = (0, model_js_1.worldBones)(project, mode === 'animate' ? currentClip() : undefined, time);
+    if (tool === 'draw') {
+        if (!chainStart) {
+            chainStart = at;
+            hover = at;
+            toast('起点已放好，再点一下肘部或下一个关节。');
+            draw();
+        }
+        else {
+            let id = '';
+            edit(p => id = (0, model_js_1.addBone)(p, chainStart, at, chainParent));
+            if (id) {
+                chainParent = id;
+                chainStart = at;
+                selection = { kind: 'bone', id };
+                render();
+            }
+        }
+        return;
+    }
+    if (tool === 'pivot' && activePart()) {
+        const part = activePart(), a = project.assets.find(v => v.id === part.assetId), local = (0, model_js_1.point)((0, model_js_1.inverse)((0, model_js_1.partMatrix)(part, a, worlds)), at.x, at.y);
+        edit(p => (0, model_js_1.movePivot)(p, part.id, (0, model_js_1.clamp)(local.x / a.width, 0, 1), (0, model_js_1.clamp)(local.y / a.height, 0, 1)), '旋转点已调整，图片位置保持不变。');
+        tool = 'select';
+        render();
+        return;
+    }
+    if (mode === 'rig' || mode === 'animate') {
+        const hit = hitBone(at, worlds);
+        if (hit) {
+            if (tool === 'bind' && activePart()) {
+                edit(p => (0, model_js_1.bindPart)(p, activePart().id, hit.bone.id), '已绑定：零件保持原位，现在会跟随这个关节。');
+                tool = 'select';
+                render();
+                return;
+            }
+            selection = { kind: 'bone', id: hit.bone.id };
+            render();
+            if (!hit.bone.locked)
+                beginDrag(hit.tip ? 'bone-tip' : 'bone-move', hit.bone.id, at, e);
+            return;
+        }
+        if (tool === 'bind') {
+            toast('请选择绿色关节，或者在属性里选择“跟随哪个关节”。');
+            return;
+        }
+    }
+    const part = activePart();
+    if (part && !part.locked && mode !== 'animate') {
+        const corners = (0, model_js_1.partCorners)(part, project.assets.find(a => a.id === part.assetId), worlds);
+        if (distance(at, rotationHandle(corners)) < 13 / zoom) {
+            beginDrag('part-rotate', part.id, at, e);
+            return;
+        }
+        if (distance(at, corners[2]) < 13 / zoom) {
+            beginDrag('part-scale', part.id, at, e);
+            return;
+        }
+    }
+    const hit = hitPart(at, worlds);
+    if (hit) {
+        choosePart(hit.id);
+        if (mode === 'animate') {
+            const bone = activeBone();
+            if (bone && !bone.locked)
+                beginDrag('bone-move', bone.id, at, e);
+        }
+        else if (!hit.locked)
+            beginDrag('part-move', hit.id, at, e);
+    }
+    else {
+        selection = null;
+        render();
+    }
+});
+canvas.addEventListener('pointermove', e => {
+    const at = pointer(e);
+    hover = at;
+    if (!drag) {
+        if (tool === 'draw')
+            draw();
+        return;
+    }
+    if (!drag.moved && distance(at, drag.start) * zoom < 2)
+        return;
+    if (!drag.moved) {
+        remember(drag.before);
+        drag.moved = true;
+    }
+    const before = drag.before, baseClip = before.clips.find(c => c.id === clipId), worlds = (0, model_js_1.worldBones)(before, mode === 'animate' ? baseClip : undefined, time);
+    if (drag.kind.startsWith('part')) {
+        const initial = before.parts.find(a => a.id === drag.id), target = project.parts.find(a => a.id === drag.id), parent = worlds.get(initial.boneId);
+        if (drag.kind === 'part-move') {
+            const start = (0, model_js_1.point)((0, model_js_1.inverse)(parent), drag.start.x, drag.start.y), end = (0, model_js_1.point)((0, model_js_1.inverse)(parent), at.x, at.y);
+            target.x = initial.x + end.x - start.x;
+            target.y = initial.y + end.y - start.y;
+        }
+        else {
+            const pivot = (0, model_js_1.point)(parent, initial.x, initial.y);
+            if (drag.kind === 'part-rotate')
+                target.rotation = initial.rotation + (0, model_js_1.degrees)(Math.atan2(at.y - pivot.y, at.x - pivot.x) - Math.atan2(drag.start.y - pivot.y, drag.start.x - pivot.x));
+            else {
+                const ratio = (0, model_js_1.clamp)(distance(at, pivot) / Math.max(1, distance(drag.start, pivot)), 0.05, 20);
+                target.scaleX = initial.scaleX * ratio;
+                target.scaleY = initial.scaleY * ratio;
+            }
+        }
+    }
+    else {
+        const initial = before.bones.find(b => b.id === drag.id), target = project.bones.find(b => b.id === drag.id);
+        const parent = initial.parentId ? worlds.get(initial.parentId) : [1, 0, 0, 1, 0, 0];
+        const local = (0, model_js_1.point)((0, model_js_1.inverse)(parent), at.x, at.y), start = (0, model_js_1.point)((0, model_js_1.inverse)(parent), drag.start.x, drag.start.y);
+        const k = mode === 'animate' ? (0, model_js_1.sampleTrack)(baseClip?.tracks[initial.id], time) : (0, model_js_1.restPose)();
+        if (drag.kind === 'bone-move') {
+            k.x += local.x - start.x;
+            k.y += local.y - start.y;
+        }
+        else {
+            const dx = local.x - initial.x - k.x, dy = local.y - initial.y - k.y;
+            k.rotation = (0, model_js_1.degrees)(Math.atan2(dy, dx)) - initial.rotation;
+            if (mode !== 'animate')
+                target.length = Math.max(2, Math.hypot(dx, dy) / initial.scale);
+        }
+        if (mode === 'animate')
+            (0, model_js_1.setKey)(currentClip(), initial.id, time, k);
+        else {
+            target.x = initial.x + k.x;
+            target.y = initial.y + k.y;
+            target.rotation = initial.rotation + k.rotation;
+        }
+    }
+    draw();
+});
+function finishDrag(cancel = false) {
+    if (drag?.moved) {
+        if (cancel) {
+            project = drag.before;
+            undo.pop();
+        }
+        changed();
+    }
+    drag = null;
+    render();
+}
+canvas.addEventListener('pointerup', () => finishDrag());
+canvas.addEventListener('pointercancel', () => finishDrag(true));
+canvas.addEventListener('dragover', e => e.preventDefault());
+$('canvas-scroll').addEventListener('dragover', e => e.preventDefault());
+$('canvas-scroll').addEventListener('drop', e => {
+    e.preventDefault();
+    if (e.dataTransfer?.files.length)
+        void importImages([...e.dataTransfer.files]);
+});
+function field(id, label, value, options = '') {
+    return `<label class="property"><span>${label}</span><input id="${id}" type="number" value="${num(value)}" step="0.1" ${options}></label>`;
+}
+function range(id, label, value, min, max, step, unit = '') {
+    return `<label class="property"><span>${label}<b id="${id}-value">${num(value)}${unit}</b></span><input id="${id}" type="range" min="${min}" max="${max}" step="${step}" value="${value}"></label>`;
+}
+function renderProperties() {
+    const holder = $('properties'), part = activePart(), bone = activeBone();
+    if (mode === 'export') {
+        $('inspector-title').textContent = '导出检查';
+        const issues = (0, spine_js_1.preflight)(project), errors = issues.filter(i => i.level === 'error');
+        holder.innerHTML = `<h3>把角色带进游戏。</h3><p class="micro">目标：LayaAir 3.x / Cocos Creator 3.8.x。<br>两边工程都要选 Spine 3.8 运行库。</p><div class="metric"><div><b>${project.parts.length}</b><span>零件</span></div><div><b>${project.bones.length}</b><span>关节</span></div><div><b>${project.clips.length}</b><span>动作</span></div></div><div class="checklist"><div class="check-item"><strong>✓</strong> JSON + ATLAS + PNG 一起打包</div><div class="check-item"><strong>✓</strong> 真实尺寸、坐标转换、2px 边缘扩展</div><div class="check-item"><strong>✓</strong> 可再次打开的含图工程 + 接入例子</div></div>${issues.map(i => `<div class="warning ${i.level === 'error' ? 'error' : ''}">${esc(i.message)}</div>`).join('')}<button id="export-spine" class="primary full" ${errors.length ? 'disabled' : ''}>导出 Spine 3.8 资源 ZIP</button><button id="export-png" class="full" ${!project.parts.length ? 'disabled' : ''}>导出初始姿势 · 透明 PNG</button><button id="export-frames" class="full" ${!project.parts.length || !currentClip() ? 'disabled' : ''}>导出当前动作 · PNG 序列帧</button><p class="micro">游戏包不是 .spine 工程；编辑请用 .project.json。序列帧是备用格式，不是骨骼数据。</p><div class="warning">本工具不包含 Spine Runtime。游戏使用对应运行库时，仍需满足其授权条款。尚未在你的实际引擎项目和真机中验收。</div>`;
+        return;
+    }
+    if (part && mode !== 'animate') {
+        $('inspector-title').textContent = '零件属性';
+        holder.innerHTML = `<label class="property"><span>零件名字</span><input id="part-name" value="${esc(part.name)}" maxlength="120"></label><label class="property"><span>跟随哪个关节</span><select id="part-bind">${(0, model_js_1.sortedBones)(project).map(b => `<option value="${b.id}" ${b.id === part.boneId ? 'selected' : ''}>${esc(b.name)}</option>`).join('')}</select></label><div class="property-row">${field('part-x', '位置 X（关节内）', part.x)}${field('part-y', '位置 Y（关节内）', part.y)}</div>${range('part-rotation', '转动', part.rotation, -360, 360, 1, '°')}${range('part-scale', '等比缩放', Math.abs(part.scaleX), 0.05, 4, 0.01)}<div class="button-row"><button id="flip-x">水平镜像</button><button id="flip-y">垂直镜像</button></div><div class="button-row"><button id="layer-up">向前一层</button><button id="layer-down">向后一层</button></div><div class="property-group"><label class="property"><span>旋转点 <b>红色圆点</b></span></label><div class="property-row">${field('pivot-x', '横向 0～1', part.pivotX, 'min="0" max="1" step="0.01"')}${field('pivot-y', '纵向 0～1', part.pivotY, 'min="0" max="1" step="0.01"')}</div><div class="button-row"><button id="pivot-center">居中</button><button id="pivot-top">顶端</button><button id="pivot-click">画布点选</button></div><p class="micro">改旋转点不会让图片跳位。头发通常把旋转点放在发根。</p><button id="joint-for-part" class="full">在旋转点创建关节并绑定</button></div>${range('part-opacity', '不透明度', part.opacity, 0, 1, 0.01)}<div class="button-row"><button id="toggle-lock">${part.locked ? '解锁零件' : '锁定零件'}</button><button id="duplicate-part">复制零件</button><button id="delete-selected" class="danger">删除</button></div><p class="micro">也可拖动紫色顶端圆点旋转，拖右下圆点缩放。锁定后不能移动。</p>`;
+        return;
+    }
+    if (bone) {
+        $('inspector-title').textContent = mode === 'animate' ? '让关节动起来' : '关节属性';
+        const k = pose(bone.id), animated = mode === 'animate';
+        holder.innerHTML = `<label class="property"><span>关节名字</span><input id="bone-name" value="${esc(bone.name)}" maxlength="120"></label>${animated ? `<div class="help-card"><strong>正在记住 ${num(time)} 秒的姿势</strong>拖动时间条到另一个时刻，再转动关节。播放时会自动连接两个姿势。</div><div class="property-row">${field('pose-x', '平移 X（相对初始）', k.x)}${field('pose-y', '平移 Y（相对初始）', k.y)}</div>${range('pose-rotation', '转动角度', k.rotation, -180, 180, 1, '°')}${range('pose-scale', '等比伸缩', k.scale, 0.2, 2, 0.01)}<div class="button-row"><button id="preset-wave">轻轻摆动</button><button id="preset-breathe">呼吸起伏</button></div><button id="pose-reset" class="full">此刻回到初始姿势</button><p class="micro">模板只作用于当前选中的关节，会替换它在当前动作中的关键帧；其他关节不变。</p>` : `<label class="property"><span>父关节</span><select id="bone-parent" ${bone.id === 'root' || (0, model_js_1.hasKeys)(project) ? 'disabled' : ''}>${(0, model_js_1.sortedBones)(project).filter(b => b.id !== bone.id).map(b => `<option value="${b.id}" ${b.id === bone.parentId ? 'selected' : ''}>${esc(b.name)}</option>`).join('')}</select></label><div class="property-row">${field('bone-x', '起点 X（父级内）', bone.x)}${field('bone-y', '起点 Y（父级内）', bone.y)}</div>${range('bone-rotation', '初始朝向', bone.rotation, -360, 360, 1, '°')}${field('bone-length', '骨骼长度', bone.length, 'min="0" max="4096"')}${range('bone-scale', '等比缩放', bone.scale, 0.1, 3, 0.01)}<p class="micro">拖起点移动整个骨骼链；拖末端改变长度与朝向。旋转父关节时，子关节和已绑定图片一起跟随。</p><div class="button-row"><button id="toggle-lock">${bone.locked ? '解锁关节' : '锁定关节'}</button><button id="delete-selected" class="danger" ${bone.id === 'root' || (0, model_js_1.hasKeys)(project) ? 'disabled' : ''}>删除关节</button></div>${(0, model_js_1.hasKeys)(project) ? '<div class="warning">为保护已有动作，修改父级 / 删除关节前需要先保存备份并清空动作。</div><button id="clear-animations" class="full">清空动作关键帧，继续改骨架</button>' : ''}`}`;
+        return;
+    }
+    $('inspector-title').textContent = '操作向导';
+    holder.innerHTML = `<div class="help-card"><strong>${mode === 'rig' ? '先把关节连起来' : mode === 'animate' ? '先选一个关节' : '像拼积木一样拼好角色'}</strong>${mode === 'rig' ? '点“画关节链”，依次点肩膀、肘部、手腕。Esc 或再次点按钮结束。' : mode === 'animate' ? '可以直接点人物，自动选中它跟随的关节。然后用右侧“转动角度”改变姿势。' : '从左边导入零件。拖动图片，右侧微调位置。头发在脸前还是脸后，用“向前 / 向后一层”调整。'}</div><div class="step-card"><b>① 拼好，再绑定</b>给零件选一个关节，绑定时不会跳位。</div><div class="step-card"><b>② 改错了也没关系</b>撤销 / 重做会保存最近 40 次修改。</div><div class="step-card"><b>③ 记得下载工程</b>工程保存包含图片，换电脑也能重新打开。浏览器副本不是永久备份。</div><div class="button-row"><button id="spread-parts">把零件整齐排开</button></div><p class="micro">拆件图集里的坐标不等于角色拼装坐标。本版不会根据 source_bbox 假装自动还原人物。</p>`;
+}
+function render() {
+    if (selection?.kind === 'part' && !project.parts.some(a => a.id === selection.id))
+        selection = null;
+    if (selection?.kind === 'bone' && !project.bones.some(b => b.id === selection.id))
+        selection = null;
+    document.querySelectorAll('[data-mode]').forEach(b => b.classList.toggle('active', b.dataset.mode === mode));
+    $('project-name').value = project.name;
+    $('part-count').textContent = String(project.parts.length);
+    $('parts-list').innerHTML = project.parts.length ? [...project.parts].sort((a, b) => b.z - a.z).map(p => `<div class="part-row ${selection?.id === p.id ? 'selected' : ''}" data-part="${p.id}" role="button" tabindex="0" aria-label="选择 ${esc(p.name)}"><div class="thumb"><img src="${project.assets.find(a => a.id === p.assetId).dataUrl}" alt=""></div><span class="part-name">${esc(p.name)}</span><div class="row-tools"><button data-visible="${p.id}" title="${p.visible ? '隐藏' : '显示'}">${p.visible ? '◉' : '○'}</button><button data-lock="${p.id}" title="${p.locked ? '解锁' : '锁定'}">${p.locked ? '▣' : '◇'}</button></div></div>`).join('') : '<p class="micro">这里会显示你导入的零件。<br>PNG 的透明背景不会被画进角色。</p>';
+    $('bones-list').innerHTML = (0, model_js_1.sortedBones)(project).map(b => {
+        let depth = 0, parent = b.parentId;
+        while (parent) {
+            depth++;
+            parent = project.bones.find(v => v.id === parent).parentId;
+        }
+        return `<button class="bone-row ${selection?.kind === 'bone' && selection.id === b.id ? 'selected' : ''}" data-bone="${b.id}" style="padding-left:${8 + depth * 12}px"><i>${b.id === 'root' ? '◎' : '◇'}</i><span>${esc(b.name)}</span></button>`;
+    }).join('');
+    const hints = { assemble: '拖动零件拼好角色。紫色顶点旋转，右下角缩放；右侧可精确调整。', rig: '依次点击“肩 → 肘 → 腕”画骨骼链，再给图片选择跟随的关节。根关节控制整体。', animate: '① 选时间　② 选关节　③ 转动或拖动　④ 播放。改动会自动记成关键帧。', export: '按 Spine 3.8 区域贴图 / FK 子集导出。JSON、ATLAS、PNG 必须放在同一目录。' };
+    $('mode-hint').textContent = tool === 'draw' ? `画关节链：${chainStart ? '继续点下一个关节；Esc / 再点按钮结束。' : '先点起点，再点末端。'}父级：${project.bones.find(b => b.id === chainParent)?.name ?? '整体'}` : tool === 'bind' ? '绑定模式：已选中零件，请点它应该跟随的绿色关节。' : tool === 'pivot' ? '旋转点模式：在图片上点一下。图片会保持原位，只改变旋转中心。' : hints[mode];
+    for (const [id, t] of [['select-tool', 'select'], ['draw-tool', 'draw'], ['bind-tool', 'bind']])
+        $(id).classList.toggle('selected', tool === t);
+    $('undo').disabled = !undo.length;
+    $('redo').disabled = !redo.length;
+    $('empty-state').hidden = project.parts.length > 0 || tool === 'draw' || mode !== 'assemble';
+    $('timeline').hidden = mode !== 'animate';
+    $('clip').innerHTML = project.clips.map(c => `<option value="${c.id}" ${c.id === currentClip()?.id ? 'selected' : ''}>${esc(c.name)}</option>`).join('');
+    const clip = currentClip();
+    if (clip) {
+        $('duration').value = num(clip.duration);
+        $('time').max = String(clip.duration);
+        $('time-end').textContent = `${clip.duration.toFixed(2)} s`;
+    }
+    updateTimeUI();
+    renderProperties();
+    resizeBoard();
+    draw();
+}
+function updateTimeUI() {
+    $('play').textContent = playing ? 'Ⅱ 暂停' : '▶ 播放';
+    $('time').value = String(time);
+    $('time-label').textContent = `${time.toFixed(2)} s`;
+    const b = activeBone(), clip = currentClip(), keys = b && clip ? clip.tracks[b.id] ?? [] : [];
+    $('keys').innerHTML = keys.map(k => `<button class="key ${Math.abs(k.time - time) < 0.02 ? 'on' : ''}" data-time="${k.time}" style="left:${k.time / clip.duration * 100}%" title="${k.time.toFixed(2)} 秒">◆</button>`).join('');
+    $('track-label').textContent = b ? `${b.name} · ${keys.length} 个姿势` : '选择关节后，转动它就会记住姿势。';
+    $('add-key').disabled = !b || !clip;
+    $('delete-key').disabled = !keys.some(k => Math.abs(k.time - time) < 0.02);
+}
+function mutateProperty(p, id, value) {
+    const part = selection?.kind === 'part' ? p.parts.find(a => a.id === selection.id) : undefined;
+    const bone = selection?.kind === 'bone' ? p.bones.find(b => b.id === selection.id) : undefined;
+    if (id === 'part-name' && part) {
+        part.name = value.trim() || part.name;
+        return;
+    }
+    if (id === 'bone-name' && bone) {
+        bone.name = value.trim() || bone.name;
+        return;
+    }
+    if (id === 'part-bind' && part) {
+        (0, model_js_1.bindPart)(p, part.id, value);
+        return;
+    }
+    if (id === 'bone-parent' && bone) {
+        (0, model_js_1.reparentBone)(p, bone.id, value);
+        return;
+    }
+    const n = Number(value);
+    if (!Number.isFinite(n) || value.trim() === '')
+        throw new Error('请输入有效的数字。');
+    if (part) {
+        if (part.locked)
+            throw new Error('请先解锁零件。');
+        switch (id) {
+            case 'part-x':
+                part.x = (0, model_js_1.clamp)(n, -10000, 10000);
+                break;
+            case 'part-y':
+                part.y = (0, model_js_1.clamp)(n, -10000, 10000);
+                break;
+            case 'part-rotation':
+                part.rotation = n;
+                break;
+            case 'part-scale': {
+                const ratio = (0, model_js_1.clamp)(n, 0.05, 4) / Math.abs(part.scaleX);
+                part.scaleX *= ratio;
+                part.scaleY *= ratio;
+                break;
+            }
+            case 'part-opacity':
+                part.opacity = (0, model_js_1.clamp)(n, 0, 1);
+                break;
+            case 'pivot-x':
+                (0, model_js_1.movePivot)(p, part.id, (0, model_js_1.clamp)(n, 0, 1), part.pivotY);
+                break;
+            case 'pivot-y':
+                (0, model_js_1.movePivot)(p, part.id, part.pivotX, (0, model_js_1.clamp)(n, 0, 1));
+                break;
+        }
+    }
+    if (bone) {
+        if (bone.locked)
+            throw new Error('请先解锁关节。');
+        if (id.startsWith('pose-')) {
+            const c = p.clips.find(c => c.id === clipId) ?? p.clips[0];
+            if (!c)
+                return;
+            const k = (0, model_js_1.sampleTrack)(c.tracks[bone.id], time);
+            if (id === 'pose-x')
+                k.x = (0, model_js_1.clamp)(n, -10000, 10000);
+            if (id === 'pose-y')
+                k.y = (0, model_js_1.clamp)(n, -10000, 10000);
+            if (id === 'pose-rotation')
+                k.rotation = n;
+            if (id === 'pose-scale')
+                k.scale = (0, model_js_1.clamp)(n, 0.1, 10);
+            (0, model_js_1.setKey)(c, bone.id, time, k);
+        }
+        else {
+            if (id === 'bone-x')
+                bone.x = (0, model_js_1.clamp)(n, -10000, 10000);
+            if (id === 'bone-y')
+                bone.y = (0, model_js_1.clamp)(n, -10000, 10000);
+            if (id === 'bone-rotation')
+                bone.rotation = n;
+            if (id === 'bone-scale')
+                bone.scale = (0, model_js_1.clamp)(n, 0.1, 10);
+            if (id === 'bone-length')
+                bone.length = (0, model_js_1.clamp)(n, 0, 4096);
+        }
+    }
+}
+$('properties').addEventListener('input', e => {
+    const input = e.target;
+    if (input.type !== 'range' || busy)
+        return;
+    try {
+        if (!sliderBefore)
+            sliderBefore = (0, model_js_1.cloneProject)(project);
+        playing = false;
+        mutateProperty(project, input.id, input.value);
+        const label = document.getElementById(`${input.id}-value`);
+        if (label)
+            label.textContent = num(Number(input.value));
+        draw();
+    }
+    catch (err) {
+        if (sliderBefore)
+            project = sliderBefore;
+        sliderBefore = null;
+        toast(err.message, true);
+        render();
+    }
+});
+$('properties').addEventListener('change', e => {
+    const input = e.target;
+    if (input.type === 'range') {
+        if (sliderBefore) {
+            remember(sliderBefore);
+            sliderBefore = null;
+            changed();
+        }
+    }
+    else
+        edit(p => mutateProperty(p, input.id, input.value));
+});
+function deleteSelection() {
+    if (mode === 'animate' || mode === 'export') {
+        toast('请回到拼装或关节步骤删除；动作中用“删除此帧”。');
+        return;
+    }
+    if (!selection)
+        return;
+    const chosen = selection;
+    edit(p => {
+        if (chosen.kind === 'bone') {
+            if (p.bones.find(b => b.id === chosen.id).locked)
+                throw new Error('请先解锁关节。');
+            (0, model_js_1.deleteBone)(p, chosen.id);
+        }
+        else {
+            if (p.parts.find(a => a.id === chosen.id).locked)
+                throw new Error('请先解锁零件。');
+            p.parts = p.parts.filter(a => a.id !== chosen.id);
+        }
+    });
+}
+function reorder(direction) {
+    const selected = activePart();
+    if (!selected)
+        return;
+    edit(p => { const order = [...p.parts].sort((a, b) => a.z - b.z), i = order.findIndex(a => a.id === selected.id), next = (0, model_js_1.clamp)(i + direction, 0, order.length - 1); [order[i], order[next]] = [order[next], order[i]]; order.forEach((a, i) => a.z = i); });
+}
+$('properties').addEventListener('click', e => {
+    const button = e.target.closest('button');
+    if (!button || busy)
+        return;
+    const part = activePart(), bone = activeBone();
+    switch (button.id) {
+        case 'export-spine':
+            void job(async () => { const out = await (0, io_js_1.exportBundle)(project); (0, io_js_1.download)(`${(0, spine_js_1.fileStem)(project.name)}-spine38.zip`, out.bytes, 'application/zip'); toast(`已导出 ${out.pages} 页图集，解压贴图约 ${out.memoryMB.toFixed(1)}MB。请按包内 IMPORT.md 在引擎验收。`); });
+            break;
+        case 'export-png':
+            void job(async () => { (0, io_js_1.download)(`${(0, spine_js_1.fileStem)(project.name)}-setup.png`, await (0, io_js_1.exportPNG)(project), 'image/png'); toast('已导出真正带 Alpha 的初始姿势 PNG。'); });
+            break;
+        case 'export-frames':
+            void job(async () => {
+                if (currentClip()) {
+                    (0, io_js_1.download)(`${(0, spine_js_1.fileStem)(project.name)}-${(0, spine_js_1.fileStem)(currentClip().name)}-frames.zip`, await (0, io_js_1.exportFrames)(project, currentClip()), 'application/zip');
+                    toast('已导出 15fps 透明 PNG 序列帧。');
+                }
+            });
+            break;
+        case 'delete-selected':
+            deleteSelection();
+            break;
+        case 'flip-x':
+            if (part)
+                edit(p => {
+                    if (part.locked)
+                        throw new Error('请先解锁。');
+                    p.parts.find(a => a.id === part.id).scaleX *= -1;
+                });
+            break;
+        case 'flip-y':
+            if (part)
+                edit(p => {
+                    if (part.locked)
+                        throw new Error('请先解锁。');
+                    p.parts.find(a => a.id === part.id).scaleY *= -1;
+                });
+            break;
+        case 'layer-up':
+            reorder(1);
+            break;
+        case 'layer-down':
+            reorder(-1);
+            break;
+        case 'toggle-lock':
+            edit(p => { const a = part ? p.parts.find(v => v.id === part.id) : p.bones.find(v => v.id === bone.id); a.locked = !a.locked; });
+            break;
+        case 'duplicate-part':
+            if (part)
+                edit(p => { const copy = { ...part, id: (0, model_js_1.uid)('part'), name: `${part.name} 副本`, x: part.x + 15, y: part.y + 15, z: Math.max(...p.parts.map(a => a.z)) + 1 }; p.parts.push(copy); selection = { kind: 'part', id: copy.id }; });
+            break;
+        case 'pivot-center':
+            if (part)
+                edit(p => (0, model_js_1.movePivot)(p, part.id, 0.5, 0.5));
+            break;
+        case 'pivot-top':
+            if (part)
+                edit(p => (0, model_js_1.movePivot)(p, part.id, 0.5, 0));
+            break;
+        case 'pivot-click':
+            if (part) {
+                tool = 'pivot';
+                setPane('canvas');
+                render();
+            }
+            break;
+        case 'joint-for-part':
+            if (part) {
+                edit(p => { const worlds = (0, model_js_1.worldBones)(p), at = (0, model_js_1.point)(worlds.get(part.boneId), part.x, part.y), id = (0, model_js_1.addBone)(p, at, { x: at.x + 55, y: at.y }, part.boneId); p.bones.find(b => b.id === id).name = `${part.name}关节`; (0, model_js_1.bindPart)(p, part.id, id); selection = { kind: 'bone', id }; });
+                mode = 'rig';
+                render();
+                break;
+            }
+            break;
+        case 'preset-wave':
+        case 'preset-breathe':
+            if (bone && currentClip()) {
+                if (currentClip().tracks[bone.id]?.length && !confirm('这会替换当前关节在此动作中的关键帧，其他关节不变。继续？'))
+                    break;
+                const breathe = button.id === 'preset-breathe';
+                edit(p => {
+                    const c = p.clips.find(v => v.id === currentClip().id);
+                    c.tracks[bone.id] = [];
+                    for (const [fraction, value] of (breathe ? [[0, 0], [0.5, 1], [1, 0]] : [[0, 0], [0.25, -1], [0.75, 1], [1, 0]]))
+                        (0, model_js_1.setKey)(c, bone.id, c.duration * fraction, { x: 0, y: breathe ? -4 * value : 0, rotation: breathe ? 0 : 12 * value, scale: breathe ? 1 + 0.02 * value : 1 });
+                }, '模板已生成，点击播放看看。');
+                break;
+            }
+            break;
+        case 'pose-reset':
+            if (bone && currentClip())
+                edit(p => (0, model_js_1.setKey)(p.clips.find(c => c.id === currentClip().id), bone.id, time, (0, model_js_1.restPose)()));
+            break;
+        case 'clear-animations':
+            if (confirm('会清空全部动作关键帧，但保留骨架和零件。建议先下载工程备份；也可以撤销。继续？'))
+                edit(p => p.clips.forEach(c => c.tracks = {}));
+            break;
+        case 'spread-parts':
+            if ((0, model_js_1.hasKeys)(project)) {
+                toast('已有动画。请新建工程导入零件后使用排开功能。');
+                break;
+            }
+            edit(p => {
+                p.parts.forEach((a, i) => {
+                    (0, model_js_1.bindPart)(p, a.id, 'root');
+                    const root = p.bones.find(b => b.id === 'root');
+                    if (root.rotation !== 0 || root.scale !== 1)
+                        throw new Error('请先把根关节转动归零、缩放归 1。');
+                    const asset = p.assets.find(v => v.id === a.assetId);
+                    a.x = 140 + (i % 3) * 250 - root.x;
+                    a.y = 130 + Math.floor(i / 3) * 190 - root.y;
+                    a.rotation = 0;
+                    a.scaleX = a.scaleY = Math.min(1, 160 / Math.max(asset.width, asset.height));
+                });
+            }, '已按三列排开；大图仅缩放显示，未改动源图片。');
+            break;
+    }
+});
+async function replaceProject(p) {
+    const checked = (0, model_js_1.parseProject)(p);
+    await Promise.all(checked.assets.map(images_js_1.loadAsset));
+    remember();
+    project = checked;
+    selection = null;
+    clipId = project.clips[0]?.id ?? '';
+    time = 0;
+    playing = false;
+    tool = 'select';
+    chainStart = null;
+    (0, images_js_1.pruneCache)(project);
+    $('resume').hidden = true;
+    changed();
+    setPane('canvas');
+    requestAnimationFrame(fit);
+}
+async function importImages(files) {
+    await job(async () => {
+        let blobs = [];
+        for (const file of files) {
+            if (/\.zip$/i.test(file.name)) {
+                const entries = await (0, zip_js_1.readZip)(new Uint8Array(await file.arrayBuffer()));
+                const source = entries.filter(e => /(^|\/)parts\/[^/]+\.(png|webp)$/i.test(e.name));
+                const selected = source.length ? source : entries.filter(e => /\.(png|webp)$/i.test(e.name) && !/(^|\/)(atlas|source)\//i.test(e.name));
+                blobs.push(...selected.map(e => ({ file: new Blob([e.bytes], { type: /\.webp$/i.test(e.name) ? 'image/webp' : 'image/png' }), name: e.name.split('/').pop() })));
+            }
+            else if (/\.(png|webp)$/i.test(file.name))
+                blobs.push({ file, name: file.name });
+        }
+        if (!blobs.length)
+            throw new Error('没有找到 PNG/WebP 零件。工程 ZIP 请用“打开工程”。');
+        if (project.assets.length + blobs.length > 256)
+            throw new Error('一次工程最多 256 张素材。');
+        const assets = [];
+        for (const b of blobs)
+            assets.push(await (0, images_js_1.readImage)(b.file, b.name));
+        const next = (0, model_js_1.cloneProject)(project);
+        assets.forEach((a, i) => (0, images_js_1.addPart)(next, a, { x: project.canvas.width / 2 + i * 8, y: project.canvas.height / 2 + i * 8 }));
+        (0, model_js_1.parseProject)(next);
+        remember();
+        project = next;
+        mode = 'assemble';
+        selection = { kind: 'part', id: project.parts[project.parts.length - 1].id };
+        changed();
+        setPane('canvas');
+        requestAnimationFrame(fit);
+        toast(`已导入 ${assets.length} 个零件。源图集坐标只用于裁切，不会被误当作角色坐标。`);
+    });
+}
+function demo() {
+    void job(async () => {
+        if (project.parts.length && !confirm('打开练习角色会替换当前画板。当前工程可撤销恢复；建议先保存。继续？'))
+            return;
+        await replaceProject(await (0, images_js_1.demoProject)());
+        mode = 'animate';
+        selection = { kind: 'bone', id: 'lower_right' };
+        render();
+        fit();
+        toast('练习角色已打开：点播放看挥手，点右前臂试试转动。');
+    });
+}
+for (const id of ['import', 'empty-import'])
+    $(id).onclick = () => $('image-input').click();
+for (const id of ['demo', 'empty-demo'])
+    $(id).onclick = demo;
+$('open').onclick = () => $('project-input').click();
+$('save').onclick = () => {
+    try {
+        (0, io_js_1.saveProject)(project);
+        toast('工程已下载，包含全部图片、关节和动作。');
+    }
+    catch (e) {
+        toast(e.message, true);
+    }
+};
+$('new').onclick = () => {
+    if (project.parts.length && !confirm('新建空工程？当前内容可撤销恢复，建议先保存。'))
+        return;
+    void job(async () => { await replaceProject((0, model_js_1.newProject)()); mode = 'assemble'; });
+};
+$('go-export').onclick = () => switchMode('export');
+$('image-input').onchange = e => {
+    const input = e.target;
+    if (input.files)
+        void importImages([...input.files]);
+    input.value = '';
+};
+$('project-input').onchange = e => {
+    const input = e.target, file = input.files?.[0];
+    input.value = '';
+    if (!file)
+        return;
+    void job(async () => {
+        if (file.size > 120 * 1024 * 1024)
+            throw new Error('工程文件过大。');
+        let text;
+        if (/\.zip$/i.test(file.name)) {
+            const entries = await (0, zip_js_1.readZip)(new Uint8Array(await file.arrayBuffer()));
+            const entry = entries.find(e => /\.project\.json$/i.test(e.name));
+            if (!entry)
+                throw new Error('ZIP 内没有 .project.json；零件包请用“导入 PNG / 部件 ZIP”。');
+            text = new TextDecoder().decode(entry.bytes);
+        }
+        else
+            text = await file.text();
+        const p = (0, model_js_1.parseProject)(JSON.parse(text));
+        if (project.parts.length && !confirm('打开工程会替换当前画板。可撤销恢复。继续？'))
+            return;
+        await replaceProject(p);
+        toast(`已还原「${p.name}」：${p.parts.length} 个零件、${p.bones.length} 个关节。`);
+    });
+};
+$('project-name').onchange = e => edit(p => p.name = e.target.value.trim().slice(0, 80) || 'my-character');
+$('parts-list').addEventListener('click', e => {
+    const target = e.target, visible = target.closest('[data-visible]'), lock = target.closest('[data-lock]'), row = target.closest('[data-part]');
+    if (visible)
+        edit(p => { const a = p.parts.find(v => v.id === visible.dataset.visible); a.visible = !a.visible; });
+    else if (lock)
+        edit(p => { const a = p.parts.find(v => v.id === lock.dataset.lock); a.locked = !a.locked; });
+    else if (row)
+        choosePart(row.dataset.part);
+});
+$('parts-list').addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') {
+        const row = e.target.closest('[data-part]');
+        if (row) {
+            e.preventDefault();
+            choosePart(row.dataset.part);
+        }
+    }
+});
+$('bones-list').addEventListener('click', e => {
+    const row = e.target.closest('[data-bone]');
+    if (row)
+        chooseBone(row.dataset.bone);
+});
+$('clear-selection').onclick = () => chooseBone('root');
+for (const button of document.querySelectorAll('[data-mode]'))
+    button.onclick = () => switchMode(button.dataset.mode);
+for (const button of document.querySelectorAll('button[data-pane]'))
+    button.onclick = () => setPane(button.dataset.pane);
+$('select-tool').onclick = () => { tool = 'select'; chainStart = null; render(); };
+$('draw-tool').onclick = () => {
+    if (tool === 'draw') {
+        tool = 'select';
+        chainStart = null;
+    }
+    else {
+        mode = 'rig';
+        tool = 'draw';
+        chainStart = null;
+        chainParent = activeBone()?.id ?? 'root';
+    }
+    render();
+};
+$('bind-tool').onclick = () => {
+    if (!activePart()) {
+        toast('先在部件库中选中一个图片零件。');
+        return;
+    }
+    mode = 'rig';
+    tool = 'bind';
+    chainStart = null;
+    render();
+};
+$('fit').onclick = fit;
+$('zoom').onchange = e => { zoom = Number(e.target.value) || zoom; resizeBoard(); draw(); };
+function historyMove(back) {
+    if (busy || drag)
+        return;
+    const source = back ? undo : redo, target = back ? redo : undo;
+    const previous = source.pop();
+    if (!previous)
+        return;
+    target.push((0, model_js_1.cloneProject)(project));
+    project = previous;
+    playing = false;
+    selection = null;
+    if (!project.clips.some(c => c.id === clipId))
+        clipId = project.clips[0]?.id ?? '';
+    time = Math.min(time, currentClip()?.duration ?? 0);
+    void Promise.all(project.assets.map(images_js_1.loadAsset)).then(draw);
+    changed();
+}
+$('undo').onclick = () => historyMove(true);
+$('redo').onclick = () => historyMove(false);
+$('play').onclick = () => {
+    if (!currentClip())
+        return;
+    if (time >= currentClip().duration)
+        time = 0;
+    playing = !playing;
+    updateTimeUI();
+    renderProperties();
+};
+$('time').oninput = e => { time = Number(e.target.value); playing = false; updateTimeUI(); renderProperties(); draw(); };
+$('keys').addEventListener('click', e => {
+    const button = e.target.closest('[data-time]');
+    if (button) {
+        time = Number(button.dataset.time);
+        playing = false;
+        updateTimeUI();
+        renderProperties();
+        draw();
+    }
+});
+$('clip').onchange = e => { clipId = e.target.value; time = 0; playing = false; render(); };
+$('duration').onchange = e => edit(p => {
+    const c = p.clips.find(c => c.id === currentClip().id);
+    const n = Number(e.target.value);
+    const last = Math.max(0, ...Object.values(c.tracks).flat().map(k => k.time));
+    if (!Number.isFinite(n) || n < Math.max(0.1, last) || n > 60)
+        throw new Error(`时长不能短于最后的关键帧（${last} 秒），且最多 60 秒。`);
+    c.duration = n;
+    time = Math.min(time, n);
+});
+$('add-clip').onclick = () => {
+    const name = prompt('给新动作起个名字（游戏里会用到）', 'wave');
+    if (!name?.trim())
+        return;
+    edit(p => {
+        if (p.clips.some(c => c.name === name.trim()))
+            throw new Error('动作名字不能重复。');
+        const id = (0, model_js_1.uid)('clip');
+        p.clips.push({ id, name: name.trim().slice(0, 80), duration: 2, tracks: {} });
+        clipId = id;
+        time = 0;
+    });
+};
+$('delete-clip').onclick = () => {
+    if (!currentClip() || !confirm('删除当前动作？可以撤销。'))
+        return;
+    const id = currentClip().id;
+    edit(p => {
+        p.clips = p.clips.filter(c => c.id !== id);
+        if (!p.clips.length)
+            p.clips.push({ id: 'idle', name: 'idle', duration: 2, tracks: {} });
+        clipId = p.clips[0].id;
+        time = 0;
+    });
+};
+$('add-key').onclick = () => {
+    const b = activeBone(), c = currentClip();
+    if (b && c)
+        edit(p => (0, model_js_1.setKey)(p.clips.find(v => v.id === c.id), b.id, time, pose(b.id)));
+};
+$('delete-key').onclick = () => {
+    const b = activeBone(), c = currentClip();
+    if (b && c)
+        edit(p => { const clip = p.clips.find(v => v.id === c.id); clip.tracks[b.id] = (clip.tracks[b.id] ?? []).filter(k => Math.abs(k.time - time) >= 0.02); });
+};
+$('restore').onclick = () => {
+    if (savedCandidate)
+        void job(async () => { await replaceProject(savedCandidate); toast('上次工程已恢复。'); });
+};
+$('dismiss-resume').onclick = () => $('resume').hidden = true;
+window.addEventListener('keydown', e => {
+    if (busy)
+        return;
+    const input = e.target;
+    if (['INPUT', 'SELECT', 'TEXTAREA'].includes(input.tagName))
+        return;
+    if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 's') {
+        e.preventDefault();
+        $('save').click();
+    }
+    if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'z') {
+        e.preventDefault();
+        historyMove(!e.shiftKey);
+    }
+    if (e.key === 'Escape') {
+        if (drag)
+            finishDrag(true);
+        tool = 'select';
+        chainStart = null;
+        playing = false;
+        render();
+    }
+    if (e.key === 'Delete' || e.key === 'Backspace') {
+        e.preventDefault();
+        deleteSelection();
+    }
+    if (e.code === 'Space' && mode === 'animate') {
+        e.preventDefault();
+        $('play').click();
+    }
+    const arrows = { ArrowLeft: { x: -1, y: 0 }, ArrowRight: { x: 1, y: 0 }, ArrowUp: { x: 0, y: -1 }, ArrowDown: { x: 0, y: 1 } };
+    const delta = arrows[e.key];
+    if (delta && selection && mode !== 'export') {
+        e.preventDefault();
+        const amount = e.shiftKey ? 10 : 1;
+        edit(p => {
+            const part = activePart();
+            if (part) {
+                if (part.locked)
+                    return;
+                const a = p.parts.find(v => v.id === part.id);
+                const parent = (0, model_js_1.worldBones)(p).get(a.boneId), zero = (0, model_js_1.point)((0, model_js_1.inverse)(parent), 0, 0), step = (0, model_js_1.point)((0, model_js_1.inverse)(parent), delta.x * amount, delta.y * amount);
+                a.x += step.x - zero.x;
+                a.y += step.y - zero.y;
+            }
+            else {
+                const b = activeBone();
+                if (!b || b.locked)
+                    return;
+                if (mode === 'animate') {
+                    const k = pose(b.id);
+                    k.x += delta.x * amount;
+                    k.y += delta.y * amount;
+                    (0, model_js_1.setKey)(p.clips.find(c => c.id === currentClip().id), b.id, time, k);
+                }
+                else {
+                    const a = p.bones.find(v => v.id === b.id);
+                    a.x += delta.x * amount;
+                    a.y += delta.y * amount;
+                }
+            }
+        });
+    }
+});
+window.addEventListener('resize', fit);
+let previousFrame = performance.now();
+function frame(now) {
+    const delta = Math.min((now - previousFrame) / 1000, 0.1);
+    previousFrame = now;
+    if (playing && currentClip()) {
+        time = (time + delta) % currentClip().duration;
+        draw();
+        updateTimeUI();
+    }
+    requestAnimationFrame(frame);
+}
+render();
+requestAnimationFrame(() => { fit(); requestAnimationFrame(frame); });
+void (0, io_js_1.restoreAutosave)().then(p => {
+    if (p && revision === 0) {
+        savedCandidate = p;
+        $('resume').hidden = false;
+    }
+}).catch(() => { $('save-state').textContent = '本地存储不可用，请下载工程'; });
+
+};
+function require(id){if(cache[id])return cache[id].exports;if(!factories[id])throw new Error('Unknown module: '+id);const m={exports:{}};cache[id]=m;factories[id](m,m.exports,require);return m.exports;}require('./app.js');})();</script>
+</body></html>
