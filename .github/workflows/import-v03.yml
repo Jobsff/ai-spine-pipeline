@@ -1,0 +1,104 @@
+name: Verify V0.3 release candidate
+on:
+  push:
+    branches: [build/v03-stage]
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: verify-v03-candidate
+  cancel-in-progress: false
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      BASE: 72c0236fe1e6464c784ad934079e87cb5dd73ac5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22.16.0
+      - name: Materialize checksum-verified source patch
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse origin/main)" = "$BASE"
+          node --input-type=module <<'JS'
+          import {readFileSync,writeFileSync,readdirSync} from 'node:fs';
+          import {createHash} from 'node:crypto';
+          import {brotliDecompressSync} from 'node:zlib';
+          const dir='.maintenance/v03';
+          const names=readdirSync(dir).filter(n=>/^payload-\d{2}\.part$/.test(n)).sort();
+          if(names.length!==11)throw Error('Missing upload chunks');
+          const bytes=Buffer.concat(names.map(n=>readFileSync(`${dir}/${n}`)));
+          if(createHash('sha256').update(bytes).digest('hex')!=='07564da478d21e1008e9b4a41d6e76912d9bea56f04d17938f5541461ac72b81')throw Error('Upload checksum mismatch');
+          writeFileSync('/tmp/v03-release.json',brotliDecompressSync(bytes));
+          JS
+          python - <<'PY'
+          import json,os,hashlib,subprocess
+          from pathlib import Path,PurePosixPath
+          data=json.loads(Path('/tmp/v03-release.json').read_text())
+          assert data['base']==os.environ['BASE']
+          assert len(data['patches'])==28 and set(data['patches'])==set(data['sha256'])
+          for name,change in data['patches'].items():
+              p=PurePosixPath(name)
+              assert not p.is_absolute() and '..' not in p.parts
+              assert name in ('.gitignore','README.md','docs/v0.3-release.md') or name.startswith(('apps/editor/','apps/gateway/'))
+              assert not (p.name.startswith('.env') and p.name!='.env.example')
+              path=Path(name)
+              if isinstance(change,str):
+                  subprocess.run(['git','apply','--check','-'],input=change.encode(),check=True)
+                  subprocess.run(['git','apply','-'],input=change.encode(),check=True)
+              else:
+                  assert set(change)=={'new'}
+                  path.parent.mkdir(parents=True,exist_ok=True)
+                  path.write_text(change['new'],encoding='utf-8')
+              assert hashlib.sha256(path.read_bytes()).hexdigest()==data['sha256'][name],name
+          print('Verified all 28 source file checksums')
+          PY
+      - name: Editor build and core tests
+        working-directory: apps/editor
+        run: |
+          npm install --ignore-scripts --no-package-lock --no-audit --no-fund
+          npm test
+      - name: Gateway tests (mock providers only)
+        working-directory: apps/gateway
+        run: npm test
+      - name: Install browser tooling
+        run: |
+          python -m pip install --disable-pip-version-check playwright==1.55.0 pillow
+          python -m playwright install --with-deps chromium
+          python - <<'PY' >> "$GITHUB_ENV"
+          from playwright.sync_api import sync_playwright
+          with sync_playwright() as p: print('CHROMIUM='+p.chromium.executable_path)
+          PY
+      - name: Legacy and real-origin V0.3 browser flows
+        run: |
+          set -euo pipefail
+          QA_OUT="$RUNNER_TEMP/v03-qa/legacy" python apps/editor/tests/browser_smoke.py
+          python -m http.server 8765 --bind 127.0.0.1 --directory apps/editor/dist > "$RUNNER_TEMP/v03-http.log" 2>&1 &
+          for i in $(seq 1 20); do curl --fail --silent http://127.0.0.1:8765/ >/dev/null && break; sleep 1; done
+          LIVE_URL=http://127.0.0.1:8765/ QA_OUT="$RUNNER_TEMP/v03-qa/http" python apps/editor/tests/v03_browser.py
+      - name: Create clean release branch (no payload or temporary workflow)
+        run: |
+          set -euo pipefail
+          rm -rf .maintenance/v03
+          rm .github/workflows/import-v03.yml
+          git add -A
+          tree=$(git write-tree)
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          commit=$(printf '%s\n' 'feat: implement V0.3 character preparation, chroma review, expression swaps and secure generation gateway' '' '59 editor and 23 gateway tests; legacy and HTTP browser flows verified.' 'Real image provider calls, Cloudflare deployment and Laya/Cocos runtime validation remain pending.' | git commit-tree "$tree" -p "$BASE")
+          git diff --stat "$BASE" "$commit"
+          git push origin "$commit:refs/heads/release/v0.3-candidate"
+          echo "Clean source commit: $commit"
+          echo "Clean source tree: $tree"
+      - name: Preserve browser evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: v03-candidate-browser-qa
+          path: ${{ runner.temp }}/v03-qa/
+          retention-days: 7

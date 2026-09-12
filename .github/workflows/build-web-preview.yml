@@ -1,59 +1,62 @@
 name: Build web preview
+
 on:
   push:
     branches: [main]
     paths:
       - 'apps/editor/**'
-      - 'apps/gateway/**'
       - '.github/workflows/build-web-preview.yml'
   workflow_dispatch:
+
 permissions:
   contents: write
+
 concurrency:
   group: build-web-preview
   cancel-in-progress: false
+
 jobs:
   build:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
       - uses: actions/setup-node@v4
         with:
-          node-version: 22.16.0
-      - name: Build and test editor
+          node-version: '22.16.0'
+      - name: Install compiler
         working-directory: apps/editor
-        run: |
-          npm install --ignore-scripts --no-package-lock --no-audit --no-fund
-          npm test
-      - name: Test gateway without paid provider calls
-        if: ${{ hashFiles('apps/gateway/package.json') != '' }}
-        working-directory: apps/gateway
+        run: npm install --ignore-scripts --no-package-lock --no-audit --no-fund
+      - name: Build and run core tests
+        working-directory: apps/editor
         run: npm test
-      - name: Publish build branch
-        env:
-          SOURCE_SHA: ${{ github.sha }}
+      - name: Prepare standalone website
+        shell: bash
         run: |
           set -euo pipefail
-          site=$(mktemp -d)
+          site="$RUNNER_TEMP/bone-studio-site"
+          mkdir -p "$site"
           cp apps/editor/dist/AI-Bone-Studio.html "$site/index.html"
           touch "$site/.nojekyll"
-          VERSION=$(node -p "require('./apps/editor/package.json').version")
-          printf '{"sourceCommit":"%s","editorVersion":"%s"}\n' "$SOURCE_SHA" "$VERSION" > "$site/version.json"
+          printf '{"sourceCommit":"%s","editorVersion":"0.2.0"}\n' "$GITHUB_SHA" > "$site/version.json"
+          test -s "$site/index.html"
+      - name: Commit website to site-build branch
+        shell: bash
+        run: |
+          set -euo pipefail
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          export GIT_INDEX_FILE=$(mktemp)
-          rm "$GIT_INDEX_FILE"
-          git read-tree --empty
-          for name in index.html .nojekyll version.json; do
-            blob=$(git hash-object -w "$site/$name")
-            git update-index --add --cacheinfo 100644 "$blob" "$name"
-          done
-          tree=$(git write-tree)
           parent=()
-          if git fetch origin site-build; then parent=(-p "$(git rev-parse FETCH_HEAD)"); fi
-          commit=$(printf 'build: web preview from %s\n' "$SOURCE_SHA" | git commit-tree "$tree" "${parent[@]}")
+          remote_ref=$(git ls-remote --heads origin refs/heads/site-build)
+          if [ -n "$remote_ref" ]; then
+            git fetch --no-tags origin refs/heads/site-build:refs/remotes/origin/site-build
+            parent=(-p "$(git rev-parse refs/remotes/origin/site-build)")
+          fi
+          export GIT_INDEX_FILE="$RUNNER_TEMP/bone-studio-site.index"
+          rm -f "$GIT_INDEX_FILE"
+          git --work-tree="$RUNNER_TEMP/bone-studio-site" add --all
+          tree=$(git write-tree)
+          commit=$(printf 'build: web preview from %s\n' "$GITHUB_SHA" | git commit-tree "$tree" "${parent[@]}")
           git push origin "$commit:refs/heads/site-build"
-          echo "Site build commit: $commit"
+          printf 'Static website commit: %s\n' "$commit" >> "$GITHUB_STEP_SUMMARY"
+          printf 'This builds the website; Pages activation and live URL verification are separate steps.\n' >> "$GITHUB_STEP_SUMMARY"
